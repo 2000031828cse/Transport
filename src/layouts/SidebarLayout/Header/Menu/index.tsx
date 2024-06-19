@@ -16,13 +16,13 @@ const ListWrapper = styled(Box)(
         .MuiTouchRipple-root {
             display: none;
         }
-        
+
         .MuiListItem-root {
             transition: ${theme.transitions.create(['color', 'fill'])};
-            
+
             &.MuiListItem-indicators {
                 padding: ${theme.spacing(1, 2)};
-            
+
                 .MuiListItemText-root {
                     .MuiTypography-root {
                         &:before {
@@ -44,9 +44,9 @@ const ListWrapper = styled(Box)(
                 &.active,
                 &:active,
                 &:hover {
-                
+
                     background: transparent;
-                
+
                     .MuiListItemText-root {
                         .MuiTypography-root {
                             &:before {
@@ -83,64 +83,7 @@ function HeaderMenu() {
             md: 'block'
           }
         }}
-      >
-        <List disablePadding component={Box} display="flex">
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={NavLink}
-            to="/components/buttons"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Buttons"
-            />
-          </ListItem>
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={NavLink}
-            to="/components/forms"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Forms"
-            />
-          </ListItem>
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            ref={ref}
-            onClick={handleOpen}
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary={
-                <Box display="flex" alignItems="center">
-                  Others
-                  <Box display="flex" alignItems="center" pl={0.3}>
-                    <ExpandMoreTwoToneIcon fontSize="small" />
-                  </Box>
-                </Box>
-              }
-            />
-          </ListItem>
-        </List>
-      </ListWrapper>
-      <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/overview">
-          Overview
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/tabs">
-          Tabs
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/cards">
-          Cards
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/components/modals">
-          Modals
-        </MenuItem>
-      </Menu>
+      ></ListWrapper>
     </>
   );
 }
