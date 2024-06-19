@@ -1,12 +1,11 @@
-export type CryptoOrderStatus = 'completed' | 'pending' | 'failed';
+export type CryptoOrderStatus = 'completed' | 'pending' | 'rejected';
 
 export interface CryptoOrder {
   id: string;
+  Studentid: string;
   status: CryptoOrderStatus;
-  orderDetails: string;
-  orderDate: number;
   orderID: string;
-  sourceName: string;
+  studentName: string;
   sourceDesc: string;
   amountCrypto: number;
   amount: number;
