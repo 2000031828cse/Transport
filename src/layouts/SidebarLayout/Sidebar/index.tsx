@@ -12,7 +12,8 @@ import {
   Button,
   lighten,
   darken,
-  Tooltip
+  Tooltip,
+  Typography
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
@@ -62,7 +63,7 @@ function Sidebar() {
                 width: 52
               }}
             >
-              <Logo />
+              {/* <Logo /> */}
             </Box>
           </Box>
           <Divider
@@ -119,7 +120,7 @@ function Sidebar() {
                   width: 52
                 }}
               >
-                <Logo />
+                {/* <Logo /> */}
               </Box>
             </Box>
             <Divider

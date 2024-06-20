@@ -21,9 +21,12 @@ function Overview() {
         <title>bus transport system</title>
       </Helmet>
       <Container maxWidth="lg">
-        <Box display="flex" justifyContent="center" py={5} alignItems="center">
-          <Logo />
-        </Box>
+        <Box
+          display="flex"
+          justifyContent="center"
+          py={5}
+          alignItems="center"
+        ></Box>
         <Card sx={{ p: 10, mb: 10, borderRadius: 12 }}>
           <Hero />
         </Card>
