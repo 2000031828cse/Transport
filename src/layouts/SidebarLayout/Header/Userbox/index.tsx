@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Box,
@@ -15,7 +15,6 @@ import {
   Popover,
   Typography
 } from '@mui/material';
-
 import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
@@ -65,15 +64,25 @@ function HeaderUserbox() {
     jobtitle: 'Admin'
   };
 
-  const ref = useRef<any>(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const ref = useRef(null);
+  const [isOpen, setOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleOpen = (): void => {
+  const handleOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = (): void => {
+  const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSignOut = () => {
+    // Clear authentication state (for example, using localStorage)
+    localStorage.removeItem('auth');
+    localStorage.removeItem('role');
+
+    // Redirect to login page
+    navigate('/login');
   };
 
   return (
@@ -83,9 +92,7 @@ function HeaderUserbox() {
         <Hidden mdDown>
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
-              {user.jobtitle}
-            </UserBoxDescription>
+            <UserBoxDescription variant="body2">{user.jobtitle}</UserBoxDescription>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
@@ -109,9 +116,7 @@ function HeaderUserbox() {
           <Avatar variant="rounded" alt={user.name} src={user.avatar} />
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
-              {user.jobtitle}
-            </UserBoxDescription>
+            <UserBoxDescription variant="body2">{user.jobtitle}</UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
@@ -124,18 +129,16 @@ function HeaderUserbox() {
             <InboxTwoToneIcon fontSize="small" />
             <ListItemText primary="Messenger" />
           </ListItem>
-          {/* <ListItem
-            button
-            to="/management/profile/settings"
-            component={NavLink}
-          >
+          Uncomment and modify the following ListItem for Account Settings if needed 
+           <ListItem button to="/management/profile/settings" component={NavLink}>
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary="Account Settings" />
-          </ListItem> */}
-        {/* </List> */}
+          </ListItem> 
+        </List> 
+        */}
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button color="primary" fullWidth onClick={handleSignOut}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>
