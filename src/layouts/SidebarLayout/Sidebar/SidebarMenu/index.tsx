@@ -196,7 +196,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/crypto"
+                  to="/dashboards/Admin"
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
                   Dashboard

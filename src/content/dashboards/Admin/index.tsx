@@ -47,11 +47,11 @@ import { Container, Grid } from '@mui/material';
 import WatchList from './WatchList';
 import StudentTable from './StudentTable';
 
-function DashboardCrypto() {
+function DashboardAdmin() {
   return (
     <>
       <Helmet>
-        <title>Crypto Dashboard</title>
+        <title>Admin Dashboard</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />
@@ -80,4 +80,4 @@ function DashboardCrypto() {
   );
 }
 
-export default DashboardCrypto;
+export default DashboardAdmin;
