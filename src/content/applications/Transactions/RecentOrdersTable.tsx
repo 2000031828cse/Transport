@@ -305,19 +305,19 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         onChange={(event) => {}}
                       >
                         <MenuItem value="paid">Paid</MenuItem>
-                        <MenuItem value="not paid">Not Paid</MenuItem>
+                        <MenuItem value="not Paid">Not Paid</MenuItem>
                       </Select>
                     </TableCell>
                   </TableCell>
 
                   <TableCell align="center">
                     <Typography variant="body1" color="text.primary">
-                      {cryptoOrder.approvalStatus === 'approved' && (
+                      {cryptoOrder.approvalStatus === 'approval' && (
                         <a href="#" onClick={(event) => {}}>
                           Approved
                         </a>
                       )}
-                      {cryptoOrder.approvalStatus === 'rejected' && (
+                      {cryptoOrder.approvalStatus === 'reject' && (
                         <a href="#" onClick={(event) => {}}>
                           Rejected
                         </a>

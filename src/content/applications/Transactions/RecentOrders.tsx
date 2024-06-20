@@ -11,8 +11,8 @@ function RecentOrders() {
       status: 'completed',
       orderID: 'VUVX709ET7BY',
       studentName: 'Peter',
-      paymentStatus: 'paid',
-      approvalStatus: 'approved' // Added approvalStatus
+      paymentStatus: 'not Paid',
+      approvalStatus: 'approval' // Added approvalStatus
     },
     {
       id: '2',
@@ -20,8 +20,8 @@ function RecentOrders() {
       status: 'completed',
       orderID: '23M3UOG65G8K',
       studentName: 'Chris',
-      paymentStatus: 'paid',
-      approvalStatus: 'rejected' // Added approvalStatus
+      paymentStatus: 'not Paid',
+      approvalStatus: 'reject' // Added approvalStatus
     },
     {
       id: '3',
@@ -29,8 +29,8 @@ function RecentOrders() {
       status: 'pending',
       orderID: '4HJDV8HV34LM',
       studentName: 'John',
-      paymentStatus: 'paid',
-      approvalStatus: 'approved' // Added approvalStatus
+      paymentStatus: 'not Paid',
+      approvalStatus: 'approval' // Added approvalStatus
     }
   ];
 

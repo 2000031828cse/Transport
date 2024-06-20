@@ -7,5 +7,5 @@ export interface CryptoOrder {
   status: PassOrderStatus;
   orderID: string;
   studentName: string;
-  approvalStatus: 'approved' | 'rejected' | 'pending';
+  approvalStatus: 'approval' | 'reject';
 }
