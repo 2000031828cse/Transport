@@ -20,7 +20,7 @@ const Login = () => {
     } else if (username === 'user' && password === 'password') {
       localStorage.setItem('auth', 'true');
       localStorage.setItem('role', 'user'); // Store role
-      navigate('/dashboard/user'); // Redirect to user dashboard
+      navigate('/dashboards/user'); // Redirect to user dashboard
     } else {
       setError('Invalid username or password');
     }
