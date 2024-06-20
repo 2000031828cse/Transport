@@ -6,71 +6,44 @@ import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
 
 import SuspenseLoader from 'src/components/SuspenseLoader';
+import Login from './content/overview/Login';
+import Signup from './content/overview/Signup';
+// src/router/routes.tsx
+// src/router/routes.tsx
 
-const Loader = (Component) => (props) =>
-  (
-    <Suspense fallback={<SuspenseLoader />}>
-      <Component {...props} />
-    </Suspense>
-  );
+import PrivateRoute from 'src/content/overview/PrivateRoute'; // Assuming correct path
+import LoginPage from 'src/content/overview/Login'; // Rename local Login to LoginPage
 
-// Pages
-
-const Overview = Loader(lazy(() => import('src/content/overview')));
-
-// Dashboards
-
-const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
-
-// Applications
-
-const Transactions = Loader(
-  lazy(() => import('src/content/applications/Transactions'))
+const Overview = lazy(() => import('src/content/overview'));
+const Admin = lazy(() => import('src/content/dashboards/Admin'));
+// const Signup = lazy(() => import('src/content/overview/Signup'));
+const Transactions = lazy(
+  () => import('src/content/applications/Transactions')
 );
-const UserProfile = Loader(
-  lazy(() => import('src/content/applications/Users/profile'))
+const UserProfile = lazy(
+  () => import('src/content/applications/Users/profile')
 );
-const UserSettings = Loader(
-  lazy(() => import('src/content/applications/Users/settings'))
+const UserSettings = lazy(
+  () => import('src/content/applications/Users/settings')
 );
-
-// Components
-
-const Buttons = Loader(
-  lazy(() => import('src/content/pages/Components/Buttons'))
+const Buttons = lazy(() => import('src/content/pages/Components/Buttons'));
+const Modals = lazy(() => import('src/content/pages/Components/Modals'));
+const Accordions = lazy(
+  () => import('src/content/pages/Components/Accordions')
 );
-const Modals = Loader(
-  lazy(() => import('src/content/pages/Components/Modals'))
+const Tabs = lazy(() => import('src/content/pages/Components/Tabs'));
+const Badges = lazy(() => import('src/content/pages/Components/Badges'));
+const Tooltips = lazy(() => import('src/content/pages/Components/Tooltips'));
+const Avatars = lazy(() => import('src/content/pages/Components/Avatars'));
+const Cards = lazy(() => import('src/content/pages/Components/Cards'));
+const Forms = lazy(() => import('src/content/pages/Components/Forms'));
+const Status404 = lazy(() => import('src/content/pages/Status/Status404'));
+const Status500 = lazy(() => import('src/content/pages/Status/Status500'));
+const StatusComingSoon = lazy(
+  () => import('src/content/pages/Status/ComingSoon')
 );
-const Accordions = Loader(
-  lazy(() => import('src/content/pages/Components/Accordions'))
-);
-const Tabs = Loader(lazy(() => import('src/content/pages/Components/Tabs')));
-const Badges = Loader(
-  lazy(() => import('src/content/pages/Components/Badges'))
-);
-const Tooltips = Loader(
-  lazy(() => import('src/content/pages/Components/Tooltips'))
-);
-const Avatars = Loader(
-  lazy(() => import('src/content/pages/Components/Avatars'))
-);
-const Cards = Loader(lazy(() => import('src/content/pages/Components/Cards')));
-const Forms = Loader(lazy(() => import('src/content/pages/Components/Forms')));
-
-// Status
-
-const Status404 = Loader(
-  lazy(() => import('src/content/pages/Status/Status404'))
-);
-const Status500 = Loader(
-  lazy(() => import('src/content/pages/Status/Status500'))
-);
-const StatusComingSoon = Loader(
-  lazy(() => import('src/content/pages/Status/ComingSoon'))
-);
-const StatusMaintenance = Loader(
-  lazy(() => import('src/content/pages/Status/Maintenance'))
+const StatusMaintenance = lazy(
+  () => import('src/content/pages/Status/Maintenance')
 );
 
 const routes: RouteObject[] = [
@@ -81,6 +54,14 @@ const routes: RouteObject[] = [
       {
         path: '/',
         element: <Overview />
+      },
+      {
+        path: 'login',
+        element: <LoginPage /> // Use renamed LoginPage component
+      },
+      {
+        path: 'Signup',
+        element: <Signup /> // Use renamed LoginPage component
       },
       {
         path: 'overview',
@@ -123,11 +104,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="crypto" replace />
+        element: <Navigate to="Admin" replace />
       },
       {
-        path: 'crypto',
-        element: <Crypto />
+        path: 'Admin',
+        element: <Admin />
       }
     ]
   },
@@ -207,7 +188,19 @@ const routes: RouteObject[] = [
         element: <Forms />
       }
     ]
+  },
+  // Protected routes using PrivateRoute
+  {
+    path: 'admin-dashboard',
+    element: (
+      <PrivateRoute
+        element={<Admin />}
+        isAuthenticated={true} // Replace with actual authentication state check
+        redirectTo="/login" // Redirect to login if not authenticated
+      />
+    )
   }
+  // Add more protected routes as needed
 ];
 
 export default routes;

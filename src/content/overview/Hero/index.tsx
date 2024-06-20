@@ -79,31 +79,29 @@ function Hero() {
         alignItems="center"
         container
       >
-        <Grid item md={10} lg={8} mx="auto">
+        <Grid item md={10} lg={8} mx="auto">         
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            bus transport system
+            Bus Transport System
           </TypographyH1>
-
-          <TypographyH1 sx={{ mb: 2 }} variant="h1">
-            Welcome To bus Management System
-          </TypographyH1>
-
           <TypographyH2
             sx={{ lineHeight: 1.5, pb: 4 }}
             variant="h4"
             color="text.secondary"
             fontWeight="normal"
-          ></TypographyH2>
+          >
+            Welcome to the Bus Transport System. Please log in to continue.
+          </TypographyH2>
           <Button
             component={RouterLink}
-            to="/dashboards/crypto"
+            to="/login"
             size="large"
             variant="contained"
           >
-            log in
+            Log In
           </Button>
           <Grid container spacing={3} mt={5}>
-            <Grid item md={6}></Grid>
+            <Grid item md={6}>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

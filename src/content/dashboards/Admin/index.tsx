@@ -4,11 +4,11 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import WatchList from './WatchList';
 import StudentTable from './StudentTable';
 
-function DashboardCrypto() {
+function DashboardAdmin() {
   return (
     <>
       <Helmet>
-        <title>Crypto Dashboard</title>
+        <title>Admin Dashboard</title>
       </Helmet>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
@@ -24,4 +24,4 @@ function DashboardCrypto() {
   );
 }
 
-export default DashboardCrypto;
+export default DashboardAdmin;
