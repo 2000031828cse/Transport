@@ -26,7 +26,7 @@ import {
 } from '@mui/material';
 
 import Label from 'src/components/Label';
-import { CryptoOrder, CryptoOrderStatus } from 'src/models/crypto_order';
+import { CryptoOrder, CryptoOrderStatus } from 'src/models/pass_request';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
@@ -42,8 +42,8 @@ interface Filters {
 
 const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
   const map = {
-    failed: {
-      text: 'Failed',
+    rejected: {
+      text: 'rejected',
       color: 'error'
     },
     completed: {
@@ -109,8 +109,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       name: 'Pending'
     },
     {
-      id: 'failed',
-      name: 'Failed'
+      id: 'rejected',
+      name: 'rejected'
     }
   ];
 
@@ -217,12 +217,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   indeterminate={selectedSomeCryptoOrders}
                   onChange={handleSelectAllCryptoOrders}
                 />
-              </TableCell>
-              <TableCell>Order Details</TableCell>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell align="right">Status</TableCell>
+              </TableCell>              
+              <TableCell>O_ID </TableCell>
+              <TableCell>Student ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Payment status</TableCell>
+              <TableCell align="right">Approval Status</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -234,7 +234,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.id}
+                  key={cryptoOrder.orderID}
                   selected={isCryptoOrderSelected}
                 >
                   <TableCell padding="checkbox">
@@ -242,7 +242,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       color="primary"
                       checked={isCryptoOrderSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                        handleSelectOneCryptoOrder(event, cryptoOrder.orderID)
                       }
                       value={isCryptoOrderSelected}
                     />
@@ -255,22 +255,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
                       {cryptoOrder.orderID}
                     </Typography>
+                    <Typography variant="body2" color="text.secondary" noWrap>                     
+                    </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography
@@ -280,7 +268,18 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.sourceName}
+                      {cryptoOrder.Studentid}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {cryptoOrder.studentName}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
                       {cryptoOrder.sourceDesc}
