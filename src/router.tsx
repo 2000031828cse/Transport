@@ -16,6 +16,7 @@ import LoginPage from 'src/content/overview/Login'; // Rename local Login to Log
 
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
+const User = lazy(() => import('src/content/dashboards/User'));
 // const Signup = lazy(() => import('src/content/overview/Signup'));
 const Transactions = lazy(
   () => import('src/content/applications/Transactions')
@@ -39,6 +40,7 @@ const Cards = lazy(() => import('src/content/pages/Components/Cards'));
 const Forms = lazy(() => import('src/content/pages/Components/Forms'));
 const Status404 = lazy(() => import('src/content/pages/Status/Status404'));
 const Status500 = lazy(() => import('src/content/pages/Status/Status500'));
+
 const StatusComingSoon = lazy(
   () => import('src/content/pages/Status/ComingSoon')
 );
@@ -109,6 +111,10 @@ const routes: RouteObject[] = [
       {
         path: 'Admin',
         element: <Admin />
+      },
+      {
+        path:'User',
+        element:<User/>
       }
     ]
   },
