@@ -5,8 +5,7 @@ export interface CryptoOrder {
   Studentid: string;
   status: CryptoOrderStatus;
   orderID: string;
-  studentName: string;
-  sourceDesc: string;
+  studentName: string;  
   amountCrypto: number;
   amount: number;
   cryptoCurrency: string;
