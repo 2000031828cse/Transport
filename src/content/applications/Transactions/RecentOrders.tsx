@@ -17,7 +17,7 @@ function RecentOrders() {
       Studentid:'2',
       status: 'completed',
       orderID: '23M3UOG65G8K',
-      studentName: 'chris'
+      studentName: 'chr'
     },
   ];
 
