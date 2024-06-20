@@ -1,23 +1,19 @@
-// src/content/PrivateRoute/PrivateRoute.tsx
 import React from 'react';
-import { Navigate, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-interface PrivateRouteProps {
-  element: React.ReactNode;
-  isAuthenticated: boolean; // Replace with actual authentication state
-  redirectTo?: string;
-}
+const PrivateRoute = ({ children, requiredRole }) => {
+  const isAuthenticated = localStorage.getItem('auth') === 'true';
+  const userRole = localStorage.getItem('role');
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
-  element,
-  isAuthenticated,
-  redirectTo = '/login',
-}) => {
   if (!isAuthenticated) {
-    return <Navigate to={redirectTo} />;
+    return <Navigate to="/login" replace />;
   }
 
-  return <Route element={element} />;
+  if (requiredRole && userRole !== requiredRole) {
+    return <Navigate to="/not-authorized" replace />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;
