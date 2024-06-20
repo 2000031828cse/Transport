@@ -222,8 +222,9 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Payment status</TableCell>
-              <TableCell align="right">Approval Status</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>Actions</TableCell>
+              <TableCell>Approval Status</TableCell>
+              <TableCell>Update</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -290,7 +291,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       noWrap
                     ></Typography>
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -298,15 +299,6 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     ></Typography>
-                    {/* <TableCell align="right">
-                      <Select
-                        value={cryptoOrder.paymentStatus}
-                        onChange={(event) => {}}
-                      >
-                        <MenuItem value="paid">Paid</MenuItem>
-                        <MenuItem value="not paid">Not Paid</MenuItem>
-                      </Select>
-                    </TableCell> */}
                     <TableCell align="center">
                       <Select
                         value={cryptoOrder.paymentStatus}
@@ -316,16 +308,27 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         <MenuItem value="not paid">Not Paid</MenuItem>
                       </Select>
                     </TableCell>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                       // `${cryptoOrder.currency}0,0.00`
-                      )}
-                    </Typography> */}
                   </TableCell>
-                  <TableCell align="right">
+
+                  <TableCell align="center">
+                    <Typography variant="body1" color="text.primary">
+                      {cryptoOrder.approvalStatus === 'approved' && (
+                        <a href="#" onClick={(event) => {}}>
+                          Approved
+                        </a>
+                      )}
+                      {cryptoOrder.approvalStatus === 'rejected' && (
+                        <a href="#" onClick={(event) => {}}>
+                          Rejected
+                        </a>
+                      )}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell align="center">
                     {getStatusLabel(cryptoOrder.status)}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">
                     <Tooltip title="Edit Order" arrow>
                       <IconButton
                         sx={{
