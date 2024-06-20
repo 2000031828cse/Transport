@@ -8,7 +8,7 @@ function DashboardUser() {
   return (
     <>
       <Helmet>
-        <title>Admin Dashboard</title>
+        <title>User Dashboard</title>
       </Helmet>
       {/* <Container maxWidth="lg">
         <Grid container spacing={4}>
