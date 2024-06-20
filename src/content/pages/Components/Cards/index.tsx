@@ -11,7 +11,7 @@ import {
   CardContent,
   Divider
 } from '@mui/material';
-import Footer from 'src/components/Footer';
+// import Footer from 'src/components/Footer';
 import CardActions from '@mui/material/CardActions';
 import { styled } from '@mui/material/styles';
 
@@ -233,7 +233,7 @@ function Cards() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

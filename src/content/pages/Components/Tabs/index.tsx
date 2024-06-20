@@ -15,7 +15,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Footer from 'src/components/Footer';
+// import Footer from 'src/components/Footer';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -111,7 +111,7 @@ function TabsDemo() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

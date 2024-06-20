@@ -24,7 +24,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import Footer from 'src/components/Footer';
+// import Footer from 'src/components/Footer';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -136,7 +136,7 @@ function Modals() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

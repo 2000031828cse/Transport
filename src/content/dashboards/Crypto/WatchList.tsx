@@ -11,7 +11,6 @@ import {
 import ViewWeekTwoToneIcon from '@mui/icons-material/ViewWeekTwoTone';
 import TableRowsTwoToneIcon from '@mui/icons-material/TableRowsTwoTone';
 import WatchListColumn from './WatchListColumn';
-import WatchListRow from './WatchListRow';
 
 const EmptyResultsWrapper = styled('img')(
   ({ theme }) => `
@@ -40,25 +39,9 @@ function WatchList() {
         sx={{
           pb: 3
         }}
-      >
-        <Typography variant="h3">Watch List</Typography>
-        <ToggleButtonGroup
-          value={tabs}
-          exclusive
-          onChange={handleViewOrientation}
-        >
-          <ToggleButton disableRipple value="watch_list_columns">
-            <ViewWeekTwoToneIcon />
-          </ToggleButton>
-          <ToggleButton disableRipple value="watch_list_rows">
-            <TableRowsTwoToneIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Box>
+      ></Box>
 
       {tabs === 'watch_list_columns' && <WatchListColumn />}
-
-      {tabs === 'watch_list_rows' && <WatchListRow />}
 
       {!tabs && (
         <Card
@@ -67,29 +50,7 @@ function WatchList() {
             p: 3
           }}
         >
-          <EmptyResultsWrapper src="/static/images/placeholders/illustrations/1.svg" />
-
-          <Typography
-            align="center"
-            variant="h2"
-            fontWeight="normal"
-            color="text.secondary"
-            sx={{
-              mt: 3
-            }}
-            gutterBottom
-          >
-            Click something, anything!
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{
-              mt: 4
-            }}
-          >
-            Maybe, a button?
-          </Button>
+          {/* <EmptyResultsWrapper src="/static/images/placeholders/illustrations/1.svg" /> */}
         </Card>
       )}
     </>
