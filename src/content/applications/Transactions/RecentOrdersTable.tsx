@@ -26,7 +26,7 @@ import {
 } from '@mui/material';
 
 import Label from 'src/components/Label';
-import { CryptoOrder, CryptoOrderStatus } from 'src/models/pass_request';
+import { CryptoOrder, PassOrderStatus } from 'src/models/pass_request';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
@@ -37,10 +37,10 @@ interface RecentOrdersTableProps {
 }
 
 interface Filters {
-  status?: CryptoOrderStatus;
+  status?: PassOrderStatus;
 }
 
-const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
+const getStatusLabel = (cryptoOrderStatus: PassOrderStatus): JSX.Element => {
   const map = {
     rejected: {
       text: 'rejected',
@@ -291,15 +291,13 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       color="text.primary"
                       gutterBottom
                       noWrap
-                    >
-                      {cryptoOrder.amountCrypto}
-                      {cryptoOrder.cryptoCurrency}
+                    >                   
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
+                    {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
+                       // `${cryptoOrder.currency}0,0.00`
                       )}
-                    </Typography>
+                    </Typography> */}
                   </TableCell>
                   <TableCell align="right">
                     {getStatusLabel(cryptoOrder.status)}
