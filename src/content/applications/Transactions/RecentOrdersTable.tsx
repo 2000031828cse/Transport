@@ -281,8 +281,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     >
                       {cryptoOrder.studentName}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
+                    <Typography variant="body2" color="text.secondary" noWrap>                    
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
