@@ -13,9 +13,9 @@ function PageHeader() {
         <Typography variant="h3" component="h3" gutterBottom>
           Transactions
         </Typography>
-        <Typography variant="subtitle2">
+        {/* <Typography variant="subtitle2">
           {user.name}, these are your recent transactions
-        </Typography>
+        </Typography> */}
       </Grid>
       <Grid item>
         <Button

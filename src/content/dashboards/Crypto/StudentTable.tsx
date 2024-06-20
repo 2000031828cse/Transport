@@ -1,68 +1,3 @@
-// // src/content/dashboard/Crypto/StudentTable.tsx
-// import React from 'react';
-// import {
-//   Card,
-//   CardContent,
-//   Typography,
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableRow,
-//   Container,
-//   Grid
-// } from '@mui/material';
-
-// const data = [
-//   { reqId: 1, studentName: 'John Doe' },
-//   { reqId: 2, studentName: 'Jane Smith' },
-//   { reqId: 3, studentName: 'Alice Johnson' },
-//   { reqId: 4, studentName: 'Chris Lee' }
-// ];
-
-// function StudentTable() {
-//   return (
-//     <Container maxWidth="lg">
-//       <Grid
-//         container
-//         direction="row"
-//         justifyContent="center"
-//         alignItems="stretch"
-//         spacing={4}
-//       >
-//         <Grid item xs={12}>
-//           <Card>
-//             <CardContent>
-//               <Typography variant="h5" gutterBottom>
-//                 Student Requests
-//               </Typography>
-//               <Table>
-//                 <TableHead>
-//                   <TableRow>
-//                     <TableCell>Req Id</TableCell>
-//                     <TableCell>Student Name</TableCell>
-//                   </TableRow>
-//                 </TableHead>
-//                 <TableBody>
-//                   {data.map((row) => (
-//                     <TableRow key={row.reqId}>
-//                       <TableCell>{row.reqId}</TableCell>
-//                       <TableCell>{row.studentName}</TableCell>
-//                     </TableRow>
-//                   ))}
-//                 </TableBody>
-//               </Table>
-//             </CardContent>
-//           </Card>
-//         </Grid>
-//       </Grid>
-//     </Container>
-//   );
-// }
-
-// export default StudentTable;
-
-// src/content/dashboard/Crypto/StudentTable.tsx
 import React from 'react';
 import {
   Card,
@@ -82,7 +17,8 @@ const data = [
   { reqId: 1, studentName: 'John Doe' },
   { reqId: 2, studentName: 'Jane Smith' },
   { reqId: 3, studentName: 'Alice Johnson' },
-  { reqId: 4, studentName: 'Chris Lee' }
+  { reqId: 4, studentName: 'Chris Lee' },
+  { reqId: 5, studentName: 'Chris Gayle' }
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -91,15 +27,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 function StudentTable() {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       <Grid
         container
-        direction="row"
-        justifyContent="center"
-        alignItems="stretch"
-        spacing={4}
+        spacing={3} // Adjusted spacing to match WatchListColumn
+        justifyContent="center" // Center align the grid items horizontally
       >
-        <Grid item xs={12}>
+        <Grid item xs={14}>
+          {' '}
           <Card>
             <CardContent>
               <Typography variant="h1" gutterBottom>

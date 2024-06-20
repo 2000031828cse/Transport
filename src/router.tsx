@@ -24,9 +24,6 @@ const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
 // Applications
 
-const Messenger = Loader(
-  lazy(() => import('src/content/applications/Messenger'))
-);
 const Transactions = Loader(
   lazy(() => import('src/content/applications/Transactions'))
 );
@@ -131,10 +128,6 @@ const routes: RouteObject[] = [
       {
         path: 'crypto',
         element: <Crypto />
-      },
-      {
-        path: 'messenger',
-        element: <Messenger />
       }
     ]
   },

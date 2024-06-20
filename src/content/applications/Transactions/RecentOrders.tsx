@@ -1,24 +1,26 @@
+import React from 'react';
 import { Card } from '@mui/material';
-import { CryptoOrder } from 'src/models/pass_request';
 import RecentOrdersTable from './RecentOrdersTable';
-import { subDays } from 'date-fns';
+import { CryptoOrder, PassOrderStatus } from 'src/models/pass_request'; // Adjusted import to include CryptoOrder and PassOrderStatus
 
 function RecentOrders() {
   const cryptoOrders: CryptoOrder[] = [
     {
       id: '1',
-      Studentid:'1',
+      Studentid: '1',
       status: 'completed',
       orderID: 'VUVX709ET7BY',
-      studentName: 'peter'
+      studentName: 'peter',
+      paymentStatus: 'paid' // Added paymentStatus
     },
     {
       id: '2',
-      Studentid:'2',
+      Studentid: '2',
       status: 'completed',
       orderID: '23M3UOG65G8K',
-      studentName: 'chr'
-    },
+      studentName: 'chr',
+      paymentStatus: 'paid' // Added paymentStatus
+    }
   ];
 
   return (

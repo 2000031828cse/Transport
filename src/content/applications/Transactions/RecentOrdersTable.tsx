@@ -217,11 +217,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   indeterminate={selectedSomeCryptoOrders}
                   onChange={handleSelectAllCryptoOrders}
                 />
-              </TableCell>              
+              </TableCell>
               <TableCell>O_ID </TableCell>
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell align="right">Payment status</TableCell>
+              <TableCell>Payment status</TableCell>
               <TableCell align="right">Approval Status</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -257,8 +257,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     >
                       {cryptoOrder.orderID}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>                     
-                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      noWrap
+                    ></Typography>
                   </TableCell>
                   <TableCell>
                     <Typography
@@ -281,8 +284,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     >
                       {cryptoOrder.studentName}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>                    
-                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      noWrap
+                    ></Typography>
                   </TableCell>
                   <TableCell align="right">
                     <Typography
@@ -291,8 +297,25 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       color="text.primary"
                       gutterBottom
                       noWrap
-                    >                   
-                    </Typography>
+                    ></Typography>
+                    {/* <TableCell align="right">
+                      <Select
+                        value={cryptoOrder.paymentStatus}
+                        onChange={(event) => {}}
+                      >
+                        <MenuItem value="paid">Paid</MenuItem>
+                        <MenuItem value="not paid">Not Paid</MenuItem>
+                      </Select>
+                    </TableCell> */}
+                    <TableCell align="center">
+                      <Select
+                        value={cryptoOrder.paymentStatus}
+                        onChange={(event) => {}}
+                      >
+                        <MenuItem value="paid">Paid</MenuItem>
+                        <MenuItem value="not paid">Not Paid</MenuItem>
+                      </Select>
+                    </TableCell>
                     {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {numeral(cryptoOrder.amount).format(
                        // `${cryptoOrder.currency}0,0.00`
@@ -315,18 +338,6 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         size="small"
                       >
                         <EditTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete Order" arrow>
-                      <IconButton
-                        sx={{
-                          '&:hover': { background: theme.colors.error.lighter },
-                          color: theme.palette.error.main
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

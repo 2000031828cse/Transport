@@ -11,7 +11,7 @@ import {
   Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import MoreVertTwoToneIcon from '@mui/icons-material/MoreVertTwoTone';
 
@@ -47,10 +47,10 @@ function BulkActions() {
           </Typography>
           <ButtonError
             sx={{ ml: 1 }}
-            startIcon={<DeleteTwoToneIcon />}
+            startIcon={<ThumbUpAltIcon />}
             variant="contained"
           >
-            Delete
+            Approve
           </ButtonError>
         </Box>
         <IconButton

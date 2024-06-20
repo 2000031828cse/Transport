@@ -1,269 +1,45 @@
-import {
-  Card,
-  Box,
-  Typography,
-  Avatar,
-  Grid,
-  alpha,
-  useTheme,
-  styled
-} from '@mui/material';
-import Label from 'src/components/Label';
-import Text from 'src/components/Text';
-import Chart from 'react-apexcharts';
-import type { ApexOptions } from 'apexcharts';
-
-const AvatarWrapper = styled(Avatar)(
-  ({ theme }) => `
-    margin: ${theme.spacing(0, 0, 1, -0.5)};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: ${theme.spacing(1)};
-    padding: ${theme.spacing(0.5)};
-    border-radius: 60px;
-    height: ${theme.spacing(5.5)};
-    width: ${theme.spacing(5.5)};
-    background: ${
-      theme.palette.mode === 'dark'
-        ? theme.colors.alpha.trueWhite[30]
-        : alpha(theme.colors.alpha.black[100], 0.07)
-    };
-  
-    img {
-      background: ${theme.colors.alpha.trueWhite[100]};
-      padding: ${theme.spacing(0.5)};
-      display: block;
-      border-radius: inherit;
-      height: ${theme.spacing(4.5)};
-      width: ${theme.spacing(4.5)};
-    }
-`
-);
+import React from 'react';
+import { Card, Box, Typography, Grid } from '@mui/material';
 
 function WatchListColumn() {
-  const theme = useTheme();
-
-  const chartOptions: ApexOptions = {
-    chart: {
-      background: 'transparent',
-      toolbar: {
-        show: false
-      },
-      sparkline: {
-        enabled: true
-      },
-      zoom: {
-        enabled: false
-      }
-    },
-    fill: {
-      gradient: {
-        shade: 'light',
-        type: 'vertical',
-        shadeIntensity: 0.1,
-        inverseColors: false,
-        opacityFrom: 0.8,
-        opacityTo: 0,
-        stops: [0, 100]
-      }
-    },
-    colors: [theme.colors.primary.main],
-    dataLabels: {
-      enabled: false
-    },
-    theme: {
-      mode: theme.palette.mode
-    },
-    stroke: {
-      show: true,
-      colors: [theme.colors.primary.main],
-      width: 3
-    },
-    legend: {
-      show: false
-    },
-    labels: [
-      'Monday',
-      'Tueday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday'
-    ],
-    xaxis: {
-      labels: {
-        show: false
-      },
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false
-      }
-    },
-    yaxis: {
-      show: false,
-      tickAmount: 5
-    },
-    tooltip: {
-      x: {
-        show: true
-      },
-      y: {
-        title: {
-          formatter: function () {
-            return 'Price: $';
-          }
-        }
-      },
-      marker: {
-        show: false
-      }
-    }
-  };
-  const chart1Data = [
-    {
-      name: 'Bitcoin Price',
-      data: [55.701, 57.598, 48.607, 46.439, 58.755, 46.978, 58.16]
-    }
-  ];
-  const chart2Data = [
-    {
-      name: 'Ethereum Price',
-      data: [13, 16, 14, 20, 8, 11, 20]
-    }
-  ];
-  const chart3Data = [
-    {
-      name: 'Cardano Price',
-      data: [51.85, 41.77, 22.09, 42.0, 71.9, 51.84, 31.84]
-    }
-  ];
-
   return (
     <Grid
       container
-      direction="row"
-      justifyContent="center"
-      alignItems="stretch"
-      spacing={3}
+      spacing={3} // Adjusted spacing to match StudentTable
     >
-      <Grid item md={4} xs={12}>
-        <Card
-          sx={{
-            overflow: 'visible'
-          }}
-        >
-          <Box
-            sx={{
-              p: 3
-            }}
-          >
-            <Box display="flex" alignItems="center">
-              <Box>
-                <Typography variant="h1" noWrap>
-                  Total
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                pt: 3
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  pr: 1,
-                  mb: 1
-                }}
-              >
-                5000
-              </Typography>
-            </Box>
+      <Grid item md={4} xs={10}>
+        <Card>
+          <Box p={3}>
+            <Typography variant="h1" noWrap>
+              Total
+            </Typography>
+            <Typography variant="h2" sx={{ pt: 3 }}>
+              5000
+            </Typography>
           </Box>
         </Card>
       </Grid>
-      <Grid item md={4} xs={12}>
-        <Card
-          sx={{
-            overflow: 'visible'
-          }}
-        >
-          <Box
-            sx={{
-              p: 3
-            }}
-          >
-            <Box display="flex" alignItems="center">
-              <Box>
-                <Typography variant="h1" noWrap>
-                  Approvals
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                pt: 3
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  pr: 1,
-                  mb: 1
-                }}
-              >
-                2500
-              </Typography>
-            </Box>
+      <Grid item md={4} xs={10}>
+        <Card>
+          <Box p={3}>
+            <Typography variant="h1" noWrap>
+              Approvals
+            </Typography>
+            <Typography variant="h2" sx={{ pt: 3 }}>
+              2500
+            </Typography>
           </Box>
         </Card>
       </Grid>
-      <Grid item md={4} xs={12}>
-        <Card
-          sx={{
-            overflow: 'visible'
-          }}
-        >
-          <Box
-            sx={{
-              p: 3
-            }}
-          >
-            <Box display="flex" alignItems="center">
-              <Box>
-                <Typography variant="h1" noWrap>
-                  Pending
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                pt: 3
-              }}
-            >
-              <Typography
-                variant="h2"
-                sx={{
-                  pr: 1,
-                  mb: 1
-                }}
-              >
-                2000
-              </Typography>
-            </Box>
+      <Grid item md={4} xs={10}>
+        <Card>
+          <Box p={3}>
+            <Typography variant="h1" noWrap>
+              Pending
+            </Typography>
+            <Typography variant="h2" sx={{ pt: 3 }}>
+              2000
+            </Typography>
           </Box>
         </Card>
       </Grid>
@@ -272,3 +48,58 @@ function WatchListColumn() {
 }
 
 export default WatchListColumn;
+
+// import React from 'react';
+// import { Card, Box, Typography, Grid } from '@mui/material';
+
+// function WatchListColumn() {
+//   return (
+//     <Grid
+//       container
+//       spacing={3} // Adjusted spacing to match StudentTable
+//       justifyContent="center" // Center align the grid items horizontally
+//     >
+//       <Grid item xs={12} md={4}>
+//         {' '}
+//         <Card>
+//           <Box p={3}>
+//             <Typography variant="h1" noWrap>
+//               Total
+//             </Typography>
+//             <Typography variant="h2" sx={{ pt: 3 }}>
+//               5000
+//             </Typography>
+//           </Box>
+//         </Card>
+//       </Grid>
+//       <Grid item xs={12} md={4}>
+//         {' '}
+//         <Card>
+//           <Box p={3}>
+//             <Typography variant="h1" noWrap>
+//               Approvals
+//             </Typography>
+//             <Typography variant="h2" sx={{ pt: 3 }}>
+//               2500
+//             </Typography>
+//           </Box>
+//         </Card>
+//       </Grid>
+//       <Grid item xs={12} md={4}>
+//         {' '}
+//         <Card>
+//           <Box p={3}>
+//             <Typography variant="h1" noWrap>
+//               Pending
+//             </Typography>
+//             <Typography variant="h2" sx={{ pt: 3 }}>
+//               2000
+//             </Typography>
+//           </Box>
+//         </Card>
+//       </Grid>
+//     </Grid>
+//   );
+// }
+
+// export default WatchListColumn;
