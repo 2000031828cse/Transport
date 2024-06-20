@@ -79,7 +79,7 @@ function Hero() {
         alignItems="center"
         container
       >
-        <Grid item md={10} lg={8} mx="auto">         
+        <Grid item md={10} lg={8} mx="auto">
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
             Bus Transport System
           </TypographyH1>
@@ -100,8 +100,7 @@ function Hero() {
             Log In
           </Button>
           <Grid container spacing={3} mt={5}>
-            <Grid item md={6}>
-            </Grid>
+            <Grid item md={6}></Grid>
           </Grid>
         </Grid>
       </Grid>
