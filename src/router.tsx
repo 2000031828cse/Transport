@@ -4,34 +4,20 @@ import { RouteObject } from 'react-router';
 
 import SidebarLayout from 'src/layouts/SidebarLayout';
 import BaseLayout from 'src/layouts/BaseLayout';
-
 import SuspenseLoader from 'src/components/SuspenseLoader';
-import Login from './content/overview/Login';
+import PrivateRoute from './content/overview/PrivateRoute'; // Correct import
+import LoginPage from './content/overview/Login'; // Renamed local Login to LoginPage
 import Signup from './content/overview/Signup';
-// src/router/routes.tsx
-// src/router/routes.tsx
-
-import PrivateRoute from 'src/content/overview/PrivateRoute'; // Assuming correct path
-import LoginPage from 'src/content/overview/Login'; // Rename local Login to LoginPage
 
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
-// const Signup = lazy(() => import('src/content/overview/Signup'));
-const Transactions = lazy(
-  () => import('src/content/applications/Transactions')
-);
-const UserProfile = lazy(
-  () => import('src/content/applications/Users/profile')
-);
-const UserSettings = lazy(
-  () => import('src/content/applications/Users/settings')
-);
+const Transactions = lazy(() => import('src/content/applications/Transactions'));
+const UserProfile = lazy(() => import('src/content/applications/Users/profile'));
+const UserSettings = lazy(() => import('src/content/applications/Users/settings'));
 const Buttons = lazy(() => import('src/content/pages/Components/Buttons'));
 const Modals = lazy(() => import('src/content/pages/Components/Modals'));
-const Accordions = lazy(
-  () => import('src/content/pages/Components/Accordions')
-);
+const Accordions = lazy(() => import('src/content/pages/Components/Accordions'));
 const Tabs = lazy(() => import('src/content/pages/Components/Tabs'));
 const Badges = lazy(() => import('src/content/pages/Components/Badges'));
 const Tooltips = lazy(() => import('src/content/pages/Components/Tooltips'));
@@ -40,13 +26,8 @@ const Cards = lazy(() => import('src/content/pages/Components/Cards'));
 const Forms = lazy(() => import('src/content/pages/Components/Forms'));
 const Status404 = lazy(() => import('src/content/pages/Status/Status404'));
 const Status500 = lazy(() => import('src/content/pages/Status/Status500'));
-
-const StatusComingSoon = lazy(
-  () => import('src/content/pages/Status/ComingSoon')
-);
-const StatusMaintenance = lazy(
-  () => import('src/content/pages/Status/Maintenance')
-);
+const StatusComingSoon = lazy(() => import('src/content/pages/Status/ComingSoon'));
+const StatusMaintenance = lazy(() => import('src/content/pages/Status/Maintenance'));
 
 const routes: RouteObject[] = [
   {
@@ -59,11 +40,11 @@ const routes: RouteObject[] = [
       },
       {
         path: 'login',
-        element: <LoginPage /> // Use renamed LoginPage component
+        element: <LoginPage />
       },
       {
-        path: 'Signup',
-        element: <Signup /> // Use renamed LoginPage component
+        path: 'signup',
+        element: <Signup />
       },
       {
         path: 'overview',
@@ -110,11 +91,19 @@ const routes: RouteObject[] = [
       },
       {
         path: 'Admin',
-        element: <Admin />
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Admin />
+          </PrivateRoute>
+        )
       },
       {
-        path:'User',
-        element:<User/>
+        path: 'User',
+        element: (
+          <PrivateRoute requiredRole="user">
+            <User />
+          </PrivateRoute>
+        )
       }
     ]
   },
@@ -128,7 +117,11 @@ const routes: RouteObject[] = [
       },
       {
         path: 'transactions',
-        element: <Transactions />
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Transactions />
+          </PrivateRoute>
+        )
       },
       {
         path: 'profile',
@@ -194,19 +187,7 @@ const routes: RouteObject[] = [
         element: <Forms />
       }
     ]
-  },
-  // Protected routes using PrivateRoute
-  {
-    path: 'admin-dashboard',
-    element: (
-      <PrivateRoute
-        element={<Admin />}
-        isAuthenticated={true} // Replace with actual authentication state check
-        redirectTo="/login" // Redirect to login if not authenticated
-      />
-    )
   }
-  // Add more protected routes as needed
 ];
 
 export default routes;
