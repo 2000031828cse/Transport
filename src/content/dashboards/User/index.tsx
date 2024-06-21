@@ -1,8 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import { Container, Grid } from '@mui/material';
-import PageTitleWrapper from 'src/components/PageTitleWrapper';
-// import WatchList from './WatchList';
-// import StudentTable from './StudentTable';
+import { Container, Grid, List, ListItem, Button } from '@mui/material';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 function DashboardUser() {
   return (
@@ -10,16 +8,46 @@ function DashboardUser() {
       <Helmet>
         <title>User Dashboard</title>
       </Helmet>
-      {/* <Container maxWidth="lg">
+      <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <WatchList />
+          {/* Sidebar */}
+          <Grid item xs={3}>
+            <List>
+              <ListItem disablePadding>
+                <Button
+                  component={RouterLink}
+                  to="/user-dashboard/routes"
+                  fullWidth
+                >
+                  Routes
+                </Button>
+              </ListItem>
+              <ListItem disablePadding>
+                <Button
+                  component={RouterLink}
+                  to="/user-dashboard/pass-details"
+                  fullWidth
+                >
+                  Pass Details
+                </Button>
+              </ListItem>
+              <ListItem disablePadding>
+                <Button
+                  component={RouterLink}
+                  to="/user-dashboard/pass-request"
+                  fullWidth
+                >
+                  Pass Request
+                </Button>
+              </ListItem>
+            </List>
           </Grid>
-          <Grid item xs={12}>
-            <StudentTable />
+          {/* Main Content Area */}
+          <Grid item xs={9}>
+            {/* Content for each route will be rendered based on the Route component */}
           </Grid>
         </Grid>
-      </Container> */}
+      </Container>
     </>
   );
 }

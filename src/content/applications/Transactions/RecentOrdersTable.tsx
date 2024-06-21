@@ -23,7 +23,7 @@ import {
 } from '@mui/material';
 
 import Label from 'src/components/Label';
-import { CryptoOrder, PassOrderStatus } from 'src/models/pass_request';
+import { PassOrder, PassOrderStatus } from 'src/models/pass_request';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
@@ -32,7 +32,7 @@ import ApprovalDialog from './DialogueBox';
 
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
+  cryptoOrders: PassOrder[];
 }
 
 interface Filters {
@@ -40,7 +40,7 @@ interface Filters {
   paymentStatus?: string | null;
 }
 
-const getStatusLabel = (cryptoOrderStatus: PassOrderStatus): JSX.Element => {
+const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
   const map = {
     rejected: {
       text: 'Rejected',
@@ -56,15 +56,15 @@ const getStatusLabel = (cryptoOrderStatus: PassOrderStatus): JSX.Element => {
     }
   };
 
-  const { text, color }: any = map[cryptoOrderStatus];
+  const { text, color }: any = map[PassOrderStatus];
 
   return <Label color={color}>{text}</Label>;
 };
 
 const applyFilters = (
-  cryptoOrders: CryptoOrder[],
+  cryptoOrders: PassOrder[],
   filters: Filters
-): CryptoOrder[] => {
+): PassOrder[] => {
   return cryptoOrders.filter((cryptoOrder) => {
     let matches = true;
 
@@ -84,10 +84,10 @@ const applyFilters = (
 };
 
 const applyPagination = (
-  cryptoOrders: CryptoOrder[],
+  cryptoOrders: PassOrder[],
   page: number,
   limit: number
-): CryptoOrder[] => {
+): PassOrder[] => {
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
@@ -134,16 +134,16 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   const handleSelectOneCryptoOrder = (
     event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
+    PassOrderId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
+    if (!selectedCryptoOrders.includes(PassOrderId)) {
       setSelectedCryptoOrders((prevSelected) => [
         ...prevSelected,
-        cryptoOrderId
+        PassOrderId
       ]);
     } else {
       setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
+        prevSelected.filter((id) => id !== PassOrderId)
       );
     }
   };

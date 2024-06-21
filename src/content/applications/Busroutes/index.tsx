@@ -52,6 +52,7 @@ const BusStages: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentStage, setCurrentStage] = useState<Stage | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true); // Set to true if sidebar should be open initially
 
   const handleOpen = () => {
     setEditMode(false);

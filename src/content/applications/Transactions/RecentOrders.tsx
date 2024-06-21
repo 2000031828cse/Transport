@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card } from '@mui/material';
 import RecentOrdersTable from './RecentOrdersTable';
-import { CryptoOrder } from 'src/models/pass_request'; // Adjusted import to include CryptoOrder
+import { PassOrder } from 'src/models/pass_request'; // Adjusted import to include CryptoOrder
 
 function RecentOrders() {
-  const cryptoOrders: CryptoOrder[] = [
+  const cryptoOrders: PassOrder[] = [
     {
       id: '1',
       Studentid: '1',
