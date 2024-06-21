@@ -21,7 +21,7 @@ function RecentOrders() {
       orderID: '23M3UOG65G8K',
       studentName: 'Chris',
       paymentStatus: 'not Paid',
-      approvalStatus: 'reject' // Added approvalStatus
+      approvalStatus: 'approval' // Added approvalStatus
     },
     {
       id: '3',
