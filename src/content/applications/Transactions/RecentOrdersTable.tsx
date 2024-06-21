@@ -399,13 +399,13 @@ import {
 } from '@mui/material';
 
 import Label from 'src/components/Label';
-import { CryptoOrder, PassOrderStatus } from 'src/models/pass_request';
+import { PassOrder, PassOrderStatus } from 'src/models/pass_request';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
+  cryptoOrders: PassOrder[];
 }
 
 interface Filters {
@@ -413,7 +413,7 @@ interface Filters {
   paymentStatus?: string;
 }
 
-const getStatusLabel = (cryptoOrderStatus: PassOrderStatus): JSX.Element => {
+const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
   const map = {
     rejected: {
       text: 'Rejected',
@@ -429,15 +429,15 @@ const getStatusLabel = (cryptoOrderStatus: PassOrderStatus): JSX.Element => {
     }
   };
 
-  const { text, color }: any = map[cryptoOrderStatus];
+  const { text, color }: any = map[PassOrderStatus];
 
   return <Label color={color}>{text}</Label>;
 };
 
 const applyFilters = (
-  cryptoOrders: CryptoOrder[],
+  cryptoOrders: PassOrder[],
   filters: Filters
-): CryptoOrder[] => {
+): PassOrder[] => {
   return cryptoOrders.filter((cryptoOrder) => {
     let matches = true;
 
@@ -457,10 +457,10 @@ const applyFilters = (
 };
 
 const applyPagination = (
-  cryptoOrders: CryptoOrder[],
+  cryptoOrders: PassOrder[],
   page: number,
   limit: number
-): CryptoOrder[] => {
+): PassOrder[] => {
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
@@ -533,16 +533,16 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   const handleSelectOneCryptoOrder = (
     event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
+    PassOrderId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
+    if (!selectedCryptoOrders.includes(PassOrderId)) {
       setSelectedCryptoOrders((prevSelected) => [
         ...prevSelected,
-        cryptoOrderId
+        PassOrderId
       ]);
     } else {
       setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
+        prevSelected.filter((id) => id !== PassOrderId)
       );
     }
   };
@@ -620,14 +620,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => {
+            {paginatedCryptoOrders.map((PassOrder) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
+                PassOrder.id
               );
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.orderID}
+                  key={PassOrder.orderID}
                   selected={isCryptoOrderSelected}
                 >
                   <TableCell>
@@ -638,7 +638,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {PassOrder.orderID}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -649,7 +649,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.Studentid}
+                      {PassOrder.Studentid}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -660,14 +660,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.studentName}
+                      {PassOrder.studentName}
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
                     <Select
-                      value={paymentStatusMap[cryptoOrder.id]}
+                      value={paymentStatusMap[PassOrder.id]}
                       onChange={(event: SelectChangeEvent<string>) =>
-                        handlePaymentStatusChangeForOrder(event, cryptoOrder.id)
+                        handlePaymentStatusChangeForOrder(event, PassOrder.id)
                       }
                     >
                       <MenuItem value="paid">Paid</MenuItem>
@@ -676,12 +676,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   </TableCell>
                   <TableCell align="center">
                     <Typography variant="body1" color="text.primary">
-                      {cryptoOrder.approvalStatus === 'approval' && (
+                      {PassOrder.approvalStatus === 'approval' && (
                         <a href="#" onClick={(event) => {}}>
                           Approved
                         </a>
                       )}
-                      {cryptoOrder.approvalStatus === 'reject' && (
+                      {PassOrder.approvalStatus === 'reject' && (
                         <a href="#" onClick={(event) => {}}>
                           Rejected
                         </a>
@@ -689,7 +689,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    {getStatusLabel(cryptoOrder.status)}
+                    {getStatusLabel(PassOrder.status)}
                   </TableCell>
                   <TableCell align="center">
                     <Tooltip title="Edit Order" arrow>
