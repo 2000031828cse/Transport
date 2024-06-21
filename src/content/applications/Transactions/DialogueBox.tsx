@@ -1,4 +1,3 @@
-// ApprovalDialog.tsx or ApprovalDialog.jsx
 import { FC, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -54,3 +53,47 @@ const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose }) => {
 };
 
 export default ApprovalDialog;
+
+// // ApprovalDialog.tsx (or DialogueBox.tsx)
+// import React from 'react';
+// import Dialog from '@mui/material/Dialog';
+// import DialogTitle from '@mui/material/DialogTitle';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogActions from '@mui/material/DialogActions';
+// import Button from '@mui/material/Button';
+
+// interface ApprovalDialogProps {
+//   open: boolean;
+//   onClose: () => void;
+//   onApprove: () => void; // Handler for approve action
+//   onReject: () => void; // Handler for reject action
+// }
+
+// const ApprovalDialog: React.FC<ApprovalDialogProps> = ({
+//   open,
+//   onClose,
+//   onApprove,
+//   onReject
+// }) => {
+//   return (
+//     <Dialog open={open} onClose={onClose}>
+//       <DialogTitle>Approve or Reject?</DialogTitle>
+//       <DialogContent>
+//         {/* Any additional content or message can go here */}
+//       </DialogContent>
+//       <DialogActions>
+//         <Button onClick={onApprove} color="primary">
+//           Approve
+//         </Button>
+//         <Button onClick={onReject} color="primary">
+//           Reject
+//         </Button>
+//         <Button onClick={onClose} color="secondary">
+//           Cancel
+//         </Button>
+//       </DialogActions>
+//     </Dialog>
+//   );
+// };
+
+// export default ApprovalDialog;
