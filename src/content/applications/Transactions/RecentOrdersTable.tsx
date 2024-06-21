@@ -25,7 +25,7 @@ import {
 import Label from 'src/components/Label';
 import { PassOrder, PassOrderStatus } from 'src/models/pass_request';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import CheckIcon from '@mui/icons-material/Check';
 
 // Import the ApprovalDialog component
 import ApprovalDialog from './DialogueBox';
@@ -37,7 +37,7 @@ interface RecentOrdersTableProps {
 
 interface Filters {
   status?: PassOrderStatus | null;
-  paymentStatus?: string | null;
+  paymentStatus?: 'paid' | 'not paid' | null;
 }
 
 const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
@@ -101,35 +101,30 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     status: null,
     paymentStatus: null
   });
-  const [paymentStatusMap, setPaymentStatusMap] = useState<{
-    [key: string]: string;
-  }>(
-    cryptoOrders.reduce((acc, order) => {
-      acc[order.id] = order.paymentStatus;
-      return acc;
-    }, {})
-  );
+  const [orders, setOrders] = useState<PassOrder[]>(cryptoOrders);
 
   // State for managing dialog
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-  const [dialogInput, setDialogInput] = useState<string>('');
+  const [currentOrder, setCurrentOrder] = useState<PassOrder | null>(null);
 
   // Function to handle opening and closing dialog
-  const handleDialogOpen = () => {
+  const handleDialogOpen = (order: PassOrder) => {
+    setCurrentOrder(order);
     setDialogOpen(true);
   };
 
   const handleDialogClose = () => {
     setDialogOpen(false);
+    setCurrentOrder(null);
   };
 
   // Function to handle approval link click
   const handleApprovalClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    order: PassOrder
   ) => {
     event.preventDefault();
-    // Logic to handle approval click, e.g., opening dialog
-    handleDialogOpen();
+    handleDialogOpen(order);
   };
 
   const handleSelectOneCryptoOrder = (
@@ -137,10 +132,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     PassOrderId: string
   ): void => {
     if (!selectedCryptoOrders.includes(PassOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
-        ...prevSelected,
-        PassOrderId
-      ]);
+      setSelectedCryptoOrders((prevSelected) => [...prevSelected, PassOrderId]);
     } else {
       setSelectedCryptoOrders((prevSelected) =>
         prevSelected.filter((id) => id !== PassOrderId)
@@ -160,14 +152,28 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     event: SelectChangeEvent<string>,
     cryptoOrderId: string
   ): void => {
-    const newStatus = event.target.value;
-    setPaymentStatusMap((prevStatusMap) => ({
-      ...prevStatusMap,
-      [cryptoOrderId]: newStatus
-    }));
+    const newStatus = event.target.value as 'paid' | 'not paid';
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.id === cryptoOrderId
+          ? { ...order, paymentStatus: newStatus }
+          : order
+      )
+    );
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
+  const handleApprovalUpdate = (status: PassOrderStatus) => {
+    if (currentOrder) {
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === currentOrder.id ? { ...order, status } : order
+        )
+      );
+      handleDialogClose();
+    }
+  };
+
+  const filteredCryptoOrders = applyFilters(orders, filters);
   const paginatedCryptoOrders = applyPagination(
     filteredCryptoOrders,
     page,
@@ -218,7 +224,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     let value = null;
 
     if (event.target.value !== 'all') {
-      value = event.target.value;
+      value = event.target.value as 'paid' | 'not paid';
     }
 
     setFilters((prevFilters) => ({
@@ -273,7 +279,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                 <TableCell>{cryptoOrder.studentName}</TableCell>
                 <TableCell align="center">
                   <Select
-                    value={paymentStatusMap[cryptoOrder.id]}
+                    value={cryptoOrder.paymentStatus}
                     onChange={(event: SelectChangeEvent<string>) =>
                       handlePaymentStatusChangeForOrder(event, cryptoOrder.id)
                     }
@@ -285,12 +291,22 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                 <TableCell align="center">
                   <Typography variant="body1" color="text.primary">
                     {cryptoOrder.approvalStatus === 'approval' && (
-                      <a href="#" onClick={handleApprovalClick}>
+                      <a
+                        href="#"
+                        onClick={(event) =>
+                          handleApprovalClick(event, cryptoOrder)
+                        }
+                      >
                         Approval
                       </a>
                     )}
                     {cryptoOrder.approvalStatus === 'reject' && (
-                      <a href="#" onClick={handleApprovalClick}>
+                      <a
+                        href="#"
+                        onClick={(event) =>
+                          handleApprovalClick(event, cryptoOrder)
+                        }
+                      >
                         Rejected
                       </a>
                     )}
@@ -300,7 +316,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   {getStatusLabel(cryptoOrder.status)}
                 </TableCell>
                 <TableCell align="center">
-                  <Tooltip title="Edit Order" arrow>
+                  <Tooltip title="Update Payment Status" arrow>
                     <IconButton
                       sx={{
                         '&:hover': {
@@ -311,9 +327,23 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       color="inherit"
                       size="small"
                     >
-                      <EditTwoToneIcon fontSize="small" />
+                      <CheckIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
+                  {/* <Tooltip title="Delete Order" arrow>
+                    <IconButton
+                      sx={{
+                        '&:hover': {
+                          background: theme.colors.primary.lighter
+                        },
+                        color: theme.palette.error.main
+                      }}
+                      color="inherit"
+                      size="small"
+                    >
+                      <DeleteTwoToneIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip> */}
                 </TableCell>
               </TableRow>
             ))}
@@ -333,7 +363,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       </Box>
 
       {/* ApprovalDialog component integrated here */}
-      <ApprovalDialog open={dialogOpen} onClose={handleDialogClose} />
+      <ApprovalDialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        onSave={handleApprovalUpdate}
+      />
     </Card>
   );
 };

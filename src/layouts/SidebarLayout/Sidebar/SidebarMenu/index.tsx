@@ -180,7 +180,6 @@ function SidebarMenu() {
   return (
     <>
       <MenuWrapper>
-        
         <List
           component="div"
           // subheader={
@@ -213,7 +212,7 @@ function SidebarMenu() {
                   Buss pass details
                 </Button>
               </ListItem>
-              
+
               <ListItem component="div">
                 <Button
                   disableRipple
@@ -225,11 +224,9 @@ function SidebarMenu() {
                   Routes
                 </Button>
               </ListItem>
-
             </List>
           </SubMenuWrapper>
         </List>
-
       </MenuWrapper>
     </>
   );

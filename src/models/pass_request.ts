@@ -1,7 +1,7 @@
 export type PassOrderStatus = 'completed' | 'pending' | 'rejected';
 
 export interface PassOrder {
-  paymentStatus: 'paid' | 'not Paid';
+  paymentStatus: 'paid' | 'not paid';
   id: string;
   Studentid: string;
   status: PassOrderStatus;

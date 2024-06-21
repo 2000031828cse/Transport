@@ -5,24 +5,27 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { PassOrderStatus } from 'src/models/pass_request';
 
 interface ApprovalDialogProps {
   open: boolean;
   onClose: () => void;
+  onSave: (status: PassOrderStatus) => void;
 }
 
-const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose }) => {
+const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose, onSave }) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleSave = () => {
-    // Logic to handle saving the input value
-    // For example, you can call a function passed from the parent component
-    // that manages the state or performs an action with the input value.
-    onClose(); // Close the dialog after saving
+  const handleApprove = () => {
+    onSave('completed');
+  };
+
+  const handleReject = () => {
+    onSave('rejected');
   };
 
   return (
@@ -41,10 +44,10 @@ const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={handleApprove} color="primary">
           Approve
         </Button>
-        <Button onClick={handleSave} color="primary">
+        <Button onClick={handleReject} color="primary">
           Reject
         </Button>
       </DialogActions>
@@ -53,47 +56,3 @@ const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose }) => {
 };
 
 export default ApprovalDialog;
-
-// // ApprovalDialog.tsx (or DialogueBox.tsx)
-// import React from 'react';
-// import Dialog from '@mui/material/Dialog';
-// import DialogTitle from '@mui/material/DialogTitle';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogActions from '@mui/material/DialogActions';
-// import Button from '@mui/material/Button';
-
-// interface ApprovalDialogProps {
-//   open: boolean;
-//   onClose: () => void;
-//   onApprove: () => void; // Handler for approve action
-//   onReject: () => void; // Handler for reject action
-// }
-
-// const ApprovalDialog: React.FC<ApprovalDialogProps> = ({
-//   open,
-//   onClose,
-//   onApprove,
-//   onReject
-// }) => {
-//   return (
-//     <Dialog open={open} onClose={onClose}>
-//       <DialogTitle>Approve or Reject?</DialogTitle>
-//       <DialogContent>
-//         {/* Any additional content or message can go here */}
-//       </DialogContent>
-//       <DialogActions>
-//         <Button onClick={onApprove} color="primary">
-//           Approve
-//         </Button>
-//         <Button onClick={onReject} color="primary">
-//           Reject
-//         </Button>
-//         <Button onClick={onClose} color="secondary">
-//           Cancel
-//         </Button>
-//       </DialogActions>
-//     </Dialog>
-//   );
-// };
-
-// export default ApprovalDialog;
