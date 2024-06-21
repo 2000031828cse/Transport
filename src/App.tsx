@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useRoutes } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import router from './router'; // Adjust import path as needed
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
