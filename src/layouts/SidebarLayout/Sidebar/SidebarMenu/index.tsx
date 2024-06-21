@@ -219,7 +219,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/transactions"
+                  to="/bus-stages"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Routes

@@ -9,6 +9,7 @@ import PrivateRoute from './content/overview/PrivateRoute'; // Correct import
 import LoginPage from './content/overview/Login'; // Renamed local Login to LoginPage
 import Signup from './content/overview/Signup';
 
+const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
       {
         path: 'overview',
         element: <Navigate to="/" replace />
+      },
+      {
+        path: '/bus-stages',
+        element: <BusStages />,
       },
       {
         path: 'status',
@@ -189,5 +194,13 @@ const routes: RouteObject[] = [
     ]
   }
 ];
+// const busroutes: RouteObject[] = [
+//   {
+//     path: '/',
+//     element: <Home />, // Assuming you have a Home component
+//   },
+
+//   // Add other routes here
+// ];
 
 export default routes;
