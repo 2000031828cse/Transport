@@ -7,6 +7,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import PrivateRoute from './content/overview/PrivateRoute'; // Correct import
 import LoginPage from './content/overview/Login'; // Renamed local Login to LoginPage
 import Signup from './content/overview/Signup';
+import UserSidebar from './layouts/SidebarLayout/Sidebar/usersidebarmenu';
 
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
@@ -108,8 +109,13 @@ const routes: RouteObject[] = [
             <Admin />
           </PrivateRoute>
         )
-      },
-     
+      }
+    ]
+  },
+  {
+    path: 'dashboards',
+    element: <UserSidebar />,
+    children: [
       {
         path: 'User',
         element: (
