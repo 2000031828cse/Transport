@@ -1,5 +1,3 @@
-// UserSidebar.jsx
-
 import React, { useContext } from 'react';
 import { List, ListItem, Button, styled, Box, alpha } from '@mui/material';
 import { NavLink as RouterLink } from 'react-router-dom';
@@ -12,11 +10,16 @@ import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
-    padding: ${theme.spacing(2)};
-    background: ${theme.palette.background.default};
-    height: 100%;
+    width: 250px;
+    height: 100vh; /* 100% viewport height */
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
 
     .MuiList-root {
+      flex-grow: 1; /* Grow to fill remaining space */
       padding: ${theme.spacing(1)};
       .MuiListItem-root {
         padding: 0;
@@ -24,22 +27,22 @@ const MenuWrapper = styled(Box)(
           justify-content: flex-start;
           padding: ${theme.spacing(1.25, 2)};
           width: 100%;
-          color: ${theme.palette.text.primary};
+          color: white;
           border-radius: ${theme.shape.borderRadius}px;
           text-transform: none;
           .MuiButton-startIcon {
-            color: ${alpha(theme.palette.primary.main, 0.8)};
+            color: white;
             font-size: 20px;
             margin-right: ${theme.spacing(1)};
           }
         }
         .MuiButton-root:hover {
-          background: ${alpha(theme.palette.primary.main, 0.1)};
-          color: ${theme.palette.primary.main};
+          background: ${alpha(theme.palette.common.white, 0.1)};
+          color: white;
         }
         &.active .MuiButton-root {
-          background: ${alpha(theme.palette.primary.main, 0.2)};
-          color: ${theme.palette.primary.main};
+          background: ${alpha(theme.palette.common.white, 0.2)};
+          color: white;
         }
       }
     }
