@@ -47,7 +47,7 @@ const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
       color: 'error'
     },
     completed: {
-      text: 'Completed',
+      text: 'Approved',
       color: 'success'
     },
     pending: {
@@ -193,7 +193,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     },
     {
       id: 'completed',
-      name: 'Completed'
+      name: 'Approved'
     },
     {
       id: 'pending',
@@ -262,7 +262,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>             
+              <TableCell>ID</TableCell>
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Stop</TableCell>
