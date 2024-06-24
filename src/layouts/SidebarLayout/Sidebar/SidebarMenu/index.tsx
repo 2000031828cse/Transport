@@ -209,20 +209,20 @@ function SidebarMenu() {
                   to="/management/transactions"
                   startIcon={<MmsTwoToneIcon />}
                 >
-                  Buss pass details
+                  Bus pass requests
                 </Button>
               </ListItem>
 
               <ListItem component="div">
-              <Button
-    disableRipple
-    component={RouterLink}
-    onClick={closeSidebar}
-    to="/management/busstages"
-    startIcon={<MmsTwoToneIcon />}
-  >
-    Routes
-  </Button>
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/busstages"
+                  startIcon={<MmsTwoToneIcon />}
+                >
+                  Routes
+                </Button>
               </ListItem>
             </List>
           </SubMenuWrapper>

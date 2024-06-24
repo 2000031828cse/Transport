@@ -33,20 +33,54 @@ interface Stage {
 
 const BusStages: React.FC = () => {
   const [stages, setStages] = useState<Stage[]>([
-    { sno: 1, shift: "Morning", location: "Guntur", routeId: "8A", route: "Gorantla", startingPoint: "Gorantla", pickupPoints: "Gorantla - Chilles" },
-    { sno: 2, shift: "Morning", location: "Guntur", routeId: "8B", route: "Gorantla", startingPoint: "Medical Hostel", pickupPoints: "Medical Hostel - Nagarulu - Vijaya Digital - Inner Ring Road" },
-    { sno: 3, shift: "Morning", location: "Guntur", routeId: "8C", route: "Lodge Center", startingPoint: "Lodge Center", pickupPoints: "Lodge Center - SBI - Ala Hospital - AJ Gudi - Inner Ring Road" },
-    { sno: 4, shift: "Morning", location: "Guntur", routeId: "8D", route: "SVN Colony", startingPoint: "SVN Colony", pickupPoints: "SVN Colony - Gujjanagundla Centre" },
+    {
+      sno: 1,
+      shift: 'Morning',
+      location: 'Guntur',
+      routeId: '8A',
+      route: 'Gorantla',
+      startingPoint: 'Gorantla',
+      pickupPoints: 'Gorantla - Chilles'
+    },
+    {
+      sno: 2,
+      shift: 'Morning',
+      location: 'Guntur',
+      routeId: '8B',
+      route: 'Gorantla',
+      startingPoint: 'Medical Hostel',
+      pickupPoints:
+        'Medical Hostel - Nagarulu - Vijaya Digital - Inner Ring Road'
+    },
+    {
+      sno: 3,
+      shift: 'Morning',
+      location: 'Guntur',
+      routeId: '8C',
+      route: 'Lodge Center',
+      startingPoint: 'Lodge Center',
+      pickupPoints:
+        'Lodge Center - SBI - Ala Hospital - AJ Gudi - Inner Ring Road'
+    },
+    {
+      sno: 4,
+      shift: 'Morning',
+      location: 'Guntur',
+      routeId: '8D',
+      route: 'SVN Colony',
+      startingPoint: 'SVN Colony',
+      pickupPoints: 'SVN Colony - Gujjanagundla Centre'
+    }
   ]);
 
   const [newStage, setNewStage] = useState<Stage>({
     sno: stages.length + 1,
-    shift: "",
-    location: "",
-    routeId: "",
-    route: "",
-    startingPoint: "",
-    pickupPoints: ""
+    shift: '',
+    location: '',
+    routeId: '',
+    route: '',
+    startingPoint: '',
+    pickupPoints: ''
   });
 
   const [open, setOpen] = useState(false);
@@ -77,12 +111,12 @@ const BusStages: React.FC = () => {
     setStages([...stages, { ...newStage, sno: stages.length + 1 }]);
     setNewStage({
       sno: stages.length + 2,
-      shift: "",
-      location: "",
-      routeId: "",
-      route: "",
-      startingPoint: "",
-      pickupPoints: ""
+      shift: '',
+      location: '',
+      routeId: '',
+      route: '',
+      startingPoint: '',
+      pickupPoints: ''
     });
     handleClose();
   };
@@ -95,37 +129,54 @@ const BusStages: React.FC = () => {
 
   const handleUpdateStage = () => {
     if (currentStage) {
-      setStages(stages.map(stage => (stage.sno === currentStage.sno ? currentStage : stage)));
+      setStages(
+        stages.map((stage) =>
+          stage.sno === currentStage.sno ? currentStage : stage
+        )
+      );
       handleClose();
     }
   };
 
   const handleDeleteStage = (sno: number) => {
-    setStages(stages.filter(stage => stage.sno !== sno));
+    setStages(stages.filter((stage) => stage.sno !== sno));
   };
 
   return (
     <>
-      <Card sx={{ backgroundColor: '#ffffff', color: '#000000', marginBottom: '16px' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' }}>
-          <Typography variant="h6">Bus Stages</Typography>
+      <Card
+        sx={{
+          backgroundColor: '#ffffff',
+          color: '#000000',
+          marginBottom: '16px'
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '16px'
+          }}
+        >
+          <Typography variant="h6">Bus Routes</Typography>
           <Button
             variant="contained"
             sx={{
               backgroundColor: '#000000',
               color: '#ffffff',
               '&:hover': {
-                backgroundColor: '#333333',
-              },
+                backgroundColor: '#333333'
+              }
             }}
             startIcon={<AddIcon />}
             onClick={handleOpen}
           >
-            Add Stage
+            Add Route
           </Button>
         </Box>
         <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="bus stages table">
+          <Table sx={{ minWidth: 650 }} aria-label="bus routes table">
             <TableHead>
               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
@@ -143,16 +194,30 @@ const BusStages: React.FC = () => {
                 <TableRow key={stage.sno}>
                   <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
                   <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
-                  <TableCell sx={{ color: '#000000' }}>{stage.location}</TableCell>
-                  <TableCell sx={{ color: '#000000' }}>{stage.routeId}</TableCell>
+                  <TableCell sx={{ color: '#000000' }}>
+                    {stage.location}
+                  </TableCell>
+                  <TableCell sx={{ color: '#000000' }}>
+                    {stage.routeId}
+                  </TableCell>
                   <TableCell sx={{ color: '#000000' }}>{stage.route}</TableCell>
-                  <TableCell sx={{ color: '#000000' }}>{stage.startingPoint}</TableCell>
-                  <TableCell sx={{ color: '#000000' }}>{stage.pickupPoints}</TableCell>
+                  <TableCell sx={{ color: '#000000' }}>
+                    {stage.startingPoint}
+                  </TableCell>
+                  <TableCell sx={{ color: '#000000' }}>
+                    {stage.pickupPoints}
+                  </TableCell>
                   <TableCell>
-                    <IconButton color="primary" onClick={() => handleEditStage(stage)}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleEditStage(stage)}
+                    >
                       <EditIcon />
                     </IconButton>
-                    <IconButton color="error" onClick={() => handleDeleteStage(stage.sno)}>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleDeleteStage(stage.sno)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -164,13 +229,15 @@ const BusStages: React.FC = () => {
       </Card>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{editMode ? "Edit Stage" : "Add Stage"}</DialogTitle>
+        <DialogTitle>{editMode ? 'Edit Route' : 'Add Route'}</DialogTitle>
         <DialogContent>
           <TextField
             label="Shift"
             variant="outlined"
             name="shift"
-            value={editMode && currentStage ? currentStage.shift : newStage.shift}
+            value={
+              editMode && currentStage ? currentStage.shift : newStage.shift
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -179,7 +246,11 @@ const BusStages: React.FC = () => {
             label="Location"
             variant="outlined"
             name="location"
-            value={editMode && currentStage ? currentStage.location : newStage.location}
+            value={
+              editMode && currentStage
+                ? currentStage.location
+                : newStage.location
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -188,7 +259,9 @@ const BusStages: React.FC = () => {
             label="Route ID"
             variant="outlined"
             name="routeId"
-            value={editMode && currentStage ? currentStage.routeId : newStage.routeId}
+            value={
+              editMode && currentStage ? currentStage.routeId : newStage.routeId
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -197,7 +270,9 @@ const BusStages: React.FC = () => {
             label="Route"
             variant="outlined"
             name="route"
-            value={editMode && currentStage ? currentStage.route : newStage.route}
+            value={
+              editMode && currentStage ? currentStage.route : newStage.route
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -206,7 +281,11 @@ const BusStages: React.FC = () => {
             label="Starting Point"
             variant="outlined"
             name="startingPoint"
-            value={editMode && currentStage ? currentStage.startingPoint : newStage.startingPoint}
+            value={
+              editMode && currentStage
+                ? currentStage.startingPoint
+                : newStage.startingPoint
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -215,7 +294,11 @@ const BusStages: React.FC = () => {
             label="Pickup Points"
             variant="outlined"
             name="pickupPoints"
-            value={editMode && currentStage ? currentStage.pickupPoints : newStage.pickupPoints}
+            value={
+              editMode && currentStage
+                ? currentStage.pickupPoints
+                : newStage.pickupPoints
+            }
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
@@ -225,8 +308,11 @@ const BusStages: React.FC = () => {
           <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={editMode ? handleUpdateStage : handleAddStage} sx={{ backgroundColor: '#000000', color: '#ffffff' }}>
-            {editMode ? "Update Stage" : "Add Stage"}
+          <Button
+            onClick={editMode ? handleUpdateStage : handleAddStage}
+            sx={{ backgroundColor: '#000000', color: '#ffffff' }}
+          >
+            {editMode ? 'Update Route' : 'Add Route'}
           </Button>
         </DialogActions>
       </Dialog>
