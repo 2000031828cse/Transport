@@ -262,9 +262,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell>ID</TableCell>             
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
+              <TableCell>Stop</TableCell>
               <TableCell>Payment Status</TableCell>
               <TableCell>Actions</TableCell>
               <TableCell>Approval Status</TableCell>
@@ -277,6 +278,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                 <TableCell>{cryptoOrder.orderID}</TableCell>
                 <TableCell>{cryptoOrder.Studentid}</TableCell>
                 <TableCell>{cryptoOrder.studentName}</TableCell>
+                <TableCell>{cryptoOrder.Stop}</TableCell>
                 <TableCell align="center">
                   <Select
                     value={cryptoOrder.paymentStatus}
