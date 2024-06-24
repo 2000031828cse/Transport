@@ -60,7 +60,7 @@ const UserSidebar = () => {
             disableRipple
             component={RouterLink}
             onClick={closeSidebar}
-            to="/dashboard/user"
+            to="/dashboards/user"
             startIcon={<BrightnessLowTwoToneIcon />}
           >
             Dashboard
@@ -71,7 +71,7 @@ const UserSidebar = () => {
             disableRipple
             component={RouterLink}
             onClick={closeSidebar}
-            to="/management/profile"
+            to="/dashboards/profile"
             startIcon={<AccountCircleTwoToneIcon />}
           >
             Profile

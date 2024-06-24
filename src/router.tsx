@@ -7,27 +7,18 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import PrivateRoute from './content/overview/PrivateRoute'; // Correct import
 import LoginPage from './content/overview/Login'; // Renamed local Login to LoginPage
 import Signup from './content/overview/Signup';
-import UserSidebar from './layouts/SidebarLayout/Sidebar/usersidebarmenu';
 import UserSidebarLayout from './layouts/SidebarLayout/Sidebar/UserSidebarLayout';
 
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
-const Transactions = lazy(
-  () => import('src/content/applications/Transactions')
-);
-const UserProfile = lazy(
-  () => import('src/content/applications/Users/profile')
-);
-const UserSettings = lazy(
-  () => import('src/content/applications/Users/settings')
-);
+const Transactions = lazy(() => import('src/content/applications/Transactions'));
+const UserProfile = lazy(() => import('src/content/applications/Users/profile'));
+const UserSettings = lazy(() => import('src/content/applications/Users/settings'));
 const Buttons = lazy(() => import('src/content/pages/Components/Buttons'));
 const Modals = lazy(() => import('src/content/pages/Components/Modals'));
-const Accordions = lazy(
-  () => import('src/content/pages/Components/Accordions')
-);
+const Accordions = lazy(() => import('src/content/pages/Components/Accordions'));
 const Tabs = lazy(() => import('src/content/pages/Components/Tabs'));
 const Badges = lazy(() => import('src/content/pages/Components/Badges'));
 const Tooltips = lazy(() => import('src/content/pages/Components/Tooltips'));
@@ -36,12 +27,8 @@ const Cards = lazy(() => import('src/content/pages/Components/Cards'));
 const Forms = lazy(() => import('src/content/pages/Components/Forms'));
 const Status404 = lazy(() => import('src/content/pages/Status/Status404'));
 const Status500 = lazy(() => import('src/content/pages/Status/Status500'));
-const StatusComingSoon = lazy(
-  () => import('src/content/pages/Status/ComingSoon')
-);
-const StatusMaintenance = lazy(
-  () => import('src/content/pages/Status/Maintenance')
-);
+const StatusComingSoon = lazy(() => import('src/content/pages/Status/ComingSoon'));
+const StatusMaintenance = lazy(() => import('src/content/pages/Status/Maintenance'));
 
 const routes: RouteObject[] = [
   {
@@ -50,7 +37,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Overview />
+        element: <Suspense fallback={<div>Loading...</div>}><Overview /></Suspense>
       },
       {
         path: 'login',
@@ -73,25 +60,25 @@ const routes: RouteObject[] = [
           },
           {
             path: '404',
-            element: <Status404 />
+            element: <Suspense fallback={<div>Loading...</div>}><Status404 /></Suspense>
           },
           {
             path: '500',
-            element: <Status500 />
+            element: <Suspense fallback={<div>Loading...</div>}><Status500 /></Suspense>
           },
           {
             path: 'maintenance',
-            element: <StatusMaintenance />
+            element: <Suspense fallback={<div>Loading...</div>}><StatusMaintenance /></Suspense>
           },
           {
             path: 'coming-soon',
-            element: <StatusComingSoon />
+            element: <Suspense fallback={<div>Loading...</div>}><StatusComingSoon /></Suspense>
           }
         ]
       },
       {
         path: '*',
-        element: <Status404 />
+        element: <Suspense fallback={<div>Loading...</div>}><Status404 /></Suspense>
       }
     ]
   },
@@ -107,7 +94,7 @@ const routes: RouteObject[] = [
         path: 'Admin',
         element: (
           <PrivateRoute requiredRole="admin">
-            <Admin />
+            <Suspense fallback={<div>Loading...</div>}><Admin /></Suspense>
           </PrivateRoute>
         )
       }
@@ -125,11 +112,26 @@ const routes: RouteObject[] = [
         path: 'User',
         element: (
           <PrivateRoute requiredRole="user">
-            <Suspense fallback={<div>Loading...</div>}>
-              <User />
-            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}><User /></Suspense>
           </PrivateRoute>
         )
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            element: <Navigate to="details" replace />
+          },
+          {
+            path: 'details',
+            element: <Suspense fallback={<div>Loading...</div>}><UserProfile /></Suspense>
+          },
+          {
+            path: 'settings',
+            element: <Suspense fallback={<div>Loading...</div>}><UserSettings /></Suspense>
+          }
+        ]
       }
     ]
   },
@@ -145,7 +147,7 @@ const routes: RouteObject[] = [
         path: 'transactions',
         element: (
           <PrivateRoute requiredRole="admin">
-            <Transactions />
+            <Suspense fallback={<div>Loading...</div>}><Transactions /></Suspense>
           </PrivateRoute>
         )
       },
@@ -153,28 +155,9 @@ const routes: RouteObject[] = [
         path: 'busstages',
         element: (
           <PrivateRoute requiredRole="admin">
-            <Suspense fallback={<div>Loading...</div>}>
-              <BusStages />
-            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}><BusStages /></Suspense>
           </PrivateRoute>
         )
-      },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '',
-            element: <Navigate to="details" replace />
-          },
-          {
-            path: 'details',
-            element: <UserProfile />
-          },
-          {
-            path: 'settings',
-            element: <UserSettings />
-          }
-        ]
       }
     ]
   },
@@ -188,39 +171,39 @@ const routes: RouteObject[] = [
       },
       {
         path: 'buttons',
-        element: <Buttons />
+        element: <Suspense fallback={<div>Loading...</div>}><Buttons /></Suspense>
       },
       {
         path: 'modals',
-        element: <Modals />
+        element: <Suspense fallback={<div>Loading...</div>}><Modals /></Suspense>
       },
       {
         path: 'accordions',
-        element: <Accordions />
+        element: <Suspense fallback={<div>Loading...</div>}><Accordions /></Suspense>
       },
       {
         path: 'tabs',
-        element: <Tabs />
+        element: <Suspense fallback={<div>Loading...</div>}><Tabs /></Suspense>
       },
       {
         path: 'badges',
-        element: <Badges />
+        element: <Suspense fallback={<div>Loading...</div>}><Badges /></Suspense>
       },
       {
         path: 'tooltips',
-        element: <Tooltips />
+        element: <Suspense fallback={<div>Loading...</div>}><Tooltips /></Suspense>
       },
       {
         path: 'avatars',
-        element: <Avatars />
+        element: <Suspense fallback={<div>Loading...</div>}><Avatars /></Suspense>
       },
       {
         path: 'cards',
-        element: <Cards />
+        element: <Suspense fallback={<div>Loading...</div>}><Cards /></Suspense>
       },
       {
         path: 'forms',
-        element: <Forms />
+        element: <Suspense fallback={<div>Loading...</div>}><Forms /></Suspense>
       }
     ]
   }

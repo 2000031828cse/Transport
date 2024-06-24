@@ -1,68 +1,24 @@
-// UserSidebarLayout.tsx
-
-import { FC, ReactNode } from 'react';
-import { Box, alpha, lighten, useTheme } from '@mui/material';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
+import UserSidebar from '../usersidebarmenu';
+import Header from '../../Header'; // Adjust the import path as necessary
+import { Box, CssBaseline } from '@mui/material';
 
-import UserSidebar from 'src/layouts/SidebarLayout/Sidebar/usersidebarmenu';
-import Header from 'src/layouts/SidebarLayout/Header';
-
-interface UserSidebarLayoutProps {
-  children?: ReactNode;
-}
-
-const UserSidebarLayout: FC<UserSidebarLayoutProps> = () => {
-  const theme = useTheme();
-
+const UserSidebarLayout = () => {
   return (
-    <>
-      <Box
-        sx={{
-          flex: 1,
-          height: '100%',
-
-          '.MuiPageTitle-wrapper': {
-            background:
-              theme.palette.mode === 'dark'
-                ? theme.colors.alpha.trueWhite[5]
-                : theme.colors.alpha.white[50],
-            marginBottom: `${theme.spacing(4)}`,
-            boxShadow:
-              theme.palette.mode === 'dark'
-                ? `0 1px 0 ${alpha(
-                    lighten(theme.colors.primary.main, 0.7),
-                    0.15
-                  )}, 0px 2px 4px -3px rgba(0, 0, 0, 0.2), 0px 5px 12px -4px rgba(0, 0, 0, .1)`
-                : `0px 2px 4px -3px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.1
-                  )}, 0px 5px 12px -4px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.05
-                  )}`
-          }
-        }}
-      >
-        <Header />
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <CssBaseline />
+      <Header />
+      <Box sx={{ display: 'flex', flexGrow: 1, mt: 5 }}> {/* mt: 2 adds a small gap below the header */}
         <UserSidebar />
         <Box
-          sx={{
-            position: 'relative',
-            zIndex: 5,
-            display: 'block',
-            flex: 1,
-            pt: `${theme.header.height}`,
-            [theme.breakpoints.up('lg')]: {
-              ml: `${theme.sidebar.width}`
-            }
-          }}
+          component="main"
+          sx={{ flexGrow: 1, p: 3 }}
         >
-          <Box display="block">
-            <Outlet />
-          </Box>
+          <Outlet />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
