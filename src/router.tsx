@@ -8,6 +8,7 @@ import PrivateRoute from './content/overview/PrivateRoute'; // Correct import
 import LoginPage from './content/overview/Login'; // Renamed local Login to LoginPage
 import Signup from './content/overview/Signup';
 import UserSidebar from './layouts/SidebarLayout/Sidebar/usersidebarmenu';
+import UserSidebarLayout from './layouts/SidebarLayout/Sidebar/UserSidebarLayout';
 
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
@@ -114,13 +115,19 @@ const routes: RouteObject[] = [
   },
   {
     path: 'dashboards',
-    element: <UserSidebar />,
+    element: <UserSidebarLayout />,
     children: [
+      {
+        path: '',
+        element: <Navigate to="User" replace />
+      },
       {
         path: 'User',
         element: (
           <PrivateRoute requiredRole="user">
-            <User />
+            <Suspense fallback={<div>Loading...</div>}>
+              <User />
+            </Suspense>
           </PrivateRoute>
         )
       }
