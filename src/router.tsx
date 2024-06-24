@@ -63,10 +63,6 @@ const routes: RouteObject[] = [
         element: <Navigate to="/" replace />
       },
       {
-        path: '/bus-stages',
-        element: <BusStages />
-      },
-      {
         path: 'status',
         children: [
           {
@@ -113,6 +109,7 @@ const routes: RouteObject[] = [
           </PrivateRoute>
         )
       },
+     
       {
         path: 'User',
         element: (
@@ -136,6 +133,16 @@ const routes: RouteObject[] = [
         element: (
           <PrivateRoute requiredRole="admin">
             <Transactions />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'busstages',
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Suspense fallback={<div>Loading...</div>}>
+              <BusStages />
+            </Suspense>
           </PrivateRoute>
         )
       },
