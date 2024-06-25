@@ -95,9 +95,7 @@ const applyPagination = (
 };
 
 const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
-  const [selectedPassOrders, setSelectedPassOrders] = useState<string[]>(
-    []
-  );
+  const [selectedPassOrders, setSelectedPassOrders] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [filters, setFilters] = useState<Filters>({
@@ -181,16 +179,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
   };
 
   const filteredPassOrders = applyFilters(orders, filters);
-  const paginatedPassOrders = applyPagination(
-    filteredPassOrders,
-    page,
-    limit
-  );
+  const paginatedPassOrders = applyPagination(filteredPassOrders, page, limit);
   const selectedSomePassOrders =
     selectedPassOrders.length > 0 &&
     selectedPassOrders.length < PassOrders.length;
-  const selectedAllPassOrders =
-    selectedPassOrders.length === PassOrders.length;
+  const selectedAllPassOrders = selectedPassOrders.length === PassOrders.length;
   const theme = useTheme();
 
   const statusOptions = [
@@ -305,11 +298,9 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
                   <Typography variant="body1" color="text.primary">
                     <a
                       href="#"
-                      onClick={(event) =>
-                        handleApprovalClick(event, PassOrder)
-                      }
+                      onClick={(event) => handleApprovalClick(event, PassOrder)}
                     >
-                      Approval
+                      Approval Link
                     </a>
                   </Typography>
                 </TableCell>
