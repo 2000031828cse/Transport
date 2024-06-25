@@ -206,28 +206,6 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/transactions"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Bus pass requests
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/busstages"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Routes
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
                   to="/management/termpage"
                   startIcon={<MmsTwoToneIcon />}
                 >
@@ -239,10 +217,32 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
+                  to="/management/transactions"
+                  startIcon={<MmsTwoToneIcon />}
+                >
+                  Bus pass requests
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
                   to="/management/stops"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Stops
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/busstages"
+                  startIcon={<MmsTwoToneIcon />}
+                >
+                  Routes
                 </Button>
               </ListItem>
             </List>
