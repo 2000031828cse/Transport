@@ -32,6 +32,7 @@ interface Stage {
   shift: string;
   location: string;
   routeId: string;
+  timings: string;
   route: string;
   startingPoint: string;
   pickupPoints: string[];
@@ -45,6 +46,7 @@ const BusStages: React.FC = () => {
       shift: 'Morning',
       location: 'Guntur',
       routeId: '8A',
+      timings: '8:00 AM',
       route: 'Gorantla',
       startingPoint: 'Gorantla',
       pickupPoints: ['Gorantla', 'Chilles']
@@ -54,6 +56,7 @@ const BusStages: React.FC = () => {
       shift: 'Morning',
       location: 'Guntur',
       routeId: '8B',
+      timings: '8:00 AM',
       route: 'Gorantla',
       startingPoint: 'Medical Hostel',
       pickupPoints: [
@@ -68,6 +71,7 @@ const BusStages: React.FC = () => {
       shift: 'Morning',
       location: 'Guntur',
       routeId: '8C',
+      timings: '8:00 AM',
       route: 'Lodge Center',
       startingPoint: 'Lodge Center',
       pickupPoints: [
@@ -83,6 +87,7 @@ const BusStages: React.FC = () => {
       shift: 'Morning',
       location: 'Guntur',
       routeId: '8D',
+      timings: '8:00 AM',
       route: 'SVN Colony',
       startingPoint: 'SVN Colony',
       pickupPoints: ['SVN Colony', 'Gujjanagundla Centre']
@@ -95,6 +100,7 @@ const BusStages: React.FC = () => {
     location: '',
     routeId: '',
     route: '',
+    timings: '',
     startingPoint: '',
     pickupPoints: []
   });
@@ -129,6 +135,7 @@ const BusStages: React.FC = () => {
       shift: '',
       location: '',
       routeId: '',
+      timings: '',
       route: '',
       startingPoint: '',
       pickupPoints: []
@@ -206,6 +213,7 @@ const BusStages: React.FC = () => {
                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Route Name</TableCell>
+                <TableCell sx={{ color: '#000000' }}>Timings</TableCell>
                 {/* <TableCell sx={{ color: '#000000' }}>Route</TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Stops</TableCell>
@@ -219,6 +227,9 @@ const BusStages: React.FC = () => {
                   <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
                   <TableCell sx={{ color: '#000000' }}>
                     {stage.routeId}
+                  </TableCell>
+                  <TableCell sx={{ color: '#000000' }}>
+                    {stage.timings}
                   </TableCell>
                   {/* <TableCell sx={{ color: '#000000' }}>{stage.route}</TableCell> */}
                   <TableCell sx={{ color: '#000000' }}>
@@ -268,6 +279,17 @@ const BusStages: React.FC = () => {
             name="routeId"
             value={
               editMode && currentStage ? currentStage.routeId : newStage.routeId
+            }
+            onChange={handleInputChange}
+            fullWidth
+            sx={{ marginBottom: '8px' }}
+          />
+          <TextField
+            label="Timings"
+            variant="outlined"
+            name="timings"
+            value={
+              editMode && currentStage ? currentStage.timings : newStage.timings
             }
             onChange={handleInputChange}
             fullWidth
