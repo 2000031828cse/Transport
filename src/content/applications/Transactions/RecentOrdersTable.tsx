@@ -31,7 +31,7 @@ import ApprovalDialog from './DialogueBox';
 
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: PassOrder[];
+  PassOrders: PassOrder[];
 }
 
 interface Filters {
@@ -65,19 +65,19 @@ const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
 };
 
 const applyFilters = (
-  cryptoOrders: PassOrder[],
+  PassOrders: PassOrder[],
   filters: Filters
 ): PassOrder[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
+  return PassOrders.filter((PassOrder) => {
     let matches = true;
 
-    if (filters.status && cryptoOrder.status !== filters.status) {
+    if (filters.status && PassOrder.status !== filters.status) {
       matches = false;
     }
 
     if (
       filters.paymentStatus &&
-      cryptoOrder.paymentStatus !== filters.paymentStatus
+      PassOrder.paymentStatus !== filters.paymentStatus
     ) {
       matches = false;
     }
@@ -87,15 +87,15 @@ const applyFilters = (
 };
 
 const applyPagination = (
-  cryptoOrders: PassOrder[],
+  PassOrders: PassOrder[],
   page: number,
   limit: number
 ): PassOrder[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
+  return PassOrders.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
+const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
+  const [selectedPassOrders, setSelectedPassOrders] = useState<string[]>(
     []
   );
   const [page, setPage] = useState<number>(0);
@@ -104,7 +104,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     status: null,
     paymentStatus: null
   });
-  const [orders, setOrders] = useState<PassOrder[]>(cryptoOrders);
+  const [orders, setOrders] = useState<PassOrder[]>(PassOrders);
 
   // State for managing dialog
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -130,14 +130,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     handleDialogOpen(order);
   };
 
-  const handleSelectOneCryptoOrder = (
+  const handleSelectOnePassOrder = (
     event: ChangeEvent<HTMLInputElement>,
     PassOrderId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(PassOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [...prevSelected, PassOrderId]);
+    if (!selectedPassOrders.includes(PassOrderId)) {
+      setSelectedPassOrders((prevSelected) => [...prevSelected, PassOrderId]);
     } else {
-      setSelectedCryptoOrders((prevSelected) =>
+      setSelectedPassOrders((prevSelected) =>
         prevSelected.filter((id) => id !== PassOrderId)
       );
     }
@@ -153,12 +153,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   const handlePaymentStatusChangeForOrder = (
     event: SelectChangeEvent<string>,
-    cryptoOrderId: string
+    PassOrderId: string
   ): void => {
     const newStatus = event.target.value as 'paid' | 'not paid';
     setOrders((prevOrders) =>
       prevOrders.map((order) => {
-        if (order.id === cryptoOrderId) {
+        if (order.id === PassOrderId) {
           if (newStatus === 'paid' && order.status === 'completed') {
             return { ...order, paymentStatus: newStatus, status: 'active' };
           }
@@ -180,17 +180,17 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     }
   };
 
-  const filteredCryptoOrders = applyFilters(orders, filters);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
+  const filteredPassOrders = applyFilters(orders, filters);
+  const paginatedPassOrders = applyPagination(
+    filteredPassOrders,
     page,
     limit
   );
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+  const selectedSomePassOrders =
+    selectedPassOrders.length > 0 &&
+    selectedPassOrders.length < PassOrders.length;
+  const selectedAllPassOrders =
+    selectedPassOrders.length === PassOrders.length;
   const theme = useTheme();
 
   const statusOptions = [
@@ -276,7 +276,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>ID</TableCell>
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell>Stop</TableCell>
+              <TableCell>Stop Request</TableCell>
               <TableCell>Payment Status</TableCell>
               <TableCell>Actions</TableCell>
               <TableCell>Approval Status</TableCell>
@@ -284,17 +284,17 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => (
-              <TableRow key={cryptoOrder.orderID}>
-                <TableCell>{cryptoOrder.orderID}</TableCell>
-                <TableCell>{cryptoOrder.Studentid}</TableCell>
-                <TableCell>{cryptoOrder.studentName}</TableCell>
-                <TableCell>{cryptoOrder.Stop}</TableCell>
+            {paginatedPassOrders.map((PassOrder) => (
+              <TableRow key={PassOrder.orderID}>
+                <TableCell>{PassOrder.orderID}</TableCell>
+                <TableCell>{PassOrder.Studentid}</TableCell>
+                <TableCell>{PassOrder.studentName}</TableCell>
+                <TableCell>{PassOrder.Stop}</TableCell>
                 <TableCell align="center">
                   <Select
-                    value={cryptoOrder.paymentStatus}
+                    value={PassOrder.paymentStatus}
                     onChange={(event: SelectChangeEvent<string>) =>
-                      handlePaymentStatusChangeForOrder(event, cryptoOrder.id)
+                      handlePaymentStatusChangeForOrder(event, PassOrder.id)
                     }
                   >
                     <MenuItem value="paid">Paid</MenuItem>
@@ -306,7 +306,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     <a
                       href="#"
                       onClick={(event) =>
-                        handleApprovalClick(event, cryptoOrder)
+                        handleApprovalClick(event, PassOrder)
                       }
                     >
                       Approval
@@ -314,7 +314,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   </Typography>
                 </TableCell>
                 <TableCell align="center">
-                  {getStatusLabel(cryptoOrder.status)}
+                  {getStatusLabel(PassOrder.status)}
                 </TableCell>
                 <TableCell align="center">
                   <Tooltip title="Update Status" arrow>
@@ -340,7 +340,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredCryptoOrders.length}
+          count={filteredPassOrders.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
