@@ -5,13 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import 'nprogress/nprogress.css';
 import App from 'src/App';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
+import { StopsProvider } from './content/applications/Stops/StopsContext';
 import * as serviceWorker from 'src/serviceWorker';
 
 ReactDOM.render(
   <HelmetProvider>
     <SidebarProvider>
       <BrowserRouter>
-        <App />
+        <StopsProvider>
+          <App />
+        </StopsProvider>
       </BrowserRouter>
     </SidebarProvider>
   </HelmetProvider>,

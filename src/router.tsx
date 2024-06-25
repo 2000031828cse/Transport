@@ -9,7 +9,7 @@ import LoginPage from './content/overview/Login'; // Renamed local Login to Logi
 import Signup from './content/overview/Signup';
 import UserSidebarLayout from './layouts/SidebarLayout/Sidebar/UserSidebarLayout';
 import Stops from './content/applications/Stops';
-import TermPage from './content/applications/term';
+import TermPage from './content/applications/Term';
 
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
@@ -137,7 +137,7 @@ const routes: RouteObject[] = [
             </Suspense>
           </PrivateRoute>
         )
-      },
+      }
     ]
   },
   {
@@ -225,7 +225,11 @@ const routes: RouteObject[] = [
       },
       {
         path: 'TermPage',
-        element: <Suspense fallback={<div>Loading...</div>}><TermPage /></Suspense>
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <TermPage />
+          </Suspense>
+        )
       }
     ]
   },

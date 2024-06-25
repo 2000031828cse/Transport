@@ -15,12 +15,17 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  IconButton
+  IconButton,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  SelectChangeEvent
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
+import { useStops } from '../Stops/StopsContext';
 interface Stage {
   sno: number;
   shift: string;
@@ -32,6 +37,7 @@ interface Stage {
 }
 
 const BusStages: React.FC = () => {
+  const { stops } = useStops();
   const [stages, setStages] = useState<Stage[]>([
     {
       sno: 1,
@@ -86,7 +92,6 @@ const BusStages: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentStage, setCurrentStage] = useState<Stage | null>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Set to true if sidebar should be open initially
 
   const handleOpen = () => {
     setEditMode(false);
@@ -142,6 +147,15 @@ const BusStages: React.FC = () => {
     setStages(stages.filter((stage) => stage.sno !== sno));
   };
 
+  const handlePickupPointsChange = (event: SelectChangeEvent<string>) => {
+    const value = event.target.value as string;
+    if (editMode && currentStage) {
+      setCurrentStage({ ...currentStage, pickupPoints: value });
+    } else {
+      setNewStage({ ...newStage, pickupPoints: value });
+    }
+  };
+
   return (
     <>
       <Card
@@ -181,7 +195,6 @@ const BusStages: React.FC = () => {
               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
-                {/* <TableCell sx={{ color: '#000000' }}>Location</TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>Route ID</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Route</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
@@ -194,9 +207,6 @@ const BusStages: React.FC = () => {
                 <TableRow key={stage.sno}>
                   <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
                   <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
-                  {/* <TableCell sx={{ color: '#000000' }}>
-                    {stage.location}
-                  </TableCell> */}
                   <TableCell sx={{ color: '#000000' }}>
                     {stage.routeId}
                   </TableCell>
@@ -242,19 +252,6 @@ const BusStages: React.FC = () => {
             fullWidth
             sx={{ marginBottom: '8px' }}
           />
-          {/* <TextField
-            label="Location"
-            variant="outlined"
-            name="location"
-            value={
-              editMode && currentStage
-                ? currentStage.location
-                : newStage.location
-            }
-            onChange={handleInputChange}
-            fullWidth
-            sx={{ marginBottom: '8px' }}
-          /> */}
           <TextField
             label="Route ID"
             variant="outlined"
@@ -290,19 +287,26 @@ const BusStages: React.FC = () => {
             fullWidth
             sx={{ marginBottom: '8px' }}
           />
-          <TextField
-            label="Pickup Points"
-            variant="outlined"
-            name="pickupPoints"
-            value={
-              editMode && currentStage
-                ? currentStage.pickupPoints
-                : newStage.pickupPoints
-            }
-            onChange={handleInputChange}
-            fullWidth
-            sx={{ marginBottom: '8px' }}
-          />
+          <FormControl fullWidth sx={{ marginBottom: '8px' }}>
+            <InputLabel id="pickup-points-label">Pickup Points</InputLabel>
+            <Select
+              labelId="pickup-points-label"
+              id="pickup-points"
+              value={
+                editMode && currentStage
+                  ? currentStage.pickupPoints
+                  : newStage.pickupPoints
+              }
+              onChange={handlePickupPointsChange}
+              fullWidth
+            >
+              {stops.map((stop) => (
+                <MenuItem key={stop.number} value={stop.name}>
+                  {stop.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">
