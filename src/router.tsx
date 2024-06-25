@@ -12,7 +12,7 @@ import Stops from './content/applications/Stops';
 import TermPage from './content/applications/term';
 
 const BusPassRequest  = lazy(() => import('src/content/applications/buspassrequest'));
-
+const BusPassDetails  = lazy(() => import('src/content/applications/buspassdetails'));
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
@@ -166,6 +166,16 @@ const routes: RouteObject[] = [
           <PrivateRoute requiredRole="user">
             <Suspense fallback={<div>Loading...</div>}>
               <BusPassRequest />
+            </Suspense>
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'buspassdetails',
+        element: (
+          <PrivateRoute requiredRole="user">
+            <Suspense fallback={<div>Loading...</div>}>
+              <BusPassDetails />
             </Suspense>
           </PrivateRoute>
         )
