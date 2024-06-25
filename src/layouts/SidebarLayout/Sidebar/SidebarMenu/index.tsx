@@ -228,7 +228,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/busstages"
+                  to="/management/termpage"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Term
