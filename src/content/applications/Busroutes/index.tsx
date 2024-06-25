@@ -205,10 +205,10 @@ const BusStages: React.FC = () => {
               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
-                <TableCell sx={{ color: '#000000' }}>Route ID</TableCell>
-                <TableCell sx={{ color: '#000000' }}>Route</TableCell>
+                <TableCell sx={{ color: '#000000' }}>Route Name</TableCell>
+                {/* <TableCell sx={{ color: '#000000' }}>Route</TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
-                <TableCell sx={{ color: '#000000' }}>Pickup Points</TableCell>
+                <TableCell sx={{ color: '#000000' }}>Stops</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -220,7 +220,7 @@ const BusStages: React.FC = () => {
                   <TableCell sx={{ color: '#000000' }}>
                     {stage.routeId}
                   </TableCell>
-                  <TableCell sx={{ color: '#000000' }}>{stage.route}</TableCell>
+                  {/* <TableCell sx={{ color: '#000000' }}>{stage.route}</TableCell> */}
                   <TableCell sx={{ color: '#000000' }}>
                     {stage.startingPoint}
                   </TableCell>
@@ -298,7 +298,7 @@ const BusStages: React.FC = () => {
             sx={{ marginBottom: '8px' }}
           />
           <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-            <InputLabel id="pickup-points-label">Pickup Points</InputLabel>
+            <InputLabel id="pickup-points-label">Stops</InputLabel>
             <Select
               labelId="pickup-points-label"
               id="pickup-points"
