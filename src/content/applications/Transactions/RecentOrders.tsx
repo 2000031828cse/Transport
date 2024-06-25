@@ -4,7 +4,7 @@ import RecentOrdersTable from './RecentOrdersTable';
 import { PassOrder } from 'src/models/pass_request'; // Adjusted import to include CryptoOrder
 
 function RecentOrders() {
-  const cryptoOrders: PassOrder[] = [
+  const PassOrders: PassOrder[] = [
     {
       id: '1',
       Studentid: '1',
@@ -39,7 +39,7 @@ function RecentOrders() {
 
   return (
     <Card>
-      <RecentOrdersTable cryptoOrders={cryptoOrders} />
+      <RecentOrdersTable PassOrders={PassOrders} />
     </Card>
   );
 }
