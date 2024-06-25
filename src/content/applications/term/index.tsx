@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
+import {
+  Button,
+  Container,
+  TextField,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography
+} from '@mui/material';
 
 interface Term {
-  termId: number; // Assuming termId is a number
+  termId: number;
   startDate: string;
   endDate: string;
 }
 
 const TermPage: React.FC = () => {
-  const [term, setTerm] = useState<Term>({
-    termId: 1, // Initial termId
+  const initialTerm: Term = {
+    termId: 1,
     startDate: '',
     endDate: '',
-  });
+  };
+
+  const [term, setTerm] = useState<Term>(initialTerm);
+  const [updatedTerm, setUpdatedTerm] = useState<Term>({ ...initialTerm });
+  const [error, setError] = useState<string>('');
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -25,63 +41,110 @@ const TermPage: React.FC = () => {
 
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newStartDate = e.target.value;
-    setTerm((prevTerm) => ({
+    setUpdatedTerm((prevTerm) => ({
       ...prevTerm,
       startDate: newStartDate,
-      // Automatically adjust endDate if it's before the new start date
-      endDate: prevTerm.endDate < newStartDate ? newStartDate : prevTerm.endDate,
     }));
+    setError(''); // Clear error message when start date changes
   };
 
   const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEndDate = e.target.value;
-    // Check if the selected end date is before the start date
-    if (newEndDate >= term.startDate) {
-      setTerm({
-        ...term,
-        endDate: newEndDate,
-      });
+    setUpdatedTerm((prevTerm) => ({
+      ...prevTerm,
+      endDate: newEndDate,
+    }));
+    if (updatedTerm.startDate && newEndDate < updatedTerm.startDate) {
+      setError('End date cannot be before the start date.');
     } else {
-      alert('End date cannot be before the start date.');
+      setError('');
     }
   };
 
   const handleUpdateTerm = () => {
-    // Here you can implement the logic to update the term on the server
-    // For demonstration, let's just log the term object
-    console.log('Updated term:', term);
-    // You can add fetch or axios call here to update the term on the server
+    if (!updatedTerm.startDate || !updatedTerm.endDate) {
+      setError('Please select both start and end dates.');
+      return;
+    }
+
+    if (updatedTerm.endDate < updatedTerm.startDate) {
+      setError('End date cannot be before the start date.');
+      return;
+    }
+
+    setTerm(updatedTerm);
+    console.log('Updated term:', updatedTerm);
+    setUpdatedTerm({ ...initialTerm });
+    setError(''); // Clear error message after successful update
   };
 
   return (
-    <div>
-      <h2>Term Details</h2>
-      <div>
-        <label>Term ID:</label> {term.termId}
-      </div>
-      <div>
-        <label>Start Date:</label>
-        <input type="date" value={term.startDate} onChange={handleStartDateChange} />
-      </div>
-      <div>
-        <label>End Date:</label>
-        <input type="date" value={term.endDate} onChange={handleEndDateChange} />
-      </div>
-      <div>
-        <button onClick={handleUpdateTerm}>Update Term</button>
-      </div>
-      <div>
-        <h3>Term Period</h3>
+    <Container maxWidth="md" sx={{ mt: 4, p: 2, border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#ffffff' }}>
+      <Typography variant="h5" align="center" sx={{ mb: 3 }}>Term Details</Typography>
+      
+      <Box sx={{ mb: 2 }}>
+        {/* <TextField
+          label="Term ID"
+          value={term.termId}
+          variant="outlined"
+          disabled
+          fullWidth
+          sx={{ mb: 2 }}
+        /> */}
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>Start Date:</Typography>
+          <TextField
+            type="date"
+            value={updatedTerm.startDate}
+            onChange={handleStartDateChange}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>End Date:</Typography>
+          <TextField
+            type="date"
+            value={updatedTerm.endDate}
+            onChange={handleEndDateChange}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
+        {error && <Typography variant="body2" color="error" sx={{ mt: 1 }}>{error}</Typography>}
+      </Box>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleUpdateTerm}
+        sx={{ mb: 2 }}
+      >
+        Update Term
+      </Button>
+
+      <Box>
+        <Typography variant="h6" sx={{ mb: 2 }}>Term Period</Typography>
         {term.startDate && term.endDate ? (
-          <p>
-            <strong>Start Date:</strong> {formatDate(term.startDate)} <br />
-            <strong>End Date:</strong> {formatDate(term.endDate)}
-          </p>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell><strong>Start Date</strong></TableCell>
+                <TableCell><strong>End Date</strong></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{formatDate(term.startDate)}</TableCell>
+                <TableCell>{formatDate(term.endDate)}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         ) : (
-          <p>Please select start and end dates.</p>
+          <Typography variant="body1" color="textSecondary">Please select start and end dates.</Typography>
         )}
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 };
 
