@@ -224,6 +224,28 @@ function SidebarMenu() {
                   Routes
                 </Button>
               </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/busstages"
+                  startIcon={<MmsTwoToneIcon />}
+                >
+                  Term
+                </Button>
+              </ListItem>
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/management/busstages"
+                  startIcon={<MmsTwoToneIcon />}
+                >
+                  Stops
+                </Button>
+              </ListItem>
             </List>
           </SubMenuWrapper>
         </List>
