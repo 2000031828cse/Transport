@@ -93,7 +93,7 @@ const UserSidebar = () => {
             disableRipple
             component={RouterLink}
             onClick={closeSidebar}
-            to="/bus-pass-details"
+            to="/buspassdetails"
             startIcon={<MmsTwoToneIcon />}
           >
             Bus Pass Details
@@ -104,7 +104,7 @@ const UserSidebar = () => {
             disableRipple
             component={RouterLink}
             onClick={closeSidebar}
-            to="/bus-pass-request"
+            to="/dashboards/buspassrequest"
             startIcon={<RedeemTwoToneIcon />}
           >
             Bus Pass Request
