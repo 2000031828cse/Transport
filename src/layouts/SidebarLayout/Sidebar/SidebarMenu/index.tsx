@@ -12,25 +12,11 @@ import {
 import { NavLink as RouterLink } from 'react-router-dom';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
-import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
-import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
-import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
-import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
-import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
-import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
-import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
-import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwoTone';
-import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
-import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
-import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import RouteIcon from '@mui/icons-material/Route';
+import PlaceIcon from '@mui/icons-material/Place';
+import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -196,7 +182,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/dashboards/Admin"
-                  startIcon={<BrightnessLowTwoToneIcon />}
+                  startIcon={<DashboardIcon />}
                 >
                   Dashboard
                 </Button>
@@ -207,7 +193,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/termpage"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<CalendarMonthIcon />}
                 >
                   Term
                 </Button>
@@ -218,7 +204,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/transactions"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<DirectionsBusIcon />}
                 >
                   Bus pass requests
                 </Button>
@@ -229,7 +215,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/stops"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<PlaceIcon />}
                 >
                   Stops
                 </Button>
@@ -240,7 +226,7 @@ function SidebarMenu() {
                   component={RouterLink}
                   onClick={closeSidebar}
                   to="/management/busstages"
-                  startIcon={<MmsTwoToneIcon />}
+                  startIcon={<RouteIcon />}
                 >
                   Routes
                 </Button>
