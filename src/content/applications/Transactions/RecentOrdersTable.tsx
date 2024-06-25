@@ -47,7 +47,7 @@ const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
     },
     completed: {
       text: 'Approved',
-      color: 'success'
+      color: 'info'
     },
     pending: {
       text: 'Pending',
