@@ -317,7 +317,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   {getStatusLabel(cryptoOrder.status)}
                 </TableCell>
                 <TableCell align="center">
-                  <Tooltip title="Update Payment Status" arrow>
+                  <Tooltip title="Update Status" arrow>
                     <IconButton
                       sx={{
                         '&:hover': {
