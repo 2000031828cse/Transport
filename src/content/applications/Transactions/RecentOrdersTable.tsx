@@ -300,7 +300,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
                       href="#"
                       onClick={(event) => handleApprovalClick(event, PassOrder)}
                     >
-                      Approval Link
+                      Approval
                     </a>
                   </Typography>
                 </TableCell>
