@@ -159,7 +159,7 @@ const BusStages: React.FC = () => {
             padding: '16px'
           }}
         >
-          <Typography variant="h6">Bus Stages</Typography>
+          <Typography variant="h6">Bus Routes</Typography>
           <Button
             variant="contained"
             sx={{
@@ -172,16 +172,16 @@ const BusStages: React.FC = () => {
             startIcon={<AddIcon />}
             onClick={handleOpen}
           >
-            Add Stage
+            Add Route
           </Button>
         </Box>
         <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="bus stages table">
+          <Table sx={{ minWidth: 650 }} aria-label="bus routes table">
             <TableHead>
               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
-                <TableCell sx={{ color: '#000000' }}>Location</TableCell>
+                {/* <TableCell sx={{ color: '#000000' }}>Location</TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>Route ID</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Route</TableCell>
                 <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
@@ -194,9 +194,9 @@ const BusStages: React.FC = () => {
                 <TableRow key={stage.sno}>
                   <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
                   <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
-                  <TableCell sx={{ color: '#000000' }}>
+                  {/* <TableCell sx={{ color: '#000000' }}>
                     {stage.location}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell sx={{ color: '#000000' }}>
                     {stage.routeId}
                   </TableCell>
@@ -229,7 +229,7 @@ const BusStages: React.FC = () => {
       </Card>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{editMode ? 'Edit Stage' : 'Add Stage'}</DialogTitle>
+        <DialogTitle>{editMode ? 'Edit Route' : 'Add Route'}</DialogTitle>
         <DialogContent>
           <TextField
             label="Shift"
@@ -242,7 +242,7 @@ const BusStages: React.FC = () => {
             fullWidth
             sx={{ marginBottom: '8px' }}
           />
-          <TextField
+          {/* <TextField
             label="Location"
             variant="outlined"
             name="location"
@@ -254,7 +254,7 @@ const BusStages: React.FC = () => {
             onChange={handleInputChange}
             fullWidth
             sx={{ marginBottom: '8px' }}
-          />
+          /> */}
           <TextField
             label="Route ID"
             variant="outlined"
@@ -312,7 +312,7 @@ const BusStages: React.FC = () => {
             onClick={editMode ? handleUpdateStage : handleAddStage}
             sx={{ backgroundColor: '#000000', color: '#ffffff' }}
           >
-            {editMode ? 'Update Stage' : 'Add Stage'}
+            {editMode ? 'Update Route' : 'Add Route'}
           </Button>
         </DialogActions>
       </Dialog>
@@ -321,314 +321,3 @@ const BusStages: React.FC = () => {
 };
 
 export default BusStages;
-
-// import React, { useState } from 'react';
-// import {
-//   Card,
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   Typography,
-//   Box,
-//   TextField,
-//   Button,
-//   Dialog,
-//   DialogTitle,
-//   DialogContent,
-//   DialogActions,
-//   IconButton,
-//   Select,
-//   MenuItem
-// } from '@mui/material';
-// import AddIcon from '@mui/icons-material/Add';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import EditIcon from '@mui/icons-material/Edit';
-// import { SelectChangeEvent } from '@mui/material/Select';
-
-// interface Stage {
-//   sno: number;
-//   shift: string;
-//   location: string;
-//   routeId: string;
-//   route: string;
-//   startingPoint: string;
-//   pickupPoints: string;
-// }
-
-// const shifts = ['Morning 7:00 AM', 'Morning 9:00 AM'];
-
-// const BusStages: React.FC = () => {
-//   const [stages, setStages] = useState<Stage[]>([
-//     {
-//       sno: 1,
-//       shift: 'Morning 7:00 AM',
-//       location: 'Guntur',
-//       routeId: '8A',
-//       route: 'Gorantla',
-//       startingPoint: 'Gorantla',
-//       pickupPoints: 'Gorantla - Chilles'
-//     },
-//     {
-//       sno: 2,
-//       shift: 'Morning 9:00 AM',
-//       location: 'Guntur',
-//       routeId: '8B',
-//       route: 'Gorantla',
-//       startingPoint: 'Medical Hostel',
-//       pickupPoints:
-//         'Medical Hostel - Nagarulu - Vijaya Digital - Inner Ring Road'
-//     }
-//     // Add more initial stages as needed...
-//   ]);
-
-//   const [newStage, setNewStage] = useState<Stage>({
-//     sno: stages.length + 1,
-//     shift: '',
-//     location: '',
-//     routeId: '',
-//     route: '',
-//     startingPoint: '',
-//     pickupPoints: ''
-//   });
-
-//   const [open, setOpen] = useState(false);
-//   const [editMode, setEditMode] = useState(false);
-//   const [currentStage, setCurrentStage] = useState<Stage | null>(null);
-
-//   const handleOpen = () => {
-//     setEditMode(false);
-//     setOpen(true);
-//   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//     setCurrentStage(null);
-//   };
-
-//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     if (editMode && currentStage) {
-//       setCurrentStage({ ...currentStage, [name]: value });
-//     } else {
-//       setNewStage({ ...newStage, [name]: value });
-//     }
-//   };
-
-//   const handleShiftChange = (event: SelectChangeEvent<string>) => {
-//     const { value } = event.target;
-//     if (editMode && currentStage) {
-//       setCurrentStage({ ...currentStage, shift: value });
-//     } else {
-//       setNewStage({ ...newStage, shift: value });
-//     }
-//   };
-
-//   const handleRouteChange = (event: SelectChangeEvent<string>) => {
-//     const { value } = event.target;
-//     if (editMode && currentStage) {
-//       setCurrentStage({ ...currentStage, route: value });
-//     } else {
-//       setNewStage({ ...newStage, route: value });
-//     }
-//   };
-
-//   const handleAddStage = () => {
-//     setStages([...stages, { ...newStage, sno: stages.length + 1 }]);
-//     setNewStage({
-//       sno: stages.length + 2,
-//       shift: '',
-//       location: '',
-//       routeId: '',
-//       route: '',
-//       startingPoint: '',
-//       pickupPoints: ''
-//     });
-//     handleClose();
-//   };
-
-//   const handleEditStage = (stage: Stage) => {
-//     setEditMode(true);
-//     setCurrentStage(stage);
-//     setOpen(true);
-//   };
-
-//   const handleUpdateStage = () => {
-//     if (currentStage) {
-//       setStages(
-//         stages.map((stage) =>
-//           stage.sno === currentStage.sno ? currentStage : stage
-//         )
-//       );
-//       handleClose();
-//     }
-//   };
-
-//   const handleDeleteStage = (sno: number) => {
-//     setStages(stages.filter((stage) => stage.sno !== sno));
-//   };
-
-//   return (
-//     <>
-//       <Card
-//         sx={{
-//           backgroundColor: '#ffffff',
-//           color: '#000000',
-//           marginBottom: '16px'
-//         }}
-//       >
-//         <Box
-//           sx={{
-//             display: 'flex',
-//             justifyContent: 'space-between',
-//             alignItems: 'center',
-//             padding: '16px'
-//           }}
-//         >
-//           <Typography variant="h6">Bus Routes</Typography>
-//           <Button
-//             variant="contained"
-//             sx={{
-//               backgroundColor: '#000000',
-//               color: '#ffffff',
-//               '&:hover': { backgroundColor: '#333333' }
-//             }}
-//             startIcon={<AddIcon />}
-//             onClick={handleOpen}
-//           >
-//             Add Route
-//           </Button>
-//         </Box>
-//         <TableContainer>
-//           <Table sx={{ minWidth: 650 }} aria-label="bus routes table">
-//             <TableHead>
-//               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-//                 <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Location</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Route ID</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Route</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Pickup Points</TableCell>
-//                 <TableCell sx={{ color: '#000000' }}>Actions</TableCell>
-//               </TableRow>
-//             </TableHead>
-//             <TableBody>
-//               {stages.map((stage) => (
-//                 <TableRow key={stage.sno}>
-//                   <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>
-//                     {stage.location}
-//                   </TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>
-//                     {stage.routeId}
-//                   </TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>{stage.route}</TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>
-//                     {stage.startingPoint}
-//                   </TableCell>
-//                   <TableCell sx={{ color: '#000000' }}>
-//                     {stage.pickupPoints}
-//                   </TableCell>
-//                   <TableCell>
-//                     <IconButton
-//                       color="primary"
-//                       onClick={() => handleEditStage(stage)}
-//                     >
-//                       <EditIcon />
-//                     </IconButton>
-//                     <IconButton
-//                       color="error"
-//                       onClick={() => handleDeleteStage(stage.sno)}
-//                     >
-//                       <DeleteIcon />
-//                     </IconButton>
-//                   </TableCell>
-//                 </TableRow>
-//               ))}
-//             </TableBody>
-//           </Table>
-//         </TableContainer>
-//       </Card>
-
-//       <Dialog open={open} onClose={handleClose}>
-//         <DialogTitle>{editMode ? 'Edit Route' : 'Add Route'}</DialogTitle>
-//         <DialogContent>
-//           <Select
-//             label="Shift"
-//             variant="outlined"
-//             value={
-//               editMode && currentStage ? currentStage.shift : newStage.shift
-//             }
-//             onChange={handleShiftChange}
-//             fullWidth
-//             sx={{ marginBottom: '8px' }}
-//           >
-//             {shifts.map((shift) => (
-//               <MenuItem key={shift} value={shift}>
-//                 {shift}
-//               </MenuItem>
-//             ))}
-//           </Select>
-//           <TextField
-//             label="Location"
-//             variant="outlined"
-//             name="location"
-//             value={
-//               editMode && currentStage
-//                 ? currentStage.location
-//                 : newStage.location
-//             }
-//             onChange={handleInputChange}
-//             fullWidth
-//             sx={{ marginBottom: '8px' }}
-//           />
-//           <Select
-//             label="Route"
-//             variant="outlined"
-//             value={
-//               editMode && currentStage ? currentStage.route : newStage.route
-//             }
-//             onChange={handleRouteChange}
-//             fullWidth
-//             sx={{ marginBottom: '8px' }}
-//           >
-//             {stages.map((stage) => (
-//               <MenuItem key={stage.routeId} value={stage.route}>
-//                 {stage.route}
-//               </MenuItem>
-//             ))}
-//           </Select>
-//           <TextField
-//             label="Route ID"
-//             variant="outlined"
-//             name="routeId"
-//             value={
-//               editMode && currentStage ? currentStage.routeId : newStage.routeId
-//             }
-//             onChange={handleInputChange}
-//             fullWidth
-//             sx={{ marginBottom: '8px' }}
-//           />
-//           {/* Additional fields as per your requirements */}
-//         </DialogContent>
-//         <DialogActions>
-//           <Button onClick={handleClose} color="secondary">
-//             Cancel
-//           </Button>
-//           <Button
-//             onClick={editMode ? handleUpdateStage : handleAddStage}
-//             sx={{ backgroundColor: '#000000', color: '#ffffff' }}
-//           >
-//             {editMode ? 'Update Route' : 'Add Route'}
-//           </Button>
-//         </DialogActions>
-//       </Dialog>
-//     </>
-//   );
-// };
-
-// export default BusStages;

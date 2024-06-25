@@ -212,7 +212,6 @@ function SidebarMenu() {
                   Bus pass requests
                 </Button>
               </ListItem>
-
               <ListItem component="div">
                 <Button
                   disableRipple
@@ -240,7 +239,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/busstages"
+                  to="/management/stops"
                   startIcon={<MmsTwoToneIcon />}
                 >
                   Stops
