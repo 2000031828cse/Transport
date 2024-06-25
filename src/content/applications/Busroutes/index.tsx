@@ -26,6 +26,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useStops } from '../Stops/StopsContext';
+
 interface Stage {
   sno: number;
   shift: string;
@@ -33,7 +34,7 @@ interface Stage {
   routeId: string;
   route: string;
   startingPoint: string;
-  pickupPoints: string;
+  pickupPoints: string[];
 }
 
 const BusStages: React.FC = () => {
@@ -46,7 +47,7 @@ const BusStages: React.FC = () => {
       routeId: '8A',
       route: 'Gorantla',
       startingPoint: 'Gorantla',
-      pickupPoints: 'Gorantla - Chilles'
+      pickupPoints: ['Gorantla', 'Chilles']
     },
     {
       sno: 2,
@@ -55,8 +56,12 @@ const BusStages: React.FC = () => {
       routeId: '8B',
       route: 'Gorantla',
       startingPoint: 'Medical Hostel',
-      pickupPoints:
-        'Medical Hostel - Nagarulu - Vijaya Digital - Inner Ring Road'
+      pickupPoints: [
+        'Medical Hostel',
+        'Nagarulu',
+        'Vijaya Digital',
+        'Inner Ring Road'
+      ]
     },
     {
       sno: 3,
@@ -65,8 +70,13 @@ const BusStages: React.FC = () => {
       routeId: '8C',
       route: 'Lodge Center',
       startingPoint: 'Lodge Center',
-      pickupPoints:
-        'Lodge Center - SBI - Ala Hospital - AJ Gudi - Inner Ring Road'
+      pickupPoints: [
+        'Lodge Center',
+        'SBI',
+        'Ala Hospital',
+        'AJ Gudi',
+        'Inner Ring Road'
+      ]
     },
     {
       sno: 4,
@@ -75,7 +85,7 @@ const BusStages: React.FC = () => {
       routeId: '8D',
       route: 'SVN Colony',
       startingPoint: 'SVN Colony',
-      pickupPoints: 'SVN Colony - Gujjanagundla Centre'
+      pickupPoints: ['SVN Colony', 'Gujjanagundla Centre']
     }
   ]);
 
@@ -86,7 +96,7 @@ const BusStages: React.FC = () => {
     routeId: '',
     route: '',
     startingPoint: '',
-    pickupPoints: ''
+    pickupPoints: []
   });
 
   const [open, setOpen] = useState(false);
@@ -121,7 +131,7 @@ const BusStages: React.FC = () => {
       routeId: '',
       route: '',
       startingPoint: '',
-      pickupPoints: ''
+      pickupPoints: []
     });
     handleClose();
   };
@@ -147,8 +157,8 @@ const BusStages: React.FC = () => {
     setStages(stages.filter((stage) => stage.sno !== sno));
   };
 
-  const handlePickupPointsChange = (event: SelectChangeEvent<string>) => {
-    const value = event.target.value as string;
+  const handlePickupPointsChange = (event: SelectChangeEvent<string[]>) => {
+    const value = event.target.value as string[];
     if (editMode && currentStage) {
       setCurrentStage({ ...currentStage, pickupPoints: value });
     } else {
@@ -215,7 +225,7 @@ const BusStages: React.FC = () => {
                     {stage.startingPoint}
                   </TableCell>
                   <TableCell sx={{ color: '#000000' }}>
-                    {stage.pickupPoints}
+                    {stage.pickupPoints.join(' - ')}
                   </TableCell>
                   <TableCell>
                     <IconButton
@@ -292,6 +302,7 @@ const BusStages: React.FC = () => {
             <Select
               labelId="pickup-points-label"
               id="pickup-points"
+              multiple
               value={
                 editMode && currentStage
                   ? currentStage.pickupPoints

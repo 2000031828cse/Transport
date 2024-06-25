@@ -1,4 +1,3 @@
-// src/content/applications/StopsContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface Stop {
@@ -22,17 +21,19 @@ export const useStops = () => {
   return context;
 };
 
-export const StopsProvider: React.FC<{ children: ReactNode }> = ({
-  children
-}) => {
-  const [stops, setStops] = useState<Stop[]>([]);
+export const StopsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [stops, setStops] = useState<Stop[]>([
+    { number: 1, name: 'benz circle' },
+    { number: 2, name: 'varadhi' },
+    { number: 3, name: 'tadepalli' }
+  ]);
 
   const addStop = (stop: Stop) => {
-    setStops((prevStops) => [...prevStops, stop]);
+    setStops([...stops, stop]);
   };
 
   const deleteStop = (number: number) => {
-    setStops((prevStops) => prevStops.filter((stop) => stop.number !== number));
+    setStops(stops.filter(stop => stop.number !== number));
   };
 
   return (
