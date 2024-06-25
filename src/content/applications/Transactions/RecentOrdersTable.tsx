@@ -24,7 +24,6 @@ import {
 
 import Label from 'src/components/Label';
 import { PassOrder, PassOrderStatus } from 'src/models/pass_request';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import CheckIcon from '@mui/icons-material/Check';
 
 // Import the ApprovalDialog component
@@ -53,6 +52,10 @@ const getStatusLabel = (PassOrderStatus: PassOrderStatus): JSX.Element => {
     pending: {
       text: 'Pending',
       color: 'warning'
+    },
+    active: {
+      text: 'Active',
+      color: 'success'
     }
   };
 
@@ -154,11 +157,15 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   ): void => {
     const newStatus = event.target.value as 'paid' | 'not paid';
     setOrders((prevOrders) =>
-      prevOrders.map((order) =>
-        order.id === cryptoOrderId
-          ? { ...order, paymentStatus: newStatus }
-          : order
-      )
+      prevOrders.map((order) => {
+        if (order.id === cryptoOrderId) {
+          if (newStatus === 'paid' && order.status === 'completed') {
+            return { ...order, paymentStatus: newStatus, status: 'active' };
+          }
+          return { ...order, paymentStatus: newStatus };
+        }
+        return order;
+      })
     );
   };
 
@@ -202,6 +209,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     {
       id: 'rejected',
       name: 'Rejected'
+    },
+    {
+      id: 'active',
+      name: 'Active'
     }
   ];
 
@@ -292,26 +303,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                 </TableCell>
                 <TableCell align="center">
                   <Typography variant="body1" color="text.primary">
-                    {cryptoOrder.approvalStatus === 'approval' && (
-                      <a
-                        href="#"
-                        onClick={(event) =>
-                          handleApprovalClick(event, cryptoOrder)
-                        }
-                      >
-                        Approval
-                      </a>
-                    )}
-                    {cryptoOrder.approvalStatus === 'reject' && (
-                      <a
-                        href="#"
-                        onClick={(event) =>
-                          handleApprovalClick(event, cryptoOrder)
-                        }
-                      >
-                        Rejected
-                      </a>
-                    )}
+                    <a
+                      href="#"
+                      onClick={(event) =>
+                        handleApprovalClick(event, cryptoOrder)
+                      }
+                    >
+                      Approval
+                    </a>
                   </Typography>
                 </TableCell>
                 <TableCell align="center">
@@ -332,20 +331,6 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       <CheckIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-                  {/* <Tooltip title="Delete Order" arrow>
-                    <IconButton
-                      sx={{
-                        '&:hover': {
-                          background: theme.colors.primary.lighter
-                        },
-                        color: theme.palette.error.main
-                      }}
-                      color="inherit"
-                      size="small"
-                    >
-                      <DeleteTwoToneIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip> */}
                 </TableCell>
               </TableRow>
             ))}

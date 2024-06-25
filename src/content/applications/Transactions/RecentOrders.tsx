@@ -7,13 +7,13 @@ function RecentOrders() {
   const cryptoOrders: PassOrder[] = [
     {
       id: '1',
-      Studentid: '1',      
+      Studentid: '1',
       status: 'pending',
       orderID: 'VUVX709ET7BY',
       studentName: 'Peter',
-      Stop:'ntr circle',
+      Stop: 'ntr circle',
       paymentStatus: 'not paid',
-      approvalStatus: 'approval' // Added approvalStatus
+      actions: 'approval' // Added approvalStatus
     },
     {
       id: '2',
@@ -21,19 +21,19 @@ function RecentOrders() {
       status: 'pending',
       orderID: '23M3UOG65G8K',
       studentName: 'Chris',
-      Stop:'patamata',
+      Stop: 'patamata',
       paymentStatus: 'not paid',
-      approvalStatus: 'approval' // Added approvalStatus
+      actions: 'approval' // Added approvalStatus
     },
     {
       id: '3',
-      Studentid: '3',     
+      Studentid: '3',
       status: 'pending',
       orderID: '4HJDV8HV34LM',
       studentName: 'John',
-      Stop:'benz circle',
+      Stop: 'benz circle',
       paymentStatus: 'not paid',
-      approvalStatus: 'approval' // Added approvalStatus
+      actions: 'approval' // Added approvalStatus
     }
   ];
 
