@@ -207,6 +207,7 @@
 
 // export default AddRoute;
 // AddRoute.js or AddRoute.tsx
+// AddRoute.js or AddRoute.tsx
 import React, { useState, useEffect } from 'react';
 import {
   TextField,
@@ -278,10 +279,20 @@ const AddRoute: React.FC = () => {
   ) => {
     const value = event.target.value as string;
     const newSelectedStops = [...selectedStops];
-    newSelectedStops[index] = value;
+    
+    // Only set the value if it's not already selected
+    if (!newSelectedStops.includes(value)) {
+      newSelectedStops[index] = value;
+      setSelectedStops(newSelectedStops);
+      setNewStage({ ...newStage, stops: newSelectedStops });
+      setErrors({ ...errors, stops: false });
+    }
+  };
+
+  const handleDeleteStop = (index: number) => {
+    const newSelectedStops = selectedStops.filter((_, i) => i !== index);
     setSelectedStops(newSelectedStops);
     setNewStage({ ...newStage, stops: newSelectedStops });
-    setErrors({ ...errors, stops: false });
   };
 
   const addNewStopField = () => {
@@ -427,31 +438,40 @@ const AddRoute: React.FC = () => {
         Stops
       </Typography>
       {selectedStops.map((stop, index) => (
-        <FormControl key={index} fullWidth sx={{ marginBottom: '8px' }}>
-          <InputLabel id={`stop-label-${index}`}>Stop {index + 1}</InputLabel>
-          <Select
-            error={errors.stops && !stop}
-            labelId={`stop-label-${index}`}
-            value={stop}
-            onChange={(event) =>
-              handleStopChange(index, event as SelectChangeEvent<string>)
-            }
-            fullWidth
+        <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+          <FormControl fullWidth sx={{ flex: 1, marginRight: '8px' }}>
+            <InputLabel id={`stop-label-${index}`}>Stop {index + 1}</InputLabel>
+            <Select
+              error={errors.stops && !stop}
+              labelId={`stop-label-${index}`}
+              value={stop}
+              onChange={(event) =>
+                handleStopChange(index, event as SelectChangeEvent<string>)
+              }
+              fullWidth
+            >
+              {stops
+                .filter((s) => !selectedStops.includes(s.name) || s.name === stop)
+                .map((filteredStop) => (
+                  <MenuItem key={filteredStop.number} value={filteredStop.name}>
+                    {filteredStop.number}. {filteredStop.name}
+                  </MenuItem>
+                ))}
+            </Select>
+            {errors.stops && !stop && (
+              <Typography variant="caption" color="error" sx={{ marginTop: '4px' }}>
+                Stop is required
+              </Typography>
+            )}
+          </FormControl>
+          <Button
+            variant="outlined"
+            onClick={() => handleDeleteStop(index)}
+            color="error"
           >
-            {stops
-              .filter((s) => !selectedStops.includes(s.name) || s.name === stop)
-              .map((filteredStop) => (
-                <MenuItem key={filteredStop.number} value={filteredStop.name}>
-                  {filteredStop.number}. {filteredStop.name}
-                </MenuItem>
-              ))}
-          </Select>
-          {errors.stops && !stop && (
-            <Typography variant="caption" color="error">
-              Stop is required
-            </Typography>
-          )}
-        </FormControl>
+            Delete
+          </Button>
+        </Box>
       ))}
       <Button
         onClick={addNewStopField}
@@ -489,4 +509,5 @@ const AddRoute: React.FC = () => {
 };
 
 export default AddRoute;
+
 
