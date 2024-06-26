@@ -94,14 +94,14 @@ const TermPage: React.FC = () => {
       </Typography>
 
       <Box sx={{ mb: 2 }}>
-        {/* <TextField
+        <TextField
           label="Term ID"
           value={term.termId}
           variant="outlined"
           disabled
           fullWidth
           sx={{ mb: 2 }}
-        /> */}
+        />
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>
             Start Date:
