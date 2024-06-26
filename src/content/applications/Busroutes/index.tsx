@@ -397,12 +397,29 @@ const BusStages: React.FC = () => {
   };
 
   return (
-    <Card sx={{ backgroundColor: '#ffffff', color: '#000000', marginBottom: '16px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' }}>
+    <Card
+      sx={{
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        marginBottom: '16px'
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '16px'
+        }}
+      >
         <Typography variant="h6">Bus Routes</Typography>
         <Button
           variant="contained"
-          sx={{ backgroundColor: '#000000', color: '#ffffff', '&:hover': { backgroundColor: '#333333' } }}
+          sx={{
+            backgroundColor: '#000000',
+            color: '#ffffff',
+            '&:hover': { backgroundColor: '#333333' }
+          }}
           startIcon={<AddIcon />}
           onClick={handleAddRouteClick}
         >
@@ -429,13 +446,23 @@ const BusStages: React.FC = () => {
                 <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>{stage.routeId}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>{stage.timings}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>{stage.startingPoint}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>{stage.pickupPoints.join(' - ')}</TableCell>
+                <TableCell sx={{ color: '#000000' }}>
+                  {stage.startingPoint}
+                </TableCell>
+                <TableCell sx={{ color: '#000000' }}>
+                  {stage.stops.join(' - ')}
+                </TableCell>
                 <TableCell>
-                  <IconButton color="primary" onClick={() => handleEditStage(stage)}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => handleEditStage(stage)}
+                  >
                     <EditIcon />
                   </IconButton>
-                  <IconButton color="error" onClick={() => handleDeleteStage(stage.sno)}>
+                  <IconButton
+                    color="error"
+                    onClick={() => handleDeleteStage(stage.sno)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

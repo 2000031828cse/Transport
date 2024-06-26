@@ -9,7 +9,7 @@ interface Stage {
   timings: string;
   route: string;
   startingPoint: string;
-  pickupPoints: string[];
+  stops: string[];
 }
 
 interface BusRoutesContextProps {
@@ -19,7 +19,9 @@ interface BusRoutesContextProps {
   deleteStage: (sno: number) => void;
 }
 
-const BusRoutesContext = createContext<BusRoutesContextProps | undefined>(undefined);
+const BusRoutesContext = createContext<BusRoutesContextProps | undefined>(
+  undefined
+);
 
 export const useBusRoutes = () => {
   const context = useContext(BusRoutesContext);
@@ -39,7 +41,7 @@ const BusRoutesProvider: React.FC = ({ children }) => {
       timings: '8:00 AM',
       route: 'Gorantla',
       startingPoint: 'Gorantla',
-      pickupPoints: ['Gorantla', 'Chilles']
+      stops: ['Gorantla', 'Chilles']
     },
     {
       sno: 2,
@@ -49,7 +51,7 @@ const BusRoutesProvider: React.FC = ({ children }) => {
       timings: '8:00 AM',
       route: 'Gorantla',
       startingPoint: 'Medical Hostel',
-      pickupPoints: ['Medical Hostel', 'Nagarulu', 'Vijaya Digital', 'Inner Ring Road']
+      stops: ['Medical Hostel', 'Nagarulu', 'Vijaya Digital', 'Inner Ring Road']
     },
     {
       sno: 3,
@@ -59,7 +61,13 @@ const BusRoutesProvider: React.FC = ({ children }) => {
       timings: '8:00 AM',
       route: 'Lodge Center',
       startingPoint: 'Lodge Center',
-      pickupPoints: ['Lodge Center', 'SBI', 'Ala Hospital', 'AJ Gudi', 'Inner Ring Road']
+      stops: [
+        'Lodge Center',
+        'SBI',
+        'Ala Hospital',
+        'AJ Gudi',
+        'Inner Ring Road'
+      ]
     },
     {
       sno: 4,
@@ -69,7 +77,7 @@ const BusRoutesProvider: React.FC = ({ children }) => {
       timings: '8:00 AM',
       route: 'SVN Colony',
       startingPoint: 'SVN Colony',
-      pickupPoints: ['SVN Colony', 'Gujjanagundla Centre']
+      stops: ['SVN Colony', 'Gujjanagundla Centre']
     }
   ]);
 
@@ -90,7 +98,9 @@ const BusRoutesProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <BusRoutesContext.Provider value={{ stages, addStage, updateStage, deleteStage }}>
+    <BusRoutesContext.Provider
+      value={{ stages, addStage, updateStage, deleteStage }}
+    >
       {children}
     </BusRoutesContext.Provider>
   );

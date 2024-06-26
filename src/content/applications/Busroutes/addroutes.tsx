@@ -31,14 +31,16 @@ const AddRoute: React.FC = () => {
     timings: '',
     route: '',
     startingPoint: '',
-    pickupPoints: []
+    stops: []
   };
 
   const [newStage, setNewStage] = useState(initialStage);
 
   useEffect(() => {
     if (editSno) {
-      const stageToEdit = stages.find((stage) => stage.sno === parseInt(editSno));
+      const stageToEdit = stages.find(
+        (stage) => stage.sno === parseInt(editSno)
+      );
       if (stageToEdit) {
         setNewStage(stageToEdit);
       }
@@ -50,9 +52,9 @@ const AddRoute: React.FC = () => {
     setNewStage({ ...newStage, [name]: value });
   };
 
-  const handlePickupPointsChange = (event: SelectChangeEvent<string[]>) => {
+  const handleStopsChange = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value as string[];
-    setNewStage({ ...newStage, pickupPoints: value });
+    setNewStage({ ...newStage, stops: value });
   };
 
   const handleAddOrUpdateStage = () => {
@@ -70,7 +72,9 @@ const AddRoute: React.FC = () => {
 
   return (
     <Box sx={{ padding: '16px' }}>
-      <Typography variant="h6">{editSno ? 'Edit Route' : 'Add Route'}</Typography>
+      <Typography variant="h6">
+        {editSno ? 'Edit Route' : 'Add Route'}
+      </Typography>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           label="Shift"
@@ -132,8 +136,8 @@ const AddRoute: React.FC = () => {
           labelId="pickup-points-label"
           id="pickup-points"
           multiple
-          value={newStage.pickupPoints}
-          onChange={handlePickupPointsChange}
+          value={newStage.stops}
+          onChange={handleStopsChange}
           fullWidth
         >
           {stops.map((stop) => (
@@ -145,7 +149,11 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <Button
         onClick={handleAddOrUpdateStage}
-        sx={{ backgroundColor: '#000000', color: '#ffffff', marginRight: '8px' }}
+        sx={{
+          backgroundColor: '#000000',
+          color: '#ffffff',
+          marginRight: '8px'
+        }}
       >
         {editSno ? 'Update Route' : 'Add Route'}
       </Button>
