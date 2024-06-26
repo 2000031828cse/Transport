@@ -81,6 +81,8 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           label="Route ID"
           variant="outlined"
@@ -90,6 +92,8 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           label="Timings"
           variant="outlined"
@@ -99,6 +103,8 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           label="Route"
           variant="outlined"
@@ -108,6 +114,8 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           label="Starting Point"
           variant="outlined"
@@ -117,6 +125,8 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <InputLabel id="pickup-points-label">Stops</InputLabel>
         <Select
           labelId="pickup-points-label"
