@@ -206,7 +206,7 @@
 // };
 
 // export default AddRoute;
-
+// AddRoute.js or AddRoute.tsx
 import React, { useState, useEffect } from 'react';
 import {
   TextField,
@@ -245,6 +245,14 @@ const AddRoute: React.FC = () => {
   const [newStage, setNewStage] = useState(initialStage);
   const [selectedStops, setSelectedStops] = useState<string[]>([]);
   const [showAddButton, setShowAddButton] = useState(true);
+  const [errors, setErrors] = useState({
+    shift: false,
+    routeId: false,
+    timings: false,
+    route: false,
+    startingPoint: false,
+    stops: false
+  });
 
   useEffect(() => {
     if (editSno) {
@@ -261,6 +269,7 @@ const AddRoute: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewStage({ ...newStage, [name]: value });
+    setErrors({ ...errors, [name]: false });
   };
 
   const handleStopChange = (
@@ -272,13 +281,58 @@ const AddRoute: React.FC = () => {
     newSelectedStops[index] = value;
     setSelectedStops(newSelectedStops);
     setNewStage({ ...newStage, stops: newSelectedStops });
+    setErrors({ ...errors, stops: false });
   };
 
   const addNewStopField = () => {
     setSelectedStops([...selectedStops, '']);
   };
 
+  const validateForm = () => {
+    let valid = true;
+    const currentErrors = {
+      shift: false,
+      routeId: false,
+      timings: false,
+      route: false,
+      startingPoint: false,
+      stops: false
+    };
+
+    if (!newStage.shift) {
+      currentErrors.shift = true;
+      valid = false;
+    }
+    if (!newStage.routeId) {
+      currentErrors.routeId = true;
+      valid = false;
+    }
+    if (!newStage.timings) {
+      currentErrors.timings = true;
+      valid = false;
+    }
+    if (!newStage.route) {
+      currentErrors.route = true;
+      valid = false;
+    }
+    if (!newStage.startingPoint) {
+      currentErrors.startingPoint = true;
+      valid = false;
+    }
+    if (selectedStops.length === 0 || selectedStops.some(stop => !stop)) {
+      currentErrors.stops = true;
+      valid = false;
+    }
+
+    setErrors(currentErrors);
+    return valid;
+  };
+
   const handleAddOrUpdateStage = () => {
+    if (!validateForm()) {
+      return;
+    }
+
     const sortedStops = selectedStops
       .filter((stop) => stop)
       .sort((a, b) => {
@@ -306,6 +360,8 @@ const AddRoute: React.FC = () => {
       </Typography>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
+          error={errors.shift}
+          helperText={errors.shift ? 'Shift is required' : ''}
           label="Shift"
           variant="outlined"
           name="shift"
@@ -317,6 +373,8 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
+          error={errors.routeId}
+          helperText={errors.routeId ? 'Route ID is required' : ''}
           label="Route ID"
           variant="outlined"
           name="routeId"
@@ -328,6 +386,8 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
+          error={errors.timings}
+          helperText={errors.timings ? 'Timings are required' : ''}
           label="Timings"
           variant="outlined"
           name="timings"
@@ -339,6 +399,8 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
+          error={errors.route}
+          helperText={errors.route ? 'Route is required' : ''}
           label="Route"
           variant="outlined"
           name="route"
@@ -350,6 +412,8 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
+          error={errors.startingPoint}
+          helperText={errors.startingPoint ? 'Starting Point is required' : ''}
           label="Starting Point"
           variant="outlined"
           name="startingPoint"
@@ -366,6 +430,7 @@ const AddRoute: React.FC = () => {
         <FormControl key={index} fullWidth sx={{ marginBottom: '8px' }}>
           <InputLabel id={`stop-label-${index}`}>Stop {index + 1}</InputLabel>
           <Select
+            error={errors.stops && !stop}
             labelId={`stop-label-${index}`}
             value={stop}
             onChange={(event) =>
@@ -381,6 +446,11 @@ const AddRoute: React.FC = () => {
                 </MenuItem>
               ))}
           </Select>
+          {errors.stops && !stop && (
+            <Typography variant="caption" color="error">
+              Stop is required
+            </Typography>
+          )}
         </FormControl>
       ))}
       <Button
@@ -419,3 +489,4 @@ const AddRoute: React.FC = () => {
 };
 
 export default AddRoute;
+
