@@ -7,13 +7,16 @@ import App from 'src/App';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import { StopsProvider } from './content/applications/Stops/StopsContext';
 import * as serviceWorker from 'src/serviceWorker';
+import BusRoutesProvider from './content/applications/Busroutes/BusRoutesContext';
 
 ReactDOM.render(
   <HelmetProvider>
     <SidebarProvider>
       <BrowserRouter>
         <StopsProvider>
+          <BusRoutesProvider>
           <App />
+          </BusRoutesProvider>
         </StopsProvider>
       </BrowserRouter>
     </SidebarProvider>
