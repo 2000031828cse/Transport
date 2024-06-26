@@ -238,7 +238,7 @@ const AddRoute: React.FC = () => {
     location: '',
     routeId: '',
     timings: '',
-    route: '',
+    // route: '',
     startingPoint: '',
     stops: []
   };
@@ -250,7 +250,7 @@ const AddRoute: React.FC = () => {
     shift: false,
     routeId: false,
     timings: false,
-    route: false,
+    // route: false,
     startingPoint: false,
     stops: false
   });
@@ -279,7 +279,7 @@ const AddRoute: React.FC = () => {
   ) => {
     const value = event.target.value as string;
     const newSelectedStops = [...selectedStops];
-    
+
     // Only set the value if it's not already selected
     if (!newSelectedStops.includes(value)) {
       newSelectedStops[index] = value;
@@ -305,7 +305,7 @@ const AddRoute: React.FC = () => {
       shift: false,
       routeId: false,
       timings: false,
-      route: false,
+      // route: false,
       startingPoint: false,
       stops: false
     };
@@ -322,15 +322,15 @@ const AddRoute: React.FC = () => {
       currentErrors.timings = true;
       valid = false;
     }
-    if (!newStage.route) {
-      currentErrors.route = true;
-      valid = false;
-    }
+    // if (!newStage.route) {
+    //   currentErrors.route = true;
+    //   valid = false;
+    // }
     if (!newStage.startingPoint) {
       currentErrors.startingPoint = true;
       valid = false;
     }
-    if (selectedStops.length === 0 || selectedStops.some(stop => !stop)) {
+    if (selectedStops.length === 0 || selectedStops.some((stop) => !stop)) {
       currentErrors.stops = true;
       valid = false;
     }
@@ -408,7 +408,7 @@ const AddRoute: React.FC = () => {
           sx={{ marginBottom: '8px' }}
         />
       </FormControl>
-      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
+      {/* <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.route}
           helperText={errors.route ? 'Route is required' : ''}
@@ -420,7 +420,7 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
-      </FormControl>
+      </FormControl> */}
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.startingPoint}
@@ -438,7 +438,10 @@ const AddRoute: React.FC = () => {
         Stops
       </Typography>
       {selectedStops.map((stop, index) => (
-        <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+        <Box
+          key={index}
+          sx={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}
+        >
           <FormControl fullWidth sx={{ flex: 1, marginRight: '8px' }}>
             <InputLabel id={`stop-label-${index}`}>Stop {index + 1}</InputLabel>
             <Select
@@ -451,7 +454,9 @@ const AddRoute: React.FC = () => {
               fullWidth
             >
               {stops
-                .filter((s) => !selectedStops.includes(s.name) || s.name === stop)
+                .filter(
+                  (s) => !selectedStops.includes(s.name) || s.name === stop
+                )
                 .map((filteredStop) => (
                   <MenuItem key={filteredStop.number} value={filteredStop.name}>
                     {filteredStop.number}. {filteredStop.name}
@@ -459,7 +464,11 @@ const AddRoute: React.FC = () => {
                 ))}
             </Select>
             {errors.stops && !stop && (
-              <Typography variant="caption" color="error" sx={{ marginTop: '4px' }}>
+              <Typography
+                variant="caption"
+                color="error"
+                sx={{ marginTop: '4px' }}
+              >
                 Stop is required
               </Typography>
             )}
@@ -509,5 +518,3 @@ const AddRoute: React.FC = () => {
 };
 
 export default AddRoute;
-
-
