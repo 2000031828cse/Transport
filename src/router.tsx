@@ -10,6 +10,7 @@ import Signup from './content/overview/Signup';
 import UserSidebarLayout from './layouts/SidebarLayout/Sidebar/UserSidebarLayout';
 import Stops from './content/applications/Stops';
 import TermPage from './content/applications/term';
+import AddRoute from './content/applications/Busroutes/addroutes';
 
 const BusPassRequest  = lazy(() => import('src/content/applications/buspassrequest'));
 const BusPassDetails  = lazy(() => import('src/content/applications/buspassdetails'));
@@ -231,6 +232,16 @@ const routes: RouteObject[] = [
           <PrivateRoute requiredRole="admin">
             <Suspense fallback={<div>Loading...</div>}>
               <BusStages />
+            </Suspense>
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'addroutes',
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Suspense fallback={<div>Loading...</div>}>
+              <AddRoute />
             </Suspense>
           </PrivateRoute>
         )
