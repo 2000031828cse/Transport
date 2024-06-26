@@ -1,213 +1,3 @@
-//Already having a field
-
-// import React, { useState, useEffect } from 'react';
-// import {
-//   TextField,
-//   Button,
-//   FormControl,
-//   InputLabel,
-//   Select,
-//   MenuItem,
-//   Box,
-//   Typography,
-//   SelectChangeEvent
-// } from '@mui/material';
-// import { useNavigate, useLocation } from 'react-router-dom';
-// import { useStops } from '../Stops/StopsContext';
-// import { useBusRoutes } from './BusRoutesContext';
-
-// const AddRoute: React.FC = () => {
-//   const { stops } = useStops();
-//   const { addStage, updateStage, stages } = useBusRoutes();
-//   const navigate = useNavigate();
-//   const location = useLocation();
-//   const searchParams = new URLSearchParams(location.search);
-//   const editSno = searchParams.get('edit');
-
-//   const initialStage = {
-//     sno: stages.length + 1,
-//     shift: '',
-//     location: '',
-//     routeId: '',
-//     timings: '',
-//     route: '',
-//     startingPoint: '',
-//     stops: []
-//   };
-
-//   const [newStage, setNewStage] = useState(initialStage);
-//   const [selectedStops, setSelectedStops] = useState<string[]>(['']);
-//   const [showAddButton, setShowAddButton] = useState(true);
-
-//   useEffect(() => {
-//     if (editSno) {
-//       const stageToEdit = stages.find(
-//         (stage) => stage.sno === parseInt(editSno)
-//       );
-//       if (stageToEdit) {
-//         setNewStage(stageToEdit);
-//         setSelectedStops(stageToEdit.stops);
-//       }
-//     }
-//   }, [editSno, stages]);
-
-//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setNewStage({ ...newStage, [name]: value });
-//   };
-
-//   const handleStopChange = (
-//     index: number,
-//     event: SelectChangeEvent<string>
-//   ) => {
-//     const value = event.target.value as string;
-//     const newSelectedStops = [...selectedStops];
-//     newSelectedStops[index] = value;
-//     setSelectedStops(newSelectedStops);
-//     setNewStage({ ...newStage, stops: newSelectedStops });
-//   };
-
-//   const addNewStopField = () => {
-//     setSelectedStops([...selectedStops, '']);
-//   };
-
-//   const handleAddOrUpdateStage = () => {
-//     const sortedStops = selectedStops
-//       .filter((stop) => stop)
-//       .sort((a, b) => {
-//         const stopA = stops.find((s) => s.name === a);
-//         const stopB = stops.find((s) => s.name === b);
-//         return (stopA?.number ?? 0) - (stopB?.number ?? 0);
-//       });
-//     const updatedStage = { ...newStage, stops: sortedStops };
-//     if (editSno) {
-//       updateStage(updatedStage);
-//     } else {
-//       addStage(updatedStage);
-//     }
-//     navigate('/management/busstages');
-//   };
-
-//   const handleCancel = () => {
-//     navigate('/management/busstages');
-//   };
-
-//   return (
-//     <Box sx={{ padding: '16px' }}>
-//       <Typography variant="h6">
-//         {editSno ? 'Edit Route' : 'Add Route'}
-//       </Typography>
-//       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-//         <TextField
-//           label="Shift"
-//           variant="outlined"
-//           name="shift"
-//           value={newStage.shift}
-//           onChange={handleInputChange}
-//           fullWidth
-//           sx={{ marginBottom: '8px' }}
-//         />
-//       </FormControl>
-//       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-//         <TextField
-//           label="Route ID"
-//           variant="outlined"
-//           name="routeId"
-//           value={newStage.routeId}
-//           onChange={handleInputChange}
-//           fullWidth
-//           sx={{ marginBottom: '8px' }}
-//         />
-//       </FormControl>
-//       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-//         <TextField
-//           label="Timings"
-//           variant="outlined"
-//           name="timings"
-//           value={newStage.timings}
-//           onChange={handleInputChange}
-//           fullWidth
-//           sx={{ marginBottom: '8px' }}
-//         />
-//       </FormControl>
-//       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-//         <TextField
-//           label="Route"
-//           variant="outlined"
-//           name="route"
-//           value={newStage.route}
-//           onChange={handleInputChange}
-//           fullWidth
-//           sx={{ marginBottom: '8px' }}
-//         />
-//       </FormControl>
-//       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-//         <TextField
-//           label="Starting Point"
-//           variant="outlined"
-//           name="startingPoint"
-//           value={newStage.startingPoint}
-//           onChange={handleInputChange}
-//           fullWidth
-//           sx={{ marginBottom: '8px' }}
-//         />
-//       </FormControl>
-//       <Typography variant="body1" sx={{ marginBottom: '8px' }}>
-//         Stops
-//       </Typography>
-//       {selectedStops.map((stop, index) => (
-//         <FormControl key={index} fullWidth sx={{ marginBottom: '8px' }}>
-//           <InputLabel id={`stop-label-${index}`}>Stop {index + 1}</InputLabel>
-//           <Select
-//             labelId={`stop-label-${index}`}
-//             value={stop}
-//             onChange={(event) =>
-//               handleStopChange(index, event as SelectChangeEvent<string>)
-//             }
-//             fullWidth
-//           >
-//             {stops
-//               .filter((s) => !selectedStops.includes(s.name) || s.name === stop)
-//               .map((filteredStop) => (
-//                 <MenuItem key={filteredStop.number} value={filteredStop.name}>
-//                   {filteredStop.number}. {filteredStop.name}
-//                 </MenuItem>
-//               ))}
-//           </Select>
-//         </FormControl>
-//       ))}
-//       {showAddButton && (
-//         <Button
-//           onClick={addNewStopField}
-//           sx={{
-//             backgroundColor: '#000000',
-//             color: '#ffffff',
-//             marginBottom: '8px'
-//           }}
-//         >
-//           +
-//         </Button>
-//       )}
-//       <Button
-//         onClick={handleAddOrUpdateStage}
-//         sx={{
-//           backgroundColor: '#000000',
-//           color: '#ffffff',
-//           marginRight: '8px'
-//         }}
-//       >
-//         {editSno ? 'Update Route' : 'Add Route'}
-//       </Button>
-//       <Button onClick={handleCancel} color="secondary">
-//         Cancel
-//       </Button>
-//     </Box>
-//   );
-// };
-
-// export default AddRoute;
-// AddRoute.js or AddRoute.tsx
-// AddRoute.js or AddRoute.tsx
 import React, { useState, useEffect } from 'react';
 import {
   TextField,
@@ -236,9 +26,8 @@ const AddRoute: React.FC = () => {
     sno: stages.length + 1,
     shift: '',
     location: '',
-    routeId: '',
+    routeName: '',
     timings: '',
-    // route: '',
     startingPoint: '',
     stops: []
   };
@@ -248,9 +37,8 @@ const AddRoute: React.FC = () => {
   const [showAddButton, setShowAddButton] = useState(true);
   const [errors, setErrors] = useState({
     shift: false,
-    routeId: false,
+    routeName: false,
     timings: false,
-    // route: false,
     startingPoint: false,
     stops: false
   });
@@ -280,7 +68,6 @@ const AddRoute: React.FC = () => {
     const value = event.target.value as string;
     const newSelectedStops = [...selectedStops];
 
-    // Only set the value if it's not already selected
     if (!newSelectedStops.includes(value)) {
       newSelectedStops[index] = value;
       setSelectedStops(newSelectedStops);
@@ -295,17 +82,22 @@ const AddRoute: React.FC = () => {
     setNewStage({ ...newStage, stops: newSelectedStops });
   };
 
-  const addNewStopField = () => {
-    setSelectedStops([...selectedStops, '']);
+  const addNewStopField = (index: number | null = null) => {
+    const newSelectedStops = [...selectedStops];
+    if (index === null) {
+      newSelectedStops.push('');
+    } else {
+      newSelectedStops.splice(index + 1, 0, '');
+    }
+    setSelectedStops(newSelectedStops);
   };
 
   const validateForm = () => {
     let valid = true;
     const currentErrors = {
       shift: false,
-      routeId: false,
+      routeName: false,
       timings: false,
-      // route: false,
       startingPoint: false,
       stops: false
     };
@@ -314,18 +106,14 @@ const AddRoute: React.FC = () => {
       currentErrors.shift = true;
       valid = false;
     }
-    if (!newStage.routeId) {
-      currentErrors.routeId = true;
+    if (!newStage.routeName) {
+      currentErrors.routeName = true;
       valid = false;
     }
     if (!newStage.timings) {
       currentErrors.timings = true;
       valid = false;
     }
-    // if (!newStage.route) {
-    //   currentErrors.route = true;
-    //   valid = false;
-    // }
     if (!newStage.startingPoint) {
       currentErrors.startingPoint = true;
       valid = false;
@@ -384,12 +172,12 @@ const AddRoute: React.FC = () => {
       </FormControl>
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
-          error={errors.routeId}
-          helperText={errors.routeId ? 'Route ID is required' : ''}
-          label="Route ID"
+          error={errors.routeName}
+          helperText={errors.routeName ? 'Route Name is required' : ''}
+          label="Route Name"
           variant="outlined"
-          name="routeId"
-          value={newStage.routeId}
+          name="routeName"
+          value={newStage.routeName}
           onChange={handleInputChange}
           fullWidth
           sx={{ marginBottom: '8px' }}
@@ -408,19 +196,6 @@ const AddRoute: React.FC = () => {
           sx={{ marginBottom: '8px' }}
         />
       </FormControl>
-      {/* <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-        <TextField
-          error={errors.route}
-          helperText={errors.route ? 'Route is required' : ''}
-          label="Route"
-          variant="outlined"
-          name="route"
-          value={newStage.route}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ marginBottom: '8px' }}
-        />
-      </FormControl> */}
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.startingPoint}
@@ -480,10 +255,20 @@ const AddRoute: React.FC = () => {
           >
             Delete
           </Button>
+          <Button
+            onClick={() => addNewStopField(index)}
+            sx={{
+              fontSize: '24px',
+              color: '#000000',
+              marginLeft: '8px'
+            }}
+          >
+            +
+          </Button>
         </Box>
       ))}
       <Button
-        onClick={addNewStopField}
+        onClick={() => addNewStopField(null)}
         sx={{
           fontSize: '30px',
           color: '#000000',
@@ -509,7 +294,13 @@ const AddRoute: React.FC = () => {
         >
           {editSno ? 'Update Route' : 'Add Route'}
         </Button>
-        <Button onClick={handleCancel} color="secondary">
+        <Button
+          onClick={handleCancel}
+          sx={{
+            backgroundColor: '#000000',
+            color: '#ffffff'
+          }}
+        >
           Cancel
         </Button>
       </Box>

@@ -82,7 +82,9 @@ const BusStages: React.FC = () => {
               <TableRow key={stage.sno}>
                 <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>{stage.routeId}</TableCell>
+                <TableCell sx={{ color: '#000000' }}>
+                  {stage.routeName}
+                </TableCell>
                 <TableCell sx={{ color: '#000000' }}>{stage.timings}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>
                   {stage.startingPoint}

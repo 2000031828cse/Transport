@@ -460,7 +460,7 @@ const ApprovalDialog: FC<ApprovalDialogProps> = ({ open, onClose, onSave }) => {
   useEffect(() => {
     if (selectedStop) {
       const routes = getRoutesForStop(selectedStop).map(
-        (route) => route.routeId
+        (route) => route.routeName
       );
       setFilteredRoutes(routes);
     }

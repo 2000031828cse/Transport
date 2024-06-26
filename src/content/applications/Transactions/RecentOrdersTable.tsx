@@ -266,24 +266,24 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              {/* <TableCell>ID</TableCell> */}
               <TableCell>Student ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Stop Request</TableCell>
               <TableCell>Payment Status</TableCell>
               <TableCell>Actions</TableCell>
-              <TableCell>Approval Status</TableCell>
+              <TableCell align="left">Approval Status</TableCell>
               <TableCell>Update</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {paginatedPassOrders.map((PassOrder) => (
               <TableRow key={PassOrder.orderID}>
-                <TableCell>{PassOrder.orderID}</TableCell>
+                {/* <TableCell>{PassOrder.orderID}</TableCell> */}
                 <TableCell>{PassOrder.Studentid}</TableCell>
                 <TableCell>{PassOrder.studentName}</TableCell>
                 <TableCell>{PassOrder.Stop}</TableCell>
-                <TableCell align="center">
+                <TableCell align="left">
                   <Select
                     value={PassOrder.paymentStatus}
                     onChange={(event: SelectChangeEvent<string>) =>
@@ -294,7 +294,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
                     <MenuItem value="not paid">Not Paid</MenuItem>
                   </Select>
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="left">
                   <Typography variant="body1" color="text.primary">
                     <a
                       href="#"
