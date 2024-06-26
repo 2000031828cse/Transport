@@ -18,20 +18,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { useBusRoutes } from './BusRoutesContext';
 
-const BusStages: React.FC = () => {
+const BusRoutes: React.FC = () => {
   const navigate = useNavigate();
-  const { stages, deleteStage } = useBusRoutes();
+  const { routes, deleteRoute } = useBusRoutes();
 
   const handleAddRouteClick = () => {
     navigate('/management/addroutes');
   };
 
-  const handleEditStage = (stage) => {
-    navigate(`/management/addroutes?edit=${stage.sno}`);
+  const handleEditRoute = (route) => {
+    navigate(`/management/addroutes?edit=${route.sno}`);
   };
 
-  const handleDeleteStage = (sno: number) => {
-    deleteStage(sno);
+  const handleDeleteRoute = (sno: number) => {
+    deleteRoute(sno);
   };
 
   return (
@@ -78,30 +78,30 @@ const BusStages: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stages.map((stage) => (
-              <TableRow key={stage.sno}>
-                <TableCell sx={{ color: '#000000' }}>{stage.sno}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>{stage.shift}</TableCell>
+            {routes.map((route) => (
+              <TableRow key={route.sno}>
+                <TableCell sx={{ color: '#000000' }}>{route.sno}</TableCell>
+                <TableCell sx={{ color: '#000000' }}>{route.shift}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>
-                  {stage.routeName}
+                  {route.routeName}
                 </TableCell>
-                <TableCell sx={{ color: '#000000' }}>{stage.timings}</TableCell>
+                <TableCell sx={{ color: '#000000' }}>{route.timings}</TableCell>
                 <TableCell sx={{ color: '#000000' }}>
-                  {stage.startingPoint}
+                  {route.startingPoint}
                 </TableCell>
                 <TableCell sx={{ color: '#000000' }}>
-                  {stage.stops.join(' - ')}
+                  {route.stops.join(' - ')}
                 </TableCell>
                 <TableCell>
                   <IconButton
                     color="primary"
-                    onClick={() => handleEditStage(stage)}
+                    onClick={() => handleEditRoute(route)}
                   >
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     color="error"
-                    onClick={() => handleDeleteStage(stage.sno)}
+                    onClick={() => handleDeleteRoute(route.sno)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -115,4 +115,4 @@ const BusStages: React.FC = () => {
   );
 };
 
-export default BusStages;
+export default BusRoutes;

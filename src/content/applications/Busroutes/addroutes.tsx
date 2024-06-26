@@ -16,14 +16,14 @@ import { useBusRoutes } from './BusRoutesContext';
 
 const AddRoute: React.FC = () => {
   const { stops } = useStops();
-  const { addStage, updateStage, stages } = useBusRoutes();
+  const { addRoute, updateRoute, routes } = useBusRoutes();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const editSno = searchParams.get('edit');
 
-  const initialStage = {
-    sno: stages.length + 1,
+  const initialRoute = {
+    sno: routes.length + 1,
     shift: '',
     location: '',
     routeName: '',
@@ -32,7 +32,7 @@ const AddRoute: React.FC = () => {
     stops: []
   };
 
-  const [newStage, setNewStage] = useState(initialStage);
+  const [newRoute, setNewRoute] = useState(initialRoute);
   const [selectedStops, setSelectedStops] = useState<string[]>([]);
   const [showAddButton, setShowAddButton] = useState(true);
   const [errors, setErrors] = useState({
@@ -45,19 +45,19 @@ const AddRoute: React.FC = () => {
 
   useEffect(() => {
     if (editSno) {
-      const stageToEdit = stages.find(
-        (stage) => stage.sno === parseInt(editSno)
+      const routeToEdit = routes.find(
+        (route) => route.sno === parseInt(editSno)
       );
-      if (stageToEdit) {
-        setNewStage(stageToEdit);
-        setSelectedStops(stageToEdit.stops);
+      if (routeToEdit) {
+        setNewRoute(routeToEdit);
+        setSelectedStops(routeToEdit.stops);
       }
     }
-  }, [editSno, stages]);
+  }, [editSno, routes]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewStage({ ...newStage, [name]: value });
+    setNewRoute({ ...newRoute, [name]: value });
     setErrors({ ...errors, [name]: false });
   };
 
@@ -71,7 +71,7 @@ const AddRoute: React.FC = () => {
     if (!newSelectedStops.includes(value)) {
       newSelectedStops[index] = value;
       setSelectedStops(newSelectedStops);
-      setNewStage({ ...newStage, stops: newSelectedStops });
+      setNewRoute({ ...newRoute, stops: newSelectedStops });
       setErrors({ ...errors, stops: false });
     }
   };
@@ -79,7 +79,7 @@ const AddRoute: React.FC = () => {
   const handleDeleteStop = (index: number) => {
     const newSelectedStops = selectedStops.filter((_, i) => i !== index);
     setSelectedStops(newSelectedStops);
-    setNewStage({ ...newStage, stops: newSelectedStops });
+    setNewRoute({ ...newRoute, stops: newSelectedStops });
   };
 
   const addNewStopField = (index: number | null = null) => {
@@ -102,19 +102,19 @@ const AddRoute: React.FC = () => {
       stops: false
     };
 
-    if (!newStage.shift) {
+    if (!newRoute.shift) {
       currentErrors.shift = true;
       valid = false;
     }
-    if (!newStage.routeName) {
+    if (!newRoute.routeName) {
       currentErrors.routeName = true;
       valid = false;
     }
-    if (!newStage.timings) {
+    if (!newRoute.timings) {
       currentErrors.timings = true;
       valid = false;
     }
-    if (!newStage.startingPoint) {
+    if (!newRoute.startingPoint) {
       currentErrors.startingPoint = true;
       valid = false;
     }
@@ -127,7 +127,7 @@ const AddRoute: React.FC = () => {
     return valid;
   };
 
-  const handleAddOrUpdateStage = () => {
+  const handleAddOrUpdateRoute = () => {
     if (!validateForm()) {
       return;
     }
@@ -139,11 +139,11 @@ const AddRoute: React.FC = () => {
         const stopB = stops.find((s) => s.name === b);
         return (stopA?.number ?? 0) - (stopB?.number ?? 0);
       });
-    const updatedStage = { ...newStage, stops: sortedStops };
+    const updatedRoute = { ...newRoute, stops: sortedStops };
     if (editSno) {
-      updateStage(updatedStage);
+      updateRoute(updatedRoute);
     } else {
-      addStage(updatedStage);
+      addRoute(updatedRoute);
     }
     navigate('/management/busstages');
   };
@@ -164,7 +164,7 @@ const AddRoute: React.FC = () => {
           label="Shift"
           variant="outlined"
           name="shift"
-          value={newStage.shift}
+          value={newRoute.shift}
           onChange={handleInputChange}
           fullWidth
           sx={{ marginBottom: '8px' }}
@@ -177,7 +177,7 @@ const AddRoute: React.FC = () => {
           label="Route Name"
           variant="outlined"
           name="routeName"
-          value={newStage.routeName}
+          value={newRoute.routeName}
           onChange={handleInputChange}
           fullWidth
           sx={{ marginBottom: '8px' }}
@@ -190,7 +190,7 @@ const AddRoute: React.FC = () => {
           label="Timings"
           variant="outlined"
           name="timings"
-          value={newStage.timings}
+          value={newRoute.timings}
           onChange={handleInputChange}
           fullWidth
           sx={{ marginBottom: '8px' }}
@@ -203,7 +203,7 @@ const AddRoute: React.FC = () => {
           label="Starting Point"
           variant="outlined"
           name="startingPoint"
-          value={newStage.startingPoint}
+          value={newRoute.startingPoint}
           onChange={handleInputChange}
           fullWidth
           sx={{ marginBottom: '8px' }}
@@ -285,7 +285,7 @@ const AddRoute: React.FC = () => {
         }}
       >
         <Button
-          onClick={handleAddOrUpdateStage}
+          onClick={handleAddOrUpdateRoute}
           sx={{
             backgroundColor: '#000000',
             color: '#ffffff',

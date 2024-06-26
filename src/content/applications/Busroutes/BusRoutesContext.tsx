@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface Stage {
+interface Route {
   sno: number;
   shift: string;
   location: string;
@@ -12,11 +12,11 @@ interface Stage {
 }
 
 interface BusRoutesContextProps {
-  stages: Stage[];
-  addStage: (stage: Stage) => void;
-  updateStage: (updatedStage: Stage) => void;
-  deleteStage: (sno: number) => void;
-  getRoutesForStop: (stop: string) => Stage[];
+  routes: Route[];
+  addRoute: (route: Route) => void;
+  updateRoute: (updatedRoute: Route) => void;
+  deleteRoute: (sno: number) => void;
+  getRoutesForStop: (stop: string) => Route[];
 }
 
 const BusRoutesContext = createContext<BusRoutesContextProps | undefined>(
@@ -32,33 +32,33 @@ export const useBusRoutes = () => {
 };
 
 const BusRoutesProvider: React.FC = ({ children }) => {
-  const [stages, setStages] = useState<Stage[]>([
+  const [routes, setRoutes] = useState<Route[]>([
     // Your predefined stages
   ]);
 
-  const addStage = (stage: Stage) => {
-    setStages((prevStages) => [...prevStages, stage]);
+  const addRoute = (route: Route) => {
+    setRoutes((prevRoutes) => [...prevRoutes, route]);
   };
 
-  const updateStage = (updatedStage: Stage) => {
-    setStages((prevStages) =>
-      prevStages.map((stage) =>
-        stage.sno === updatedStage.sno ? updatedStage : stage
+  const updateRoute = (updatedRoute: Route) => {
+    setRoutes((prevRoutes) =>
+      prevRoutes.map((route) =>
+        route.sno === updatedRoute.sno ? updatedRoute : route
       )
     );
   };
 
-  const deleteStage = (sno: number) => {
-    setStages((prevStages) => prevStages.filter((stage) => stage.sno !== sno));
+  const deleteRoute = (sno: number) => {
+    setRoutes((prevRoutes) => prevRoutes.filter((route) => route.sno !== sno));
   };
 
-  const getRoutesForStop = (stop: string): Stage[] => {
-    return stages.filter((stage) => stage.stops.includes(stop));
+  const getRoutesForStop = (stop: string): Route[] => {
+    return routes.filter((route) => route.stops.includes(stop));
   };
 
   return (
     <BusRoutesContext.Provider
-      value={{ stages, addStage, updateStage, deleteStage, getRoutesForStop }}
+      value={{ routes, addRoute, updateRoute, deleteRoute, getRoutesForStop }}
     >
       {children}
     </BusRoutesContext.Provider>
