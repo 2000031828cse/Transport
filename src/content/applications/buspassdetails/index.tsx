@@ -99,7 +99,7 @@ const BusPassDetails: React.FC<BusPassDetailsProps> = ({
 };
 
 // Example usage of the component
-const App: React.FC = () => {
+const PassDetails: React.FC = () => {
   const busPassDetails = {
     studentName: 'John Doe',
     passId: 'BP12345',
@@ -113,4 +113,4 @@ const App: React.FC = () => {
   return <BusPassDetails {...busPassDetails} />;
 };
 
-export default App;
+export default PassDetails;
