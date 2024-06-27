@@ -12,14 +12,18 @@ import Stops from './content/applications/Stops';
 import TermPage from './content/applications/term';
 import AddRoute from './content/applications/Busroutes/addroutes';
 
-const BusPassRequest  = lazy(() => import('src/content/applications/buspassrequest'));
-const BusPassDetails  = lazy(() => import('src/content/applications/buspassdetails'));
+const BusPassRequest = lazy(
+  () => import('src/content/applications/buspassrequest')
+);
+const BusPassDetails = lazy(
+  () => import('src/content/applications/buspassdetails')
+);
 const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
 const Transactions = lazy(
-  () => import('src/content/applications/Transactions')
+  () => import('src/content/applications/BusPassRequests')
 );
 const UserProfile = lazy(
   () => import('src/content/applications/Users/profile')
