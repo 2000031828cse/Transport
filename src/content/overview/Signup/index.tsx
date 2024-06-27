@@ -4,26 +4,43 @@ import { Container, Box, TextField, Button, Typography } from '@mui/material';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const validatePhoneNumber = (number) => {
+    const phoneRegex = /^[0-9]{10}$/;
+    return phoneRegex.test(number);
+  };
+
   const handleSignup = (e) => {
     e.preventDefault();
 
-    // Add your signup logic here
-    // For demonstration, just validate the password match
+    if (!username) {
+      setError('Username is required');
+      return;
+    }
+
+    if (!validatePhoneNumber(phoneNumber)) {
+      setError('Invalid phone number');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
-    // Replace with your actual signup logic
-    // For simplicity, store username in localStorage
     localStorage.setItem('username', username);
+    localStorage.setItem('phoneNumber', phoneNumber);
 
-    // Redirect to login page after signup
     navigate('/login');
   };
 
@@ -41,6 +58,22 @@ const Signup = () => {
             fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            error={!!error && !username}
+            helperText={!!error && !username ? 'Username is required' : ''}
+          />
+          <TextField
+            label="Phone Number"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            error={!!error && !validatePhoneNumber(phoneNumber)}
+            helperText={
+              !!error && !validatePhoneNumber(phoneNumber)
+                ? 'Invalid phone number'
+                : ''
+            }
           />
           <TextField
             label="Password"
@@ -50,6 +83,14 @@ const Signup = () => {
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            error={
+              !!error && (password.length < 6 || password !== confirmPassword)
+            }
+            helperText={
+              !!error && password.length < 6
+                ? 'Password must be at least 6 characters long'
+                : ''
+            }
           />
           <TextField
             label="Confirm Password"
@@ -59,9 +100,25 @@ const Signup = () => {
             fullWidth
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            error={!!error && password !== confirmPassword}
+            helperText={
+              !!error && password !== confirmPassword
+                ? 'Passwords do not match'
+                : ''
+            }
           />
-          {error && <Typography color="error">{error}</Typography>}
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          {error && (
+            <Typography color="error" sx={{ mt: 2 }}>
+              {error}
+            </Typography>
+          )}
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2 }}
+          >
             Sign Up
           </Button>
         </form>
