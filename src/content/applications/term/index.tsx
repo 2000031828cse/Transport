@@ -25,8 +25,8 @@ const TermPage: React.FC = () => {
     endDate: ''
   };
 
-  const [term, setTerm] = useState<Term>(initialTerm);
-  const [updatedTerm, setUpdatedTerm] = useState<Term>({ ...initialTerm });
+  const [terms, setTerms] = useState<Term[]>([]);
+  const [newTerm, setNewTerm] = useState<Term>({ ...initialTerm });
   const [error, setError] = useState<string>('');
 
   const formatDate = (dateString: string): string => {
@@ -41,41 +41,44 @@ const TermPage: React.FC = () => {
 
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newStartDate = e.target.value;
-    setUpdatedTerm((prevTerm) => ({
+    setNewTerm((prevTerm) => ({
       ...prevTerm,
       startDate: newStartDate
     }));
-    setError(''); // Clear error message when start date changes
+    setError('');
   };
 
   const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEndDate = e.target.value;
-    setUpdatedTerm((prevTerm) => ({
+    setNewTerm((prevTerm) => ({
       ...prevTerm,
       endDate: newEndDate
     }));
-    if (updatedTerm.startDate && newEndDate < updatedTerm.startDate) {
+    if (newTerm.startDate && newEndDate < newTerm.startDate) {
       setError('End date cannot be before the start date.');
     } else {
       setError('');
     }
   };
 
-  const handleUpdateTerm = () => {
-    if (!updatedTerm.startDate || !updatedTerm.endDate) {
+  const handleCreateTerm = () => {
+    if (!newTerm.startDate || !newTerm.endDate) {
       setError('Please select both start and end dates.');
       return;
     }
 
-    if (updatedTerm.endDate < updatedTerm.startDate) {
+    if (newTerm.endDate < newTerm.startDate) {
       setError('End date cannot be before the start date.');
       return;
     }
 
-    setTerm(updatedTerm);
-    console.log('Updated term:', updatedTerm);
-    setUpdatedTerm({ ...initialTerm });
-    setError(''); // Clear error message after successful update
+    setTerms((prevTerms) => [
+      ...prevTerms,
+      { ...newTerm, termId: prevTerms.length + 1 }
+    ]);
+    console.log('Created term:', newTerm);
+    setNewTerm({ ...initialTerm, termId: terms.length + 2 });
+    setError('');
   };
 
   return (
@@ -95,7 +98,7 @@ const TermPage: React.FC = () => {
 
       <Box sx={{ mb: 2 }}>
         <Typography variant="body1" sx={{ mb: 2 }}>
-          Term ID: {term.termId}
+          Term ID: {newTerm.termId}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>
@@ -103,7 +106,7 @@ const TermPage: React.FC = () => {
           </Typography>
           <TextField
             type="date"
-            value={updatedTerm.startDate}
+            value={newTerm.startDate}
             onChange={handleStartDateChange}
             variant="outlined"
             fullWidth
@@ -115,7 +118,7 @@ const TermPage: React.FC = () => {
           </Typography>
           <TextField
             type="date"
-            value={updatedTerm.endDate}
+            value={newTerm.endDate}
             onChange={handleEndDateChange}
             variant="outlined"
             fullWidth
@@ -131,20 +134,23 @@ const TermPage: React.FC = () => {
       <Button
         variant="contained"
         color="primary"
-        onClick={handleUpdateTerm}
+        onClick={handleCreateTerm}
         sx={{ mb: 2 }}
       >
-        Update Term
+        Create Term
       </Button>
 
       <Box>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Term Period
+          Term Periods
         </Typography>
-        {term.startDate && term.endDate ? (
+        {terms.length > 0 ? (
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell>
+                  <strong>Term ID</strong>
+                </TableCell>
                 <TableCell>
                   <strong>Start Date</strong>
                 </TableCell>
@@ -154,15 +160,18 @@ const TermPage: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell>{formatDate(term.startDate)}</TableCell>
-                <TableCell>{formatDate(term.endDate)}</TableCell>
-              </TableRow>
+              {terms.map((term) => (
+                <TableRow key={term.termId}>
+                  <TableCell>{term.termId}</TableCell>
+                  <TableCell>{formatDate(term.startDate)}</TableCell>
+                  <TableCell>{formatDate(term.endDate)}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         ) : (
           <Typography variant="body1" color="textSecondary">
-            Please select start and end dates.
+            No terms created yet.
           </Typography>
         )}
       </Box>
