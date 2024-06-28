@@ -69,10 +69,10 @@ const BusRoutes: React.FC = () => {
           <TableHead>
             <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
               <TableCell sx={{ color: '#000000' }}>S.No</TableCell>
-              <TableCell sx={{ color: '#000000' }}>Shift</TableCell>
+              {/* <TableCell sx={{ color: '#000000' }}>Shift</TableCell> */}
               <TableCell sx={{ color: '#000000' }}>Route Name</TableCell>
               <TableCell sx={{ color: '#000000' }}>Timings</TableCell>
-              <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell>
+              {/* <TableCell sx={{ color: '#000000' }}>Starting Point</TableCell> */}
               <TableCell sx={{ color: '#000000' }}>Stops</TableCell>
               <TableCell sx={{ color: '#000000' }}>Actions</TableCell>
             </TableRow>
@@ -81,14 +81,14 @@ const BusRoutes: React.FC = () => {
             {routes.map((route) => (
               <TableRow key={route.sno}>
                 <TableCell sx={{ color: '#000000' }}>{route.sno}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>{route.shift}</TableCell>
+                {/* <TableCell sx={{ color: '#000000' }}>{route.shift}</TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>
                   {route.routeName}
                 </TableCell>
                 <TableCell sx={{ color: '#000000' }}>{route.timings}</TableCell>
-                <TableCell sx={{ color: '#000000' }}>
+                {/* <TableCell sx={{ color: '#000000' }}>
                   {route.startingPoint}
-                </TableCell>
+                </TableCell> */}
                 <TableCell sx={{ color: '#000000' }}>
                   {route.stops.join(' - ')}
                 </TableCell>

@@ -70,11 +70,11 @@ import React, { createContext, useContext, useState } from 'react';
 
 interface Route {
   sno: number;
-  shift: string;
+  // shift: string;
   location: string;
   routeName: string;
   timings: string;
-  startingPoint: string;
+  // startingPoint: string;
   stops: string[];
 }
 

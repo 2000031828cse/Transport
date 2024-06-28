@@ -335,21 +335,21 @@ const AddRoute: React.FC = () => {
 
   const initialRoute = {
     sno: routes.length + 1,
-    shift: '',
+    // shift: '',
     location: '',
     routeName: '',
     timings: '',
-    startingPoint: '',
+    // startingPoint: '',
     stops: []
   };
 
   const [newRoute, setNewRoute] = useState(initialRoute);
   const [selectedStops, setSelectedStops] = useState<string[]>([]);
   const [errors, setErrors] = useState({
-    shift: false,
+    // shift: false,
     routeName: false,
     timings: false,
-    startingPoint: false,
+    // startingPoint: false,
     stops: false
   });
 
@@ -405,17 +405,17 @@ const AddRoute: React.FC = () => {
   const validateForm = () => {
     let valid = true;
     const currentErrors = {
-      shift: false,
+      // shift: false,
       routeName: false,
       timings: false,
-      startingPoint: false,
+      // startingPoint: false,
       stops: false
     };
 
-    if (!newRoute.shift) {
-      currentErrors.shift = true;
-      valid = false;
-    }
+    // if (!newRoute.shift) {
+    //   currentErrors.shift = true;
+    //   valid = false;
+    // }
     if (!newRoute.routeName) {
       currentErrors.routeName = true;
       valid = false;
@@ -424,10 +424,10 @@ const AddRoute: React.FC = () => {
       currentErrors.timings = true;
       valid = false;
     }
-    if (!newRoute.startingPoint) {
-      currentErrors.startingPoint = true;
-      valid = false;
-    }
+    // if (!newRoute.startingPoint) {
+    //   currentErrors.startingPoint = true;
+    //   valid = false;
+    // }
     if (selectedStops.length === 0 || selectedStops.some((stop) => !stop)) {
       currentErrors.stops = true;
       valid = false;
@@ -442,7 +442,10 @@ const AddRoute: React.FC = () => {
       return;
     }
 
-    const updatedRoute = { ...newRoute, stops: selectedStops.filter((stop) => stop) };
+    const updatedRoute = {
+      ...newRoute,
+      stops: selectedStops.filter((stop) => stop)
+    };
     if (editSno) {
       updateRoute(updatedRoute);
     } else {
@@ -460,7 +463,7 @@ const AddRoute: React.FC = () => {
       <Typography variant="h6">
         {editSno ? 'Edit Route' : 'Add Route'}
       </Typography>
-      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
+      {/* <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.shift}
           helperText={errors.shift ? 'Shift is required' : ''}
@@ -472,7 +475,7 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
-      </FormControl>
+      </FormControl> */}
       <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.routeName}
@@ -499,7 +502,7 @@ const AddRoute: React.FC = () => {
           sx={{ marginBottom: '8px' }}
         />
       </FormControl>
-      <FormControl fullWidth sx={{ marginBottom: '8px' }}>
+      {/* <FormControl fullWidth sx={{ marginBottom: '8px' }}>
         <TextField
           error={errors.startingPoint}
           helperText={errors.startingPoint ? 'Starting Point is required' : ''}
@@ -511,7 +514,7 @@ const AddRoute: React.FC = () => {
           fullWidth
           sx={{ marginBottom: '8px' }}
         />
-      </FormControl>
+      </FormControl> */}
       <Typography variant="body1" sx={{ marginBottom: '8px' }}>
         Stops
       </Typography>
