@@ -11,6 +11,7 @@ import UserSidebarLayout from './layouts/SidebarLayout/Sidebar/UserSidebarLayout
 import Stops from './content/applications/Stops';
 import TermPage from './content/applications/term';
 import AddRoute from './content/applications/Busroutes/addroutes';
+import ChangePassword from './content/applications/Users/profile/ChangePassword';
 
 const BusPassRequest = lazy(
   () => import('src/content/applications/buspassrequest')
@@ -197,6 +198,14 @@ const routes: RouteObject[] = [
             element: (
               <Suspense fallback={<div>Loading...</div>}>
                 <UserProfile />
+              </Suspense>
+            )
+          },
+          {
+            path: 'change-password',
+            element: (
+              <Suspense fallback={<div>Loading...</div>}>
+                <ChangePassword />
               </Suspense>
             )
           },
