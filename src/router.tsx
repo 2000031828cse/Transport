@@ -12,6 +12,7 @@ import Stops from './content/applications/Stops';
 import TermPage from './content/applications/term';
 import AddRoute from './content/applications/Busroutes/addroutes';
 import ChangePassword from './content/applications/Users/profile/ChangePassword';
+import AddStop from './content/applications/Stops/AddStop';
 
 const BusPassRequest = lazy(
   () => import('src/content/applications/buspassrequest')
@@ -265,6 +266,16 @@ const routes: RouteObject[] = [
           <PrivateRoute requiredRole="admin">
             <Suspense fallback={<div>Loading...</div>}>
               <Stops />
+            </Suspense>
+          </PrivateRoute>
+        )
+      },
+      {
+        path: 'add-stop',
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Suspense fallback={<div>Loading...</div>}>
+              <AddStop />
             </Suspense>
           </PrivateRoute>
         )
