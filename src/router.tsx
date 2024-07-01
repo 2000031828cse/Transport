@@ -13,6 +13,7 @@ import TermPage from './content/applications/term';
 import AddRoute from './content/applications/Busroutes/addroutes';
 import ChangePassword from './content/applications/Users/profile/ChangePassword';
 import AddStop from './content/applications/Stops/AddStop';
+import AdminPanel from './content/applications/adminpanel/adminpanel';
 
 const BusPassRequest = lazy(
   () => import('src/content/applications/buspassrequest')
@@ -286,6 +287,17 @@ const routes: RouteObject[] = [
           <Suspense fallback={<div>Loading...</div>}>
             <TermPage />
           </Suspense>
+        )
+      },
+      
+      {
+        path: 'createuser',
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <Suspense fallback={<div>Loading...</div>}>
+              <AdminPanel />
+            </Suspense>
+          </PrivateRoute>
         )
       }
     ]
