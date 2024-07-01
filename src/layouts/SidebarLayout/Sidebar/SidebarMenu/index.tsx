@@ -1,5 +1,329 @@
-import { useContext } from 'react';
+// // import { useContext } from 'react';
 
+// // import {
+// //   ListSubheader,
+// //   alpha,
+// //   Box,
+// //   List,
+// //   styled,
+// //   Button,
+// //   ListItem
+// // } from '@mui/material';
+// // import { NavLink as RouterLink } from 'react-router-dom';
+// // import { SidebarContext } from 'src/contexts/SidebarContext';
+
+// // import DashboardIcon from '@mui/icons-material/Dashboard';
+// // import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+// // import RouteIcon from '@mui/icons-material/Route';
+// // import PlaceIcon from '@mui/icons-material/Place';
+// // import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
+
+// // const MenuWrapper = styled(Box)(
+// //   ({ theme }) => `
+// //   .MuiList-root {
+// //     padding: ${theme.spacing(1)};
+
+// //     & > .MuiList-root {
+// //       padding: 0 ${theme.spacing(0)} ${theme.spacing(1)};
+// //     }
+// //   }
+
+// //     .MuiListSubheader-root {
+// //       text-transform: uppercase;
+// //       font-weight: bold;
+// //       font-size: ${theme.typography.pxToRem(12)};
+// //       color: ${theme.colors.alpha.trueWhite[50]};
+// //       padding: ${theme.spacing(0, 2.5)};
+// //       line-height: 1.4;
+// //     }
+// // `
+// // );
+
+// // const SubMenuWrapper = styled(Box)(
+// //   ({ theme }) => `
+// //     .MuiList-root {
+
+// //       .MuiListItem-root {
+// //         padding: 1px 0;
+
+// //         .MuiBadge-root {
+// //           position: absolute;
+// //           right: ${theme.spacing(3.2)};
+
+// //           .MuiBadge-standard {
+// //             background: ${theme.colors.primary.main};
+// //             font-size: ${theme.typography.pxToRem(10)};
+// //             font-weight: bold;
+// //             text-transform: uppercase;
+// //             color: ${theme.palette.primary.contrastText};
+// //           }
+// //         }
+
+// //         .MuiButton-root {
+// //           display: flex;
+// //           color: ${theme.colors.alpha.trueWhite[70]};
+// //           background-color: transparent;
+// //           width: 100%;
+// //           justify-content: flex-start;
+// //           padding: ${theme.spacing(1.2, 3)};
+
+// //           .MuiButton-startIcon,
+// //           .MuiButton-endIcon {
+// //             transition: ${theme.transitions.create(['color'])};
+
+// //             .MuiSvgIcon-root {
+// //               font-size: inherit;
+// //               transition: none;
+// //             }
+// //           }
+
+// //           .MuiButton-startIcon {
+// //             color: ${theme.colors.alpha.trueWhite[30]};
+// //             font-size: ${theme.typography.pxToRem(20)};
+// //             margin-right: ${theme.spacing(1)};
+// //           }
+
+// //           .MuiButton-endIcon {
+// //             color: ${theme.colors.alpha.trueWhite[50]};
+// //             margin-left: auto;
+// //             opacity: .8;
+// //             font-size: ${theme.typography.pxToRem(20)};
+// //           }
+
+// //           &.active,
+// //           &:hover {
+// //             background-color: ${alpha(theme.colors.alpha.trueWhite[100], 0.06)};
+// //             color: ${theme.colors.alpha.trueWhite[100]};
+
+// //             .MuiButton-startIcon,
+// //             .MuiButton-endIcon {
+// //               color: ${theme.colors.alpha.trueWhite[100]};
+// //             }
+// //           }
+// //         }
+
+// //         &.Mui-children {
+// //           flex-direction: column;
+
+// //           .MuiBadge-root {
+// //             position: absolute;
+// //             right: ${theme.spacing(7)};
+// //           }
+// //         }
+
+// //         .MuiCollapse-root {
+// //           width: 100%;
+
+// //           .MuiList-root {
+// //             padding: ${theme.spacing(1, 0)};
+// //           }
+
+// //           .MuiListItem-root {
+// //             padding: 1px 0;
+
+// //             .MuiButton-root {
+// //               padding: ${theme.spacing(0.8, 3)};
+
+// //               .MuiBadge-root {
+// //                 right: ${theme.spacing(3.2)};
+// //               }
+
+// //               &:before {
+// //                 content: ' ';
+// //                 background: ${theme.colors.alpha.trueWhite[100]};
+// //                 opacity: 0;
+// //                 transition: ${theme.transitions.create([
+// //                   'transform',
+// //                   'opacity'
+// //                 ])};
+// //                 width: 6px;
+// //                 height: 6px;
+// //                 transform: scale(0);
+// //                 transform-origin: center;
+// //                 border-radius: 20px;
+// //                 margin-right: ${theme.spacing(1.8)};
+// //               }
+
+// //               &.active,
+// //               &:hover {
+
+// //                 &:before {
+// //                   transform: scale(1);
+// //                   opacity: 1;
+// //                 }
+// //               }
+// //             }
+// //           }
+// //         }
+// //       }
+// //     }
+// // `
+// // );
+
+// // function SidebarMenu() {
+// //   const { closeSidebar } = useContext(SidebarContext);
+
+// //   return (
+// //     <>
+// //       <MenuWrapper>
+// //         <List
+// //           component="div"
+// //           // subheader={
+// //           //   <ListSubheader component="div" disableSticky>
+// //           //     Dashboards
+// //           //   </ListSubheader>
+// //           // }
+// //         >
+// //           <SubMenuWrapper>
+// //             <List component="div">
+// //               <ListItem component="div">
+// //                 <Button
+// //                   disableRipple
+// //                   component={RouterLink}
+// //                   onClick={closeSidebar}
+// //                   to="/dashboards/Admin"
+// //                   startIcon={<DashboardIcon />}
+// //                 >
+// //                   Dashboard
+// //                 </Button>
+// //               </ListItem>
+// //               <ListItem component="div">
+// //                 <Button
+// //                   disableRipple
+// //                   component={RouterLink}
+// //                   onClick={closeSidebar}
+// //                   to="/management/termpage"
+// //                   startIcon={<CalendarMonthIcon />}
+// //                 >
+// //                   Term
+// //                 </Button>
+// //               </ListItem>
+// //               <ListItem component="div">
+// //                 <Button
+// //                   disableRipple
+// //                   component={RouterLink}
+// //                   onClick={closeSidebar}
+// //                   to="/management/transactions"
+// //                   startIcon={<DirectionsBusIcon />}
+// //                 >
+// //                   Bus pass requests
+// //                 </Button>
+// //               </ListItem>
+// //               <ListItem component="div">
+// //                 <Button
+// //                   disableRipple
+// //                   component={RouterLink}
+// //                   onClick={closeSidebar}
+// //                   to="/management/stops"
+// //                   startIcon={<PlaceIcon />}
+// //                 >
+// //                   Stops
+// //                 </Button>
+// //               </ListItem>
+// //               <ListItem component="div">
+// //                 <Button
+// //                   disableRipple
+// //                   component={RouterLink}
+// //                   onClick={closeSidebar}
+// //                   to="/management/busstages"
+// //                   startIcon={<RouteIcon />}
+// //                 >
+// //                   Routes
+// //                 </Button>
+// //               </ListItem>
+// //             </List>
+// //           </SubMenuWrapper>
+// //         </List>
+// //       </MenuWrapper>
+// //     </>
+// //   );
+// // }
+
+// // export default SidebarMenu;
+
+// import { useContext } from 'react';
+// import { List, Box, ListItem, styled, Button } from '@mui/material';
+// import { NavLink as RouterLink } from 'react-router-dom';
+// import { SidebarContext } from 'src/contexts/SidebarContext';
+
+// import DashboardIcon from '@mui/icons-material/Dashboard';
+// import PersonIcon from '@mui/icons-material/Person';
+// import RouteIcon from '@mui/icons-material/Route';
+// import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
+// import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+
+// const MenuWrapper = styled(Box)(
+//   ({ theme }) => `
+//   .MuiList-root {
+//     padding: ${theme.spacing(1)};
+//   }
+// `
+// );
+
+// const SubMenuWrapper = styled(Box)(
+//   ({ theme }) => `
+//   .MuiList-root {
+//     .MuiListItem-root {
+//       padding: 1px 0;
+//       .MuiButton-root {
+//         display: flex;
+//         color: ${theme.colors.alpha.trueWhite[70]};
+//         background-color: transparent;
+//         width: 100%;
+//         justify-content: flex-start;
+//         padding: ${theme.spacing(1.2, 3)};
+
+//         .MuiButton-startIcon {
+//           color: ${theme.colors.alpha.trueWhite[30]};
+//           font-size: ${theme.typography.pxToRem(20)};
+//           margin-right: ${theme.spacing(1)};
+//         }
+
+//         &.active,
+//         &:hover {
+//           background-color: ${theme.colors.alpha.trueWhite[100]};
+//           color: ${theme.colors.alpha.trueWhite[100]};
+//           .MuiButton-startIcon {
+//             color: ${theme.colors.alpha.trueWhite[100]};
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
+// );
+
+// function SidebarMenu({ items }) {
+//   const { closeSidebar } = useContext(SidebarContext);
+
+//   return (
+//     <MenuWrapper>
+//       <List component="div">
+//         <SubMenuWrapper>
+//           <List component="div">
+//             {items.map((item) => (
+//               <ListItem component="div" key={item.label}>
+//                 <Button
+//                   disableRipple
+//                   component={RouterLink}
+//                   onClick={closeSidebar}
+//                   to={item.path}
+//                   startIcon={item.icon}
+//                 >
+//                   {item.label}
+//                 </Button>
+//               </ListItem>
+//             ))}
+//           </List>
+//         </SubMenuWrapper>
+//       </List>
+//     </MenuWrapper>
+//   );
+// }
+
+// export default SidebarMenu;
+
+import { useContext } from 'react';
 import {
   ListSubheader,
   alpha,
@@ -17,6 +341,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import RouteIcon from '@mui/icons-material/Route';
 import PlaceIcon from '@mui/icons-material/Place';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -28,209 +354,196 @@ const MenuWrapper = styled(Box)(
     }
   }
 
-    .MuiListSubheader-root {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: ${theme.typography.pxToRem(12)};
-      color: ${theme.colors.alpha.trueWhite[50]};
-      padding: ${theme.spacing(0, 2.5)};
-      line-height: 1.4;
-    }
+  .MuiListSubheader-root {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: ${theme.typography.pxToRem(12)};
+    color: ${theme.colors.alpha.trueWhite[50]};
+    padding: ${theme.spacing(0, 2.5)};
+    line-height: 1.4;
+  }
 `
 );
 
 const SubMenuWrapper = styled(Box)(
   ({ theme }) => `
-    .MuiList-root {
+  .MuiList-root {
+    .MuiListItem-root {
+      padding: 1px 0;
 
-      .MuiListItem-root {
-        padding: 1px 0;
+      .MuiBadge-root {
+        position: absolute;
+        right: ${theme.spacing(3.2)};
 
-        .MuiBadge-root {
-          position: absolute;
-          right: ${theme.spacing(3.2)};
+        .MuiBadge-standard {
+          background: ${theme.colors.primary.main};
+          font-size: ${theme.typography.pxToRem(10)};
+          font-weight: bold;
+          text-transform: uppercase;
+          color: ${theme.palette.primary.contrastText};
+        }
+      }
 
-          .MuiBadge-standard {
-            background: ${theme.colors.primary.main};
-            font-size: ${theme.typography.pxToRem(10)};
-            font-weight: bold;
-            text-transform: uppercase;
-            color: ${theme.palette.primary.contrastText};
+      .MuiButton-root {
+        display: flex;
+        color: ${theme.colors.alpha.trueWhite[70]};
+        background-color: transparent;
+        width: 100%;
+        justify-content: flex-start;
+        padding: ${theme.spacing(1.2, 3)};
+
+        .MuiButton-startIcon,
+        .MuiButton-endIcon {
+          transition: ${theme.transitions.create(['color'])};
+
+          .MuiSvgIcon-root {
+            font-size: inherit;
+            transition: none;
           }
         }
-    
-        .MuiButton-root {
-          display: flex;
-          color: ${theme.colors.alpha.trueWhite[70]};
-          background-color: transparent;
-          width: 100%;
-          justify-content: flex-start;
-          padding: ${theme.spacing(1.2, 3)};
+
+        .MuiButton-startIcon {
+          color: ${theme.colors.alpha.trueWhite[30]};
+          font-size: ${theme.typography.pxToRem(20)};
+          margin-right: ${theme.spacing(1)};
+        }
+
+        .MuiButton-endIcon {
+          color: ${theme.colors.alpha.trueWhite[50]};
+          margin-left: auto;
+          opacity: .8;
+          font-size: ${theme.typography.pxToRem(20)};
+        }
+
+        &.active,
+        &:hover {
+          background-color: ${alpha(theme.colors.alpha.trueWhite[100], 0.06)};
+          color: ${theme.colors.alpha.trueWhite[100]};
 
           .MuiButton-startIcon,
           .MuiButton-endIcon {
-            transition: ${theme.transitions.create(['color'])};
-
-            .MuiSvgIcon-root {
-              font-size: inherit;
-              transition: none;
-            }
-          }
-
-          .MuiButton-startIcon {
-            color: ${theme.colors.alpha.trueWhite[30]};
-            font-size: ${theme.typography.pxToRem(20)};
-            margin-right: ${theme.spacing(1)};
-          }
-          
-          .MuiButton-endIcon {
-            color: ${theme.colors.alpha.trueWhite[50]};
-            margin-left: auto;
-            opacity: .8;
-            font-size: ${theme.typography.pxToRem(20)};
-          }
-
-          &.active,
-          &:hover {
-            background-color: ${alpha(theme.colors.alpha.trueWhite[100], 0.06)};
             color: ${theme.colors.alpha.trueWhite[100]};
 
-            .MuiButton-startIcon,
-            .MuiButton-endIcon {
-              color: ${theme.colors.alpha.trueWhite[100]};
-            }
-          }
-        }
+          
+                       .MuiButton-endIcon {
+               color: ${theme.colors.alpha.trueWhite[100]};
+             }
+           }
+         }
 
-        &.Mui-children {
-          flex-direction: column;
+         &.Mui-children {
+           flex-direction: column;
 
-          .MuiBadge-root {
-            position: absolute;
-            right: ${theme.spacing(7)};
-          }
-        }
+           .MuiBadge-root {
+             position: absolute;
+             right: ${theme.spacing(7)};
+           }
+         }
 
-        .MuiCollapse-root {
-          width: 100%;
+         .MuiCollapse-root {
+           width: 100%;
 
-          .MuiList-root {
-            padding: ${theme.spacing(1, 0)};
-          }
+           .MuiList-root {
+             padding: ${theme.spacing(1, 0)};
+           }
 
-          .MuiListItem-root {
-            padding: 1px 0;
+           .MuiListItem-root {
+             padding: 1px 0;
 
-            .MuiButton-root {
-              padding: ${theme.spacing(0.8, 3)};
+             .MuiButton-root {
+               padding: ${theme.spacing(0.8, 3)};
 
-              .MuiBadge-root {
-                right: ${theme.spacing(3.2)};
-              }
+               .MuiBadge-root {
+                 right: ${theme.spacing(3.2)};
+               }
 
-              &:before {
-                content: ' ';
-                background: ${theme.colors.alpha.trueWhite[100]};
-                opacity: 0;
-                transition: ${theme.transitions.create([
-                  'transform',
-                  'opacity'
-                ])};
-                width: 6px;
-                height: 6px;
-                transform: scale(0);
-                transform-origin: center;
-                border-radius: 20px;
-                margin-right: ${theme.spacing(1.8)};
-              }
+               &:before {
+                 content: ' ';
+                 background: ${theme.colors.alpha.trueWhite[100]};
+                 opacity: 0;
+                 transition: ${theme.transitions.create([
+                   'transform',
+                   'opacity'
+                 ])};
+                 width: 6px;
+                 height: 6px;
+                 transform: scale(0);
+                 transform-origin: center;
+                 border-radius: 20px;
+                 margin-right: ${theme.spacing(1.8)};
+               }
 
-              &.active,
-              &:hover {
-
-                &:before {
-                  transform: scale(1);
-                  opacity: 1;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-`
+               &.active,
+               &:hover {
+                 &:before {
+                   transform: scale(1);
+                   opacity: 1;
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   `
 );
 
-function SidebarMenu() {
+function SidebarMenu({ userType }) {
   const { closeSidebar } = useContext(SidebarContext);
+
+  const adminItems = [
+    { to: '/dashboards/Admin', icon: <DashboardIcon />, label: 'Dashboard' },
+    { to: '/management/termpage', icon: <CalendarMonthIcon />, label: 'Term' },
+    {
+      to: '/management/transactions',
+      icon: <DirectionsBusIcon />,
+      label: 'Bus pass requests'
+    },
+    { to: '/management/stops', icon: <PlaceIcon />, label: 'Stops' },
+    { to: '/management/busstages', icon: <RouteIcon />, label: 'Routes' }
+  ];
+
+  const userItems = [
+    { to: '/dashboards/User', icon: <DashboardIcon />, label: 'Dashboard' },
+    {
+      to: '/dashboards/profile',
+      icon: <AccountCircleIcon />,
+      label: 'Profile'
+    },
+    { to: '/dashboards/routes', icon: <RouteIcon />, label: 'Routes' },
+    {
+      to: '/dashboards/buspassdetails',
+      icon: <ListAltIcon />,
+      label: 'Bus pass details'
+    },
+    {
+      to: '/dashboards/buspassrequest',
+      icon: <DirectionsBusIcon />,
+      label: 'Bus pass request'
+    }
+  ];
+
+  const menuItems = userType === 'admin' ? adminItems : userItems;
 
   return (
     <>
       <MenuWrapper>
-        <List
-          component="div"
-          // subheader={
-          //   <ListSubheader component="div" disableSticky>
-          //     Dashboards
-          //   </ListSubheader>
-          // }
-        >
+        <List component="div">
           <SubMenuWrapper>
             <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/Admin"
-                  startIcon={<DashboardIcon />}
-                >
-                  Dashboard
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/termpage"
-                  startIcon={<CalendarMonthIcon />}
-                >
-                  Term
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/transactions"
-                  startIcon={<DirectionsBusIcon />}
-                >
-                  Bus pass requests
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/stops"
-                  startIcon={<PlaceIcon />}
-                >
-                  Stops
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/busstages"
-                  startIcon={<RouteIcon />}
-                >
-                  Routes
-                </Button>
-              </ListItem>
+              {menuItems.map((item) => (
+                <ListItem component="div" key={item.to}>
+                  <Button
+                    disableRipple
+                    component={RouterLink}
+                    onClick={closeSidebar}
+                    to={item.to}
+                    startIcon={item.icon}
+                  >
+                    {item.label}
+                  </Button>
+                </ListItem>
+              ))}
             </List>
           </SubMenuWrapper>
         </List>

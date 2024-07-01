@@ -131,7 +131,7 @@ const routes: RouteObject[] = [
   },
   {
     path: 'dashboards',
-    element: <SidebarLayout />,
+    element: <SidebarLayout userType={'admin'} />,
     children: [
       {
         path: '',
@@ -151,7 +151,7 @@ const routes: RouteObject[] = [
   },
   {
     path: 'dashboards',
-    element: <UserSidebarLayout />,
+    element: <SidebarLayout userType={'user'} />,
     children: [
       {
         path: '',
@@ -224,7 +224,7 @@ const routes: RouteObject[] = [
   },
   {
     path: 'management',
-    element: <SidebarLayout />,
+    element: <SidebarLayout userType={'admin'} />,
     children: [
       {
         path: '',
@@ -292,7 +292,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/components',
-    element: <SidebarLayout />,
+    element: <SidebarLayout userType={'admin'} />,
     children: [
       {
         path: '',

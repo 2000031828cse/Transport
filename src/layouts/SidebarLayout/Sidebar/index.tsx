@@ -9,29 +9,25 @@ import {
   styled,
   Divider,
   useTheme,
-  Button,
   lighten,
-  darken,
-  Tooltip,
-  Typography
+  darken
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
-import Logo from 'src/components/LogoSign';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
-        width: ${theme.sidebar.width};
-        min-width: ${theme.sidebar.width};
-        color: ${theme.colors.alpha.trueWhite[70]};
-        position: relative;
-        z-index: 7;
-        height: 100%;
-        padding-bottom: 68px;
+    width: ${theme.sidebar.width};
+    min-width: ${theme.sidebar.width};
+    color: ${theme.colors.alpha.trueWhite[70]};
+    position: relative;
+    z-index: 7;
+    height: 100%;
+    padding-bottom: 68px;
 `
 );
 
-function Sidebar() {
+function Sidebar({ userType }) {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const closeSidebar = () => toggleSidebar();
   const theme = useTheme();
@@ -73,7 +69,7 @@ function Sidebar() {
               background: theme.colors.alpha.trueWhite[10]
             }}
           />
-          <SidebarMenu />
+          <SidebarMenu userType={userType} />
         </Scrollbar>
         {/* <Divider
           sx={{
@@ -130,7 +126,7 @@ function Sidebar() {
                 background: theme.colors.alpha.trueWhite[10]
               }}
             />
-            <SidebarMenu />
+            <SidebarMenu userType={userType} />
           </Scrollbar>
         </SidebarWrapper>
       </Drawer>
