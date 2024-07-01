@@ -1,6 +1,4 @@
-import { useRef, useState } from 'react';
-
-import { NavLink } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -9,18 +7,12 @@ import {
   Divider,
   Hidden,
   lighten,
-  List,
-  ListItem,
-  ListItemText,
   Popover,
   Typography
 } from '@mui/material';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -58,15 +50,28 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
-  const user = {
-    name: 'Catherine Pike',
-    avatar: '/static/images/avatars/1.jpg',
-    jobtitle: 'Admin'
-  };
+  const [user, setUser] = useState({
+    name: '',
+    avatar: '',
+    jobtitle: ''
+  });
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Retrieve user data from localStorage
+    const storedName = localStorage.getItem('name');
+    const storedAvatar = localStorage.getItem('avatar');
+    const storedRole = localStorage.getItem('role');
+
+    setUser({
+      name: storedName || 'Catherine Pike',
+      avatar: storedAvatar || '/static/images/avatars/1.jpg',
+      jobtitle: storedRole === 'admin' ? 'Admin' : 'Student'
+    });
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -80,6 +85,8 @@ function HeaderUserbox() {
     // Clear authentication state (for example, using localStorage)
     localStorage.removeItem('auth');
     localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    localStorage.removeItem('avatar');
 
     // Redirect to login page
     navigate('/login');
@@ -92,7 +99,9 @@ function HeaderUserbox() {
         <Hidden mdDown>
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">{user.jobtitle}</UserBoxDescription>
+            <UserBoxDescription variant="body2">
+              {user.jobtitle}
+            </UserBoxDescription>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>
@@ -116,26 +125,12 @@ function HeaderUserbox() {
           <Avatar variant="rounded" alt={user.name} src={user.avatar} />
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">{user.jobtitle}</UserBoxDescription>
+            <UserBoxDescription variant="body2">
+              {user.jobtitle}
+            </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
-        {/* <List sx={{ p: 1 }} component="nav">
-          <ListItem button to="/management/profile/details" component={NavLink}>
-            <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary="My Profile" />
-          </ListItem>
-          <ListItem button to="/dashboards/messenger" component={NavLink}>
-            <InboxTwoToneIcon fontSize="small" />
-            <ListItemText primary="Messenger" />
-          </ListItem>
-          Uncomment and modify the following ListItem for Account Settings if needed 
-           <ListItem button to="/management/profile/settings" component={NavLink}>
-            <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Account Settings" />
-          </ListItem> 
-        </List> 
-        */}
         <Divider />
         <Box sx={{ m: 1 }}>
           <Button color="primary" fullWidth onClick={handleSignOut}>
