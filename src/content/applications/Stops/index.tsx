@@ -26,13 +26,13 @@ const Stops: React.FC = () => {
       maxWidth="lg"
       sx={{
         mt: 4,
-        p: 2,
+        p: 3,
         border: '1px solid #ccc',
         borderRadius: '8px',
         backgroundColor: '#ffffff'
       }}
     >
-      <Typography variant="h5" align="center" sx={{ mb: 3 }}>
+      <Typography variant="h1" align="center" sx={{ mb: 3 }}>
         Manage Stops
       </Typography>
       <Box my={4}>

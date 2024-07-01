@@ -103,7 +103,16 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container
+      maxWidth="sm"
+      sx={{
+        mt: 4,
+        p: 2
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <img height={100} src="/static/logo/tms.svg" />
+      </div>
       <Box display="flex" flexDirection="column" alignItems="center" mt={5}>
         <Typography variant="h4" component="h1" gutterBottom>
           Login

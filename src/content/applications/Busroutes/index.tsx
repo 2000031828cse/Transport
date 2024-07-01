@@ -10,7 +10,8 @@ import {
   Typography,
   Box,
   Button,
-  IconButton
+  IconButton,
+  Container
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -35,8 +36,12 @@ const BusRoutes: React.FC = () => {
   };
 
   return (
-    <Card
+    <Container
+      maxWidth="lg"
       sx={{
+        mt: 4,
+        p: 2,
+        border: '1px solid #ccc',
         backgroundColor: '#ffffff',
         color: '#000000',
         marginBottom: '16px'
@@ -111,7 +116,7 @@ const BusRoutes: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Card>
+    </Container>
   );
 };
 

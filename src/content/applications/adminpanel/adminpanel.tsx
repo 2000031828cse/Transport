@@ -15,7 +15,16 @@ const AdminPanel: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container
+      maxWidth="sm"
+      sx={{
+        mt: 4,
+        p: 2,
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        backgroundColor: '#ffffff'
+      }}
+    >
       <Box display="flex" flexDirection="column" alignItems="center" mt={5}>
         <Typography variant="h4" component="h1" gutterBottom>
           Create User
@@ -40,7 +49,11 @@ const AdminPanel: React.FC = () => {
         <Button variant="contained" color="primary" onClick={handleCreateUser}>
           Create User
         </Button>
-        {message && <Typography color="primary" mt={2}>{message}</Typography>}
+        {message && (
+          <Typography color="primary" mt={2}>
+            {message}
+          </Typography>
+        )}
       </Box>
     </Container>
   );

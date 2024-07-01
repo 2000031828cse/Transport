@@ -58,17 +58,19 @@ function Sidebar({ userType }) {
               sx={{
                 width: 52
               }}
-            >
-              {/* <Logo /> */}
-            </Box>
+            ></Box>
           </Box>
-          <Divider
+          {/* <img alt="Logo" height={100} src="/static/logo/tms.svg" /> */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <img height={50} src="/static/logo/tms.svg" />
+          </div>
+          {/* <Divider
             sx={{
               mt: theme.spacing(3),
               mx: theme.spacing(2),
               background: theme.colors.alpha.trueWhite[10]
             }}
-          />
+          /> */}
           <SidebarMenu userType={userType} />
         </Scrollbar>
         {/* <Divider

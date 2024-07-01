@@ -1,9 +1,6 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-
 import { Link as RouterLink } from 'react-router-dom';
-
 import { styled } from '@mui/material/styles';
-
 const TypographyH1 = styled(Typography)(
   ({ theme }) => `
     font-size: ${theme.typography.pxToRem(50)};
@@ -80,6 +77,7 @@ function Hero() {
         container
       >
         <Grid item md={10} lg={8} mx="auto">
+          <img alt="404" height={180} src="/static/logo/tms.svg" />
           <TypographyH1 sx={{ mb: 2 }} variant="h1">
             Bus Transport System
           </TypographyH1>
