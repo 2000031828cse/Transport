@@ -11,7 +11,7 @@
 
 // interface StopsContextType {
 //   stops: Stop[];
-//   addStop: (stop: Stop) => void;
+//   addStop: (stop: Omit<Stop, 'number'>) => void;
 //   deleteStop: (number: number) => void;
 // }
 
@@ -55,8 +55,11 @@
 //     }
 //   ]);
 
-//   const addStop = (stop: Stop) => {
-//     setStops([...stops, stop]);
+//   const addStop = (stop: Omit<Stop, 'number'>) => {
+//     const newNumber =
+//       stops.length > 0 ? Math.max(...stops.map((s) => s.number)) + 1 : 1;
+//     const newStop: Stop = { ...stop, number: newNumber };
+//     setStops([...stops, newStop]);
 //   };
 
 //   const deleteStop = (number: number) => {
@@ -135,7 +138,12 @@ export const StopsProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const deleteStop = (number: number) => {
-    setStops(stops.filter((stop) => stop.number !== number));
+    const updatedStops = stops.filter((stop) => stop.number !== number);
+    const reassignedStops = updatedStops.map((stop, index) => ({
+      ...stop,
+      number: index + 1
+    }));
+    setStops(reassignedStops);
   };
 
   return (

@@ -60,7 +60,6 @@ function Sidebar({ userType }) {
               }}
             ></Box>
           </Box>
-          {/* <img alt="Logo" height={100} src="/static/logo/tms.svg" /> */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img height={50} src="/static/logo/tms.svg" />
           </div>
@@ -78,19 +77,7 @@ function Sidebar({ userType }) {
             background: theme.colors.alpha.trueWhite[10]
           }}
         /> */}
-        <Box p={2}>
-          {/* <Button
-            href="https://bloomui.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="contained"
-            color="warning"
-            size="small"
-            fullWidth
-          >
-            Upgrade to PRO
-          </Button> */}
-        </Box>
+        <Box p={2}></Box>
       </SidebarWrapper>
       <Drawer
         sx={{
