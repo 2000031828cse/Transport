@@ -34,17 +34,6 @@ const UserProfile = lazy(
 const UserSettings = lazy(
   () => import('src/content/applications/Users/settings')
 );
-const Buttons = lazy(() => import('src/content/pages/Components/Buttons'));
-const Modals = lazy(() => import('src/content/pages/Components/Modals'));
-const Accordions = lazy(
-  () => import('src/content/pages/Components/Accordions')
-);
-const Tabs = lazy(() => import('src/content/pages/Components/Tabs'));
-const Badges = lazy(() => import('src/content/pages/Components/Badges'));
-const Tooltips = lazy(() => import('src/content/pages/Components/Tooltips'));
-const Avatars = lazy(() => import('src/content/pages/Components/Avatars'));
-const Cards = lazy(() => import('src/content/pages/Components/Cards'));
-const Forms = lazy(() => import('src/content/pages/Components/Forms'));
 const Status404 = lazy(() => import('src/content/pages/Status/Status404'));
 const Status500 = lazy(() => import('src/content/pages/Status/Status500'));
 const StatusComingSoon = lazy(
@@ -289,7 +278,7 @@ const routes: RouteObject[] = [
           </Suspense>
         )
       },
-      
+
       {
         path: 'createuser',
         element: (
@@ -309,78 +298,6 @@ const routes: RouteObject[] = [
       {
         path: '',
         element: <Navigate to="buttons" replace />
-      },
-      {
-        path: 'buttons',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Buttons />
-          </Suspense>
-        )
-      },
-      {
-        path: 'modals',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Modals />
-          </Suspense>
-        )
-      },
-      {
-        path: 'accordions',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Accordions />
-          </Suspense>
-        )
-      },
-      {
-        path: 'tabs',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Tabs />
-          </Suspense>
-        )
-      },
-      {
-        path: 'badges',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Badges />
-          </Suspense>
-        )
-      },
-      {
-        path: 'tooltips',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Tooltips />
-          </Suspense>
-        )
-      },
-      {
-        path: 'avatars',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Avatars />
-          </Suspense>
-        )
-      },
-      {
-        path: 'cards',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Cards />
-          </Suspense>
-        )
-      },
-      {
-        path: 'forms',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Forms />
-          </Suspense>
-        )
       }
     ]
   }

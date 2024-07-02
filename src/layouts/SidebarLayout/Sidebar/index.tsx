@@ -121,13 +121,9 @@ function Sidebar({ userType }) {
                 {/* <Logo /> */}
               </Box>
             </Box>
-            <Divider
-              sx={{
-                mt: theme.spacing(3),
-                mx: theme.spacing(2),
-                background: theme.colors.alpha.trueWhite[10]
-              }}
-            />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <img height={100} src="/static/logo/tms.svg" />
+            </div>
             <SidebarMenu userType={userType} />
           </Scrollbar>
         </SidebarWrapper>
