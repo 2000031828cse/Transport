@@ -5,7 +5,10 @@ interface User {
   username: string;
   password: string;
   role: string;
+  email: string; // New field
+  phoneNumber: string; // New field
 }
+
 
 interface UserContextType {
   users: User[];
@@ -17,13 +20,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [users, setUsers] = useState<User[]>([
-    { username: 'admin', password: 'password', role: 'admin' },
-    { username: 'user', password: 'password', role: 'user' },
+    {
+      username: 'admin', password: 'password', role: 'admin',
+      email: '',
+      phoneNumber: ''
+    },
+    {
+      username: 'user', password: 'password', role: 'user',
+      email: '',
+      phoneNumber: ''
+    },
   ]);
 
-  const addUser = (user: User) => {
-    setUsers([...users, user]);
-  };
+const addUser = (user: User) => {
+  setUsers([...users, user]);
+};
 
   const getUser = (username: string) => {
     return users.find(user => user.username === username);
