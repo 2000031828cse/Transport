@@ -1,17 +1,34 @@
-// src/components/AdminPanel.tsx
 import React, { useState } from 'react';
-import { Container, Box, TextField, Button, Typography } from '@mui/material';
+import {
+  Container,
+  Box,
+  TextField,
+  Button,
+  Typography,
+} from '@mui/material';
 import { useUserContext } from 'src/content/dashboards/User/UserContext';
 
 const AdminPanel: React.FC = () => {
   const { addUser } = useUserContext();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); // New state
+  const [phoneNumber, setPhoneNumber] = useState(''); // New state
   const [message, setMessage] = useState('');
 
   const handleCreateUser = () => {
-    addUser({ username, password, role: 'user' });
+    addUser({
+      username,
+      password,
+      role: 'user',
+      email,
+      phoneNumber,
+    });
     setMessage('User created successfully');
+    setUsername('');
+    setPassword('');
+    setEmail('');
+    setPhoneNumber('');
   };
 
   return (
@@ -46,7 +63,28 @@ const AdminPanel: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button variant="contained" color="primary" onClick={handleCreateUser}>
+        <TextField
+          label="Email"
+          type="email"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          label="Phone Number"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCreateUser}
+        >
           Create User
         </Button>
         {message && (
