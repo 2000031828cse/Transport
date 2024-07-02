@@ -9,66 +9,96 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Typography
+  Typography,
+  MenuItem,
+  Select,
+  SelectChangeEvent
 } from '@mui/material';
 
 interface Term {
   termId: number;
-  startDate: string;
-  endDate: string;
+  startYear: string;
+  endYear: string;
+  semester: string;
 }
 
 const TermPage: React.FC = () => {
   const initialTerm: Term = {
     termId: 1,
-    startDate: '',
-    endDate: ''
+    startYear: '',
+    endYear: '',
+    semester: 'sem1'
   };
 
   const [terms, setTerms] = useState<Term[]>([]);
   const [newTerm, setNewTerm] = useState<Term>({ ...initialTerm });
   const [error, setError] = useState<string>('');
 
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    };
-    return date.toLocaleDateString('en-US', options);
-  };
+  const isValidYear = (year: string) => /^\d{4}$/.test(year);
 
-  const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newStartDate = e.target.value;
+  const handleStartYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newStartYear = e.target.value;
     setNewTerm((prevTerm) => ({
       ...prevTerm,
-      startDate: newStartDate
+      startYear: newStartYear
     }));
     setError('');
   };
 
-  const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEndDate = e.target.value;
+  const handleEndYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEndYear = e.target.value;
     setNewTerm((prevTerm) => ({
       ...prevTerm,
-      endDate: newEndDate
+      endYear: newEndYear
     }));
-    if (newTerm.startDate && newEndDate < newTerm.startDate) {
-      setError('End date cannot be before the start date.');
-    } else {
-      setError('');
-    }
+    setError('');
+  };
+
+  const handleSemesterChange = (e: SelectChangeEvent<string>) => {
+    const newSemester = e.target.value as string;
+    setNewTerm((prevTerm) => ({
+      ...prevTerm,
+      semester: newSemester
+    }));
+  };
+
+  const isDuplicateTerm = (term: Term) => {
+    return terms.some(
+      (existingTerm) =>
+        existingTerm.startYear === term.startYear &&
+        existingTerm.endYear === term.endYear &&
+        existingTerm.semester === term.semester
+    );
   };
 
   const handleCreateTerm = () => {
-    if (!newTerm.startDate || !newTerm.endDate) {
-      setError('Please select both start and end dates.');
+    if (!newTerm.startYear || !newTerm.endYear || !newTerm.semester) {
+      setError('Please select start year, end year, and semester.');
       return;
     }
 
-    if (newTerm.endDate < newTerm.startDate) {
-      setError('End date cannot be before the start date.');
+    if (!isValidYear(newTerm.startYear)) {
+      setError('Start year must be a valid 4-digit year.');
+      return;
+    }
+
+    if (!isValidYear(newTerm.endYear)) {
+      setError('End year must be a valid 4-digit year.');
+      return;
+    }
+
+    if (parseInt(newTerm.endYear) < parseInt(newTerm.startYear)) {
+      setError('End year cannot be before start year.');
+      return;
+    }
+
+    if (parseInt(newTerm.endYear) > parseInt(newTerm.startYear) + 1) {
+      setError('End year cannot exceed start year by more than one year.');
+      return;
+    }
+
+    if (isDuplicateTerm(newTerm)) {
+      setError('This term already exists.');
       return;
     }
 
@@ -76,7 +106,6 @@ const TermPage: React.FC = () => {
       ...prevTerms,
       { ...newTerm, termId: prevTerms.length + 1 }
     ]);
-    console.log('Created term:', newTerm);
     setNewTerm({ ...initialTerm, termId: terms.length + 2 });
     setError('');
   };
@@ -102,27 +131,42 @@ const TermPage: React.FC = () => {
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>
-            Start Date:
+            Start Year:
           </Typography>
           <TextField
-            type="date"
-            value={newTerm.startDate}
-            onChange={handleStartDateChange}
+            type="text"
+            value={newTerm.startYear}
+            onChange={handleStartYearChange}
             variant="outlined"
             fullWidth
+            inputProps={{ maxLength: 4 }}
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>
-            End Date:
+            End Year:
           </Typography>
           <TextField
-            type="date"
-            value={newTerm.endDate}
-            onChange={handleEndDateChange}
+            type="text"
+            value={newTerm.endYear}
+            onChange={handleEndYearChange}
             variant="outlined"
             fullWidth
+            inputProps={{ maxLength: 4 }}
           />
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Typography variant="body1" sx={{ minWidth: '100px', pr: 2 }}>
+            Semester:
+          </Typography>
+          <Select
+            value={newTerm.semester}
+            onChange={handleSemesterChange}
+            fullWidth
+          >
+            <MenuItem value="sem1">sem1</MenuItem>
+            <MenuItem value="sem2">sem2</MenuItem>
+          </Select>
         </Box>
         {error && (
           <Typography variant="body2" color="error" sx={{ mt: 1 }}>
@@ -152,10 +196,13 @@ const TermPage: React.FC = () => {
                   <strong>Term ID</strong>
                 </TableCell>
                 <TableCell>
-                  <strong>Start Date</strong>
+                  <strong>Start Year</strong>
                 </TableCell>
                 <TableCell>
-                  <strong>End Date</strong>
+                  <strong>End Year</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>Semester</strong>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -163,8 +210,9 @@ const TermPage: React.FC = () => {
               {terms.map((term) => (
                 <TableRow key={term.termId}>
                   <TableCell>{term.termId}</TableCell>
-                  <TableCell>{formatDate(term.startDate)}</TableCell>
-                  <TableCell>{formatDate(term.endDate)}</TableCell>
+                  <TableCell>{term.startYear}</TableCell>
+                  <TableCell>{term.endYear}</TableCell>
+                  <TableCell>{term.semester}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
