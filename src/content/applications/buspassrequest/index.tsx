@@ -360,10 +360,10 @@ const BusPassRequest: React.FC = () => {
   useEffect(() => {
     // Example terms - replace with actual data fetching if needed
     const fetchedTerms: Term[] = [
-      { termId: 1, startYear: '2023', endYear: '2024', semester: 'sem1' },
-      { termId: 1, startYear: '2023', endYear: '2024', semester: 'sem2' },
-      { termId: 2, startYear: '2024', endYear: '2025', semester: 'sem1' },
-      { termId: 2, startYear: '2024', endYear: '2025', semester: 'sem2' }
+      { termId: 1, startYear: '2023', endYear: '2024', semester: 'Odd' },
+      { termId: 1, startYear: '2023', endYear: '2024', semester: 'Even' },
+      { termId: 2, startYear: '2024', endYear: '2025', semester: 'Odd' },
+      { termId: 2, startYear: '2024', endYear: '2025', semester: 'Even' }
     ];
     setTerms(fetchedTerms);
   }, []);

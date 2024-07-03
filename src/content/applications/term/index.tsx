@@ -258,7 +258,7 @@ const TermPage: React.FC = () => {
     termId: 1,
     startYear: '',
     endYear: '',
-    semester: 'sem1'
+    semester: 'Odd'
   };
 
   const [terms, setTerms] = useState<Term[]>([]);
@@ -395,8 +395,8 @@ const TermPage: React.FC = () => {
             onChange={handleSemesterChange}
             fullWidth
           >
-            <MenuItem value="sem1">sem1</MenuItem>
-            <MenuItem value="sem2">sem2</MenuItem>
+            <MenuItem value="Odd">Odd</MenuItem>
+            <MenuItem value="Even">Even</MenuItem>
           </Select>
         </Box>
         {error && (
