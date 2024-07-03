@@ -32,7 +32,7 @@ const Stops: React.FC = () => {
         backgroundColor: '#ffffff'
       }}
     >
-      <Typography variant="h1" align="center" sx={{ mb: 3 }}>
+      <Typography variant="h5" align="center" sx={{ mb: 3 }}>
         Manage Stops
       </Typography>
       <Box my={4}>
