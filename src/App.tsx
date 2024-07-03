@@ -7,7 +7,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider'; // Adjust import path as needed
-import { UserProvider } from './content/dashboards/User/UserContext';
+import { UserProvider } from './content/applications/create-user/UserContext';
 
 function App() {
   const content = useRoutes(router);

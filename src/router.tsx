@@ -13,7 +13,7 @@ import TermPage from './content/applications/term';
 import AddRoute from './content/applications/Busroutes/addroutes';
 import ChangePassword from './content/applications/Users/profile/ChangePassword';
 import AddStop from './content/applications/Stops/AddStop';
-import AdminPanel from './content/applications/adminpanel/adminpanel';
+import AdminPanel from './content/applications/create-user/adminpanel';
 
 const BusPassRequest = lazy(
   () => import('src/content/applications/buspassrequest')
