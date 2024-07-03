@@ -6,7 +6,7 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import { useUserContext } from 'src/content/dashboards/User/UserContext';
+import { useUserContext } from 'src/content/applications/create-user/UserContext';
 
 const AdminPanel: React.FC = () => {
   const { addUser } = useUserContext();

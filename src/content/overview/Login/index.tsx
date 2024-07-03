@@ -74,7 +74,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Container, Box, TextField, Button, Typography } from '@mui/material';
-import { useUserContext } from 'src/content/dashboards/User/UserContext'; // Adjust import path as needed
+import { useUserContext } from 'src/content/applications/create-user/UserContext'; // Adjust import path as needed
 
 const Login = () => {
   const { getUser } = useUserContext();
