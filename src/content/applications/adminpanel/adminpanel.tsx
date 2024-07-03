@@ -12,23 +12,78 @@ const AdminPanel: React.FC = () => {
   const { addUser } = useUserContext();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [email, setEmail] = useState(''); // New state
-  const [phoneNumber, setPhoneNumber] = useState(''); // New state
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   const handleCreateUser = () => {
-    addUser({
-      username,
-      password,
-      role: 'user',
-      email,
-      phoneNumber,
-    });
-    setMessage('User created successfully');
-    setUsername('');
-    setPassword('');
-    setEmail('');
-    setPhoneNumber('');
+    let isValid = true;
+
+    // Basic validation checks
+    if (username.trim() === '') {
+      setUsernameError('Username is required');
+      isValid = false;
+    } else {
+      setUsernameError('');
+    }
+
+    if (password.trim() === '') {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (email.trim() === '') {
+      setEmailError('Email is required');
+      isValid = false;
+    } else if (!isValidEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      isValid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (phoneNumber.trim() === '') {
+      setPhoneNumberError('Phone number is required');
+      isValid = false;
+    } else if (!isValidPhoneNumber(phoneNumber)) {
+      setPhoneNumberError('Phone number should have 10 digits');
+      isValid = false;
+    } else {
+      setPhoneNumberError('');
+    }
+
+    if (isValid) {
+      addUser({
+        username,
+        password,
+        role: 'user',
+        email,
+        phoneNumber,
+      });
+      setMessage('User created successfully');
+      setUsername('');
+      setPassword('');
+      setEmail('');
+      setPhoneNumber('');
+    }
+  };
+
+  // Email validation function
+  const isValidEmail = (value: string) => {
+    // Very basic email validation using regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  };
+
+  // Phone number validation function
+  const isValidPhoneNumber = (value: string) => {
+    // Validate that the phone number is exactly 10 digits
+    return /^\d{10}$/.test(value);
   };
 
   return (
@@ -53,6 +108,8 @@ const AdminPanel: React.FC = () => {
           fullWidth
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          error={!!usernameError}
+          helperText={usernameError}
         />
         <TextField
           label="Password"
@@ -62,6 +119,8 @@ const AdminPanel: React.FC = () => {
           fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          error={!!passwordError}
+          helperText={passwordError}
         />
         <TextField
           label="Email"
@@ -71,6 +130,8 @@ const AdminPanel: React.FC = () => {
           fullWidth
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          error={!!emailError}
+          helperText={emailError}
         />
         <TextField
           label="Phone Number"
@@ -79,6 +140,8 @@ const AdminPanel: React.FC = () => {
           fullWidth
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
+          error={!!phoneNumberError}
+          helperText={phoneNumberError}
         />
         <Button
           variant="contained"
