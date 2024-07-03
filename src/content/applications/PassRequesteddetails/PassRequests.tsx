@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card } from '@mui/material';
-import RecentOrdersTable from './RecentOrdersTable';
+import PassRequestsTable from './PassRequestsTable';
 import { PassOrder } from 'src/models/pass_request'; // Adjusted import to include CryptoOrder
 
-function RecentOrders() {
+function PassRequests() {
   const PassOrders: PassOrder[] = [
     {
       id: '1',
@@ -39,9 +39,9 @@ function RecentOrders() {
 
   return (
     <Card>
-      <RecentOrdersTable PassOrders={PassOrders} />
+      <PassRequestsTable PassOrders={PassOrders} />
     </Card>
   );
 }
 
-export default RecentOrders;
+export default PassRequests;

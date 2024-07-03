@@ -29,7 +29,7 @@ import CheckIcon from '@mui/icons-material/Check';
 // Import the ApprovalDialog component
 import ApprovalDialog from './DialogueBox';
 
-interface RecentOrdersTableProps {
+interface PassRequestsTableProps {
   className?: string;
   PassOrders: PassOrder[];
 }
@@ -94,7 +94,7 @@ const applyPagination = (
   return PassOrders.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
+const PassRequestsTable: FC<PassRequestsTableProps> = ({ PassOrders }) => {
   const [selectedPassOrders, setSelectedPassOrders] = useState<string[]>([]);
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
@@ -354,4 +354,4 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ PassOrders }) => {
   );
 };
 
-export default RecentOrdersTable;
+export default PassRequestsTable;

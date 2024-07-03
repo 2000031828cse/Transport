@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container, Box } from '@mui/material';
 
-import RecentOrders from './RecentOrders';
+import PassRequests from './PassRequests';
 
 function RequestedDetails() {
   return (
@@ -20,7 +20,7 @@ function RequestedDetails() {
         >
           <Grid item xs={12}>
             <Box mb={4}> </Box>
-            <RecentOrders />
+            <PassRequests />
           </Grid>
         </Grid>
       </Container>
