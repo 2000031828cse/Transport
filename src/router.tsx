@@ -26,7 +26,7 @@ const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
 const Transactions = lazy(
-  () => import('src/content/applications/BusPassRequests')
+  () => import('src/content/applications/PassRequesteddetails')
 );
 const UserProfile = lazy(
   () => import('src/content/applications/Users/profile')
