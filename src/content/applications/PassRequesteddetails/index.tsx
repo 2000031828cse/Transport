@@ -4,7 +4,7 @@ import { Grid, Container, Box } from '@mui/material';
 
 import RecentOrders from './RecentOrders';
 
-function ApplicationsTransactions() {
+function RequestedDetails() {
   return (
     <>
       <Helmet>
@@ -28,4 +28,4 @@ function ApplicationsTransactions() {
   );
 }
 
-export default ApplicationsTransactions;
+export default RequestedDetails;

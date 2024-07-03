@@ -25,7 +25,7 @@ const BusStages = lazy(() => import('src/content/applications/Busroutes'));
 const Overview = lazy(() => import('src/content/overview'));
 const Admin = lazy(() => import('src/content/dashboards/Admin'));
 const User = lazy(() => import('src/content/dashboards/User'));
-const Transactions = lazy(
+const RequestedPassDetails = lazy(
   () => import('src/content/applications/PassRequesteddetails')
 );
 const UserProfile = lazy(
@@ -218,14 +218,14 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="transactions" replace />
+        element: <Navigate to="PassRequesteddetails" replace />
       },
       {
-        path: 'transactions',
+        path: 'PassRequesteddetails',
         element: (
           <PrivateRoute requiredRole="admin">
             <Suspense fallback={<div>Loading...</div>}>
-              <Transactions />
+              <RequestedPassDetails />
             </Suspense>
           </PrivateRoute>
         )

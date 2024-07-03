@@ -61,7 +61,7 @@ function SidebarMenu({ userType }) {
     { to: '/dashboards/Admin', icon: <DashboardIcon />, label: 'Dashboard' },
     { to: '/management/termpage', icon: <CalendarMonthIcon />, label: 'Term' },
     {
-      to: '/management/transactions',
+      to: '/management/PassRequesteddetails',
       icon: <DirectionsBusIcon />,
       label: 'Bus pass requests'
     },
